@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <title>regulus desk — the verified ledger of mayur vaish</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:image" content="https://regulusdesk.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://regulusdesk.com/og.png">
 <meta name="description" content="regulus desk — a private derivatives desk in india that keeps its trading book in public. every number broker-true: the ledger, the laws, the wins and the wounds.">
 <meta property="og:title" content="regulus desk — the verified ledger">
 <meta property="og:description" content="a live trading book kept in public. every number broker-true.">
@@ -26,6 +31,25 @@
     font-family:var(--serif); font-size:19px; line-height:1.72;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
+  /*
+    DESIGN BLUEPRINT (extracted, immutable — the private-edition field manual):
+    ground deep warm black #0B0A07 · ink warm ivory · ONE gold accent family (#D3A94F display / #AA8535 marks)
+    rust #C75F35 strictly for losses · Times/serif everywhere · tracked-caps labels · ✦ separators
+    hairline rules · tabular numerals · one orchestrated motion system · the sky behind everything
+  */
+  /* the sky — the desk under the royal star */
+  #sky{position:fixed; inset:0; z-index:0; pointer-events:none;}
+  header,.hero,section,.door,footer{position:relative; z-index:2;}
+  /* paper grain — the private-edition stock */
+  body::after{
+    content:""; position:fixed; inset:0; z-index:9; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+  /* the gold thread — reading progress */
+  #thread{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, var(--gold-mark), var(--gold)); z-index:20;}
+  /* gold-leaf glint on the gilded words */
+  .gild, .hero h1 em{transition:text-shadow .35s ease;}
+  .gild:hover, .hero h1 em:hover{text-shadow:0 0 22px rgba(211,169,79,.45);}
   ::selection{background:var(--gold); color:var(--ground);}
   a{color:var(--gold); text-decoration:none;}
   a:hover{text-decoration:underline; text-underline-offset:3px;}
@@ -42,6 +66,9 @@
   .masthead{font-size:clamp(1.7rem,4.6vw,2.5rem); letter-spacing:.32em; text-indent:.32em; margin:20px 0 8px; font-weight:400; text-transform:uppercase;}
   .mast-sub{font-size:.74rem; letter-spacing:.26em; text-indent:.26em; text-transform:uppercase; color:var(--faint); margin:0 0 30px;}
   .mast-rule{border:0; border-top:1px solid var(--hair); margin:0;}
+  nav{display:flex; justify-content:center; gap:34px; flex-wrap:wrap; padding:16px 0 14px; border-bottom:1px solid var(--hair);}
+  nav a{font-size:.62rem; letter-spacing:.26em; text-transform:uppercase; color:var(--muted);}
+  nav a:hover{color:var(--gold); text-decoration:none;}
 
   /* ── hero ── */
   .hero{padding:72px 0 30px;}
@@ -135,6 +162,18 @@
   .law p{font-size:1rem; color:var(--muted); margin:0; line-height:1.65;}
   .law p b{color:var(--ink-2); font-weight:400;}
 
+  /* ── the law book ── */
+  .lawbook{border:1px solid var(--hair); background:var(--panel);}
+  .lb-row{display:flex; gap:20px; align-items:baseline; padding:18px 26px; border-bottom:1px solid var(--hair-soft);}
+  .lb-row:last-child{border-bottom:0;}
+  .lb-num{font-style:italic; color:var(--gold); font-size:1.15rem; min-width:52px; text-align:right;}
+  .lb-title{flex:1; font-size:1.05rem; color:var(--ink); font-style:italic;}
+  .lb-title small{display:block; font-style:normal; font-size:.88rem; color:var(--muted); margin-top:3px;}
+  .lb-date{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:.75rem; color:var(--faint); white-space:nowrap;}
+  .lb-foot{text-align:center; font-style:italic; color:var(--muted); font-size:.95rem; padding:20px 26px 22px; border-top:1px solid var(--hair);}
+  .lb-foot b{color:var(--gold); font-weight:400;}
+  @media (max-width:560px){ .lb-row{padding:16px 18px; gap:14px;} .lb-num{min-width:36px;} .lb-date{display:none;} }
+
   /* ── prose ── */
   .prose{max-width:56ch; margin:0 auto 40px; font-size:1.14rem; color:var(--ink-2); text-align:center;}
   .prose .lead-in{color:var(--gold); font-style:italic;}
@@ -154,6 +193,29 @@
   footer p{font-size:.82rem; color:var(--faint); max-width:64ch; margin:0 auto 10px; line-height:1.7;}
   footer .cr{letter-spacing:.2em; text-transform:uppercase; font-size:.64rem; margin-top:18px;}
 
+  /* scroll choreography — sections rise as the reader arrives */
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1);}
+    .reveal.in{opacity:1; transform:none;}
+  }
+
+  /* the field-manual print edition — A4, ink-safe */
+  @media print{
+    @page{margin:18mm 16mm;}
+    body{background:#fff; color:#111; font-size:11.5pt;}
+    body::after, #thread, .pulse, .tip, .day-caret, .door, .chart-note b, #sky, nav{display:none !important;}
+    .lbl,.mast-sub,.stat .k,.tile .k, h2, th{color:#666 !important;}
+    .gild,.law .num,.hero h1 em,.method h3,.prose .lead-in{color:#8a6a1f !important; text-shadow:none !important;}
+    .stat .v,.day-pnl,td,.day-title,.day-story,.law p,.prose,.hero p,.card p{color:#111 !important;}
+    .stat .v.pos,.day-pnl.pos,td .pos{color:#7a5c14 !important;}
+    .stat .v.neg,.day-pnl.neg,td .neg{color:#8c3a1c !important;}
+    .strip,.tiles,.laws,.book,.card,.chart-wrap,.ledger-wrap{border-color:#bbb; background:#fff;}
+    .stat,.law,.day,.tile{background:#fff;}
+    .day-body{display:block !important;}
+    .stamp{opacity:.9;}
+    section,.hero{padding:22px 0; break-inside:avoid-page;}
+    a{color:#111; text-decoration:none;}
+  }
   @media (prefers-reduced-motion: no-preference){
     .rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards;}
     .rise.d1{animation-delay:.08s} .rise.d2{animation-delay:.24s} .rise.d3{animation-delay:.4s} .rise.d4{animation-delay:.56s}
@@ -164,11 +226,19 @@
 </style>
 </head>
 <body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div id="thread" aria-hidden="true"></div>
 <header class="page">
   <div class="mast-top"><span class="lbl"><span class="star">✦</span>&nbsp;&nbsp;est. mmxxvi&nbsp;&nbsp;<span class="star">✦</span></span></div>
   <h1 class="masthead">Regulus Desk</h1>
   <p class="mast-sub">the desk under the royal star · india</p>
-  <hr class="mast-rule">
+  <nav aria-label="the book">
+    <a href="#ledger">the ledger</a>
+    <a href="#doctrine">the doctrine</a>
+    <a href="#lawbook">the law book</a>
+    <a href="#keeper">the man</a>
+    <a href="#correspondence">letters</a>
+  </nav>
 </header>
 
 <div class="page hero">
@@ -222,6 +292,22 @@
       <h3>evolve daily</h3>
       <p><b>every close ends in a written law</b> — what broke, what's fixed, what compounds. the laws you see carved in the book are real, and each one cost real rupees to learn.</p>
     </div>
+  </div>
+</section>
+
+<section class="page" id="lawbook">
+  <div class="sep">✦</div>
+  <h2>from the <span class="gild">law book</span></h2>
+  <p class="h2-sub">the desk keeps a book of laws — each one carved on the day that paid for it. a selection:</p>
+  <div class="lawbook">
+    <div class="lb-row"><span class="lb-num">0.</span><span class="lb-title">the kaizen rule<small>improve the desk one percent every single day — the law above all laws.</small></span><span class="lb-date">carved 08 jun</span></div>
+    <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
+    <div class="lb-row"><span class="lb-num">viii.</span><span class="lb-title">the book never lies, never deletes<small>append-only. a wrong entry is corrected in daylight, never erased.</small></span><span class="lb-date">carved 08 jun</span></div>
+    <div class="lb-row"><span class="lb-num">xi.</span><span class="lb-title">a live position's p&amp;l is the broker's truth — never a proxy<small>the desk watches at the broker and books at the broker.</small></span><span class="lb-date">carved 08 jun</span></div>
+    <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −₹1.4L night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
+    <div class="lb-row"><span class="lb-num">xxviii.</span><span class="lb-title">earn in every regime<small>never twelve bets one way — the slate matches the weather, trend or chop.</small></span><span class="lb-date">carved 18 jun</span></div>
+    <div class="lb-row"><span class="lb-num">xxxiv.</span><span class="lb-title">the tank law<small>capital is verified at the broker before the bell — never discovered by a rejection.</small></span><span class="lb-date">carved 06 jul</span></div>
+    <p class="lb-foot"><b>thirty-five laws and counting.</b> each one was carved by a day that cost real rupees — the full law book joins the site soon.</p>
   </div>
 </section>
 
@@ -302,7 +388,7 @@
       :'<span class="day-pnl '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>';
     const stamp=p.pnl===null?'':'<span class="stamp '+(p.pnl>=0?'pos':'neg')+'">'+(p.pnl>=0?'green day':'red day')+'</span>';
     const law=p.law?'<span class="law-tag">“'+p.law+'”</span>':'';
-    return '<div class="day" id="day-'+i+'">'
+    return '<div class="day" id="day-'+p.d.replace(/\s+/g,'-')+'-26">'
       +'<button class="day-head" aria-expanded="false" data-i="'+i+'">'
       +'<span class="day-date">'+p.d+' ’26</span>'
       +'<span class="day-title">'+p.title+'</span>'
@@ -315,6 +401,7 @@
       d.classList.toggle('open', j===i ? (scroll?true:!d.classList.contains('open')) : false);
       d.querySelector('.day-head').setAttribute('aria-expanded', d.classList.contains('open'));
     });
+    if(days[i].classList.contains('open')) history.replaceState(null,'','#'+days[i].id);
     if(scroll) days[i].scrollIntoView({block:'center', behavior:reduce?'auto':'smooth'});
     paintDots();
   }
@@ -416,6 +503,131 @@
     new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){draw();o.disconnect();}});},{threshold:.15}).observe(svg);
     setTimeout(draw,4000);
   }
+
+  /* ═══ the gold thread ═══ */
+  const thread=document.getElementById('thread');
+  const onScroll=()=>{
+    const h=document.documentElement;
+    const k=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+    thread.style.width=(k*100)+'%';
+  };
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* ═══ deep link: #day-6-jul-26 opens that page of the book ═══ */
+  if(location.hash){
+    const t=document.getElementById(location.hash.slice(1));
+    if(t && t.classList.contains('day')){
+      const i=days.indexOf(t);
+      if(i>=0) setTimeout(()=>openDay(i,true), reduce?0:350);
+    }
+  }
+
+  /* ═══ keyboard: j/k turn the pages, escape closes ═══ */
+  addEventListener('keydown',e=>{
+    if(e.target.closest('input,textarea')||e.metaKey||e.ctrlKey||e.altKey) return;
+    const cur=days.findIndex(d=>d.classList.contains('open'));
+    if(e.key==='j'||e.key==='k'){
+      const n=e.key==='j'?Math.min(days.length-1,(cur<0?days.length-1:cur+1)):Math.max(0,(cur<0?days.length-1:cur-1));
+      openDay(n,true); e.preventDefault();
+    }else if(e.key==='Escape'&&cur>=0){
+      days[cur].classList.remove('open');
+      days[cur].querySelector('.day-head').setAttribute('aria-expanded','false');
+      history.replaceState(null,'',location.pathname); paintDots();
+    }
+  });
+
+  /* ═══ the sky — leo drawn in hairline gold, regulus pulsing at the heart ═══ */
+  (function sky(){
+    const cv=document.getElementById('sky'), cx=cv.getContext('2d');
+    let W2,H2,DPR=Math.min(2,devicePixelRatio||1), stars=[], t=0, mx=0, my=0, shoot=null;
+    // leo, normalized (x,y): the sickle ε→μ→ζ→γ→η→α(regulus) + back δ + tail β + hip θ
+    const LEO={pts:{e:[.06,.30],m:[.11,.16],z:[.18,.22],g:[.26,.33],h:[.30,.50],a:[.33,.66],th:[.55,.58],d:[.60,.36],b:[.82,.44]},
+      lines:[['e','m'],['m','z'],['z','g'],['g','h'],['h','a'],['h','th'],['g','d'],['d','b'],['th','b'],['th','d']]};
+    function size(){
+      W2=innerWidth; H2=innerHeight;
+      cv.width=W2*DPR; cv.height=H2*DPR; cv.style.width=W2+'px'; cv.style.height=H2+'px';
+      cx.setTransform(DPR,0,0,DPR,0,0);
+      const seed=[...Array(90)].map((_,i)=>i*2654435761%4294967296/4294967296);
+      stars=seed.map((r,i)=>({x:(r*997%1)*W2, y:(r*613%1)*H2, r:.4+(r*7%1)*1.1, p:(r*331%1)*6.28}));
+    }
+    function leoBox(){
+      const w=Math.min(W2*.46,560), h=w*.72;
+      return {x:W2-w-Math.max(20,W2*.06), y:Math.max(64,H2*.10), w, h};
+    }
+    function paint(){
+      cx.clearRect(0,0,W2,H2);
+      const px=mx*8, py=my*5, sy=-(scrollY||0)*.06;
+      // field stars
+      for(const s of stars){
+        const tw=.35+.3*Math.sin(t*.9+s.p);
+        cx.globalAlpha=tw; cx.fillStyle='#EAE3D3';
+        cx.beginPath(); cx.arc(s.x+px*.4, ((s.y+sy*.5)%H2+H2)%H2 + py*.4, s.r, 0, 6.28); cx.fill();
+      }
+      // shooting star (rare, quiet)
+      if(shoot){
+        shoot.k+=.025;
+        if(shoot.k>=1){shoot=null;}
+        else{
+          const {x0,y0,dx,dy,k}=shoot;
+          cx.globalAlpha=Math.sin(k*3.14)*.7;
+          const grad=cx.createLinearGradient(x0+dx*k-dx*.12,y0+dy*k-dy*.12,x0+dx*k,y0+dy*k);
+          grad.addColorStop(0,'rgba(211,169,79,0)'); grad.addColorStop(1,'rgba(234,227,211,.9)');
+          cx.strokeStyle=grad; cx.lineWidth=1.4;
+          cx.beginPath(); cx.moveTo(x0+dx*k-dx*.12,y0+dy*k-dy*.12); cx.lineTo(x0+dx*k,y0+dy*k); cx.stroke();
+        }
+      }
+      // leo
+      const B=leoBox(), P={};
+      for(const k in LEO.pts) P[k]=[B.x+LEO.pts[k][0]*B.w+px, B.y+LEO.pts[k][1]*B.h+py+sy];
+      cx.globalAlpha=.5; cx.strokeStyle='rgba(170,133,53,.34)'; cx.lineWidth=.8;
+      for(const [u,v] of LEO.lines){cx.beginPath(); cx.moveTo(P[u][0],P[u][1]); cx.lineTo(P[v][0],P[v][1]); cx.stroke();}
+      for(const k in P){
+        const isA=k==='a';
+        const rr=isA?2.6+.9*Math.sin(t*1.6):1.5;
+        cx.globalAlpha=isA?.95:.75; cx.fillStyle=isA?'#D3A94F':'#C9BFA8';
+        cx.beginPath(); cx.arc(P[k][0],P[k][1],rr,0,6.28); cx.fill();
+        if(isA){
+          cx.globalAlpha=.16+.1*Math.sin(t*1.6);
+          cx.beginPath(); cx.arc(P[k][0],P[k][1],11+3*Math.sin(t*1.6),0,6.28);
+          cx.fillStyle='#D3A94F'; cx.fill();
+        }
+      }
+      cx.globalAlpha=1;
+    }
+    function loop(){
+      t+=.016; paint();
+      if(!shoot && Math.random()<.0012) shoot={x0:Math.random()*W2*.7, y0:Math.random()*H2*.3, dx:180+Math.random()*160, dy:70+Math.random()*60, k:0};
+      raf=requestAnimationFrame(loop);
+    }
+    let raf=null;
+    size(); addEventListener('resize',size,{passive:true});
+    if(reduce){ paint(); }
+    else{
+      addEventListener('mousemove',e=>{mx=e.clientX/W2-.5; my=e.clientY/H2-.5;},{passive:true});
+      document.addEventListener('visibilitychange',()=>{
+        if(document.hidden){cancelAnimationFrame(raf);} else {loop();}
+      });
+      loop();
+    }
+  })();
+
+  /* ═══ scroll choreography ═══ */
+  const toReveal=[...document.querySelectorAll('section, .door')];
+  toReveal.forEach(el=>el.classList.add('reveal'));
+  if(reduce){ toReveal.forEach(el=>el.classList.add('in')); }
+  else{
+    const ro=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }}),{threshold:.12});
+    toReveal.forEach(el=>ro.observe(el));
+    setTimeout(()=>toReveal.forEach(el=>el.classList.add('in')), 5000); // fail-safe: content never stays hidden
+  }
+
+  /* ═══ the mood favicon — the lion wears the last close ═══ */
+  const lastPnl=data[data.length-1].pnl;
+  const ring=lastPnl===null?'%239C927D':(lastPnl>=0?'%23D3A94F':'%23C75F35');
+  const fav=document.createElement('link'); fav.rel='icon';
+  fav.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='none' stroke='"+ring+"' stroke-width='6'/><text x='50' y='58' text-anchor='middle' font-size='56'>🦁</text></svg>";
+  document.querySelectorAll("link[rel='icon']").forEach(l=>l.remove());
+  document.head.appendChild(fav);
 })();
 </script>
 </body>

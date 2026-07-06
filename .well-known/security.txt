@@ -1,0 +1,4 @@
+Contact: mailto:letters@regulusdesk.com
+Expires: 2027-07-06T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://regulusdesk.com/.well-known/security.txt
