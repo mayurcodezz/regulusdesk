@@ -9,9 +9,9 @@
 <meta property="og:image" content="https://regulusdesk.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://regulusdesk.com/og.png">
-<meta name="description" content="regulus desk — a private systematic derivatives desk in india. its book, kept for the inner circle: every result in R-multiples, reconciled to broker records at each close.">
-<meta property="og:title" content="regulus desk — the verified book">
-<meta property="og:description" content="a systematic derivatives book, kept in the open. every result broker-reconciled, written in R.">
+<meta name="description" content="regulus desk — a private systematic derivatives desk in india. a transparent book for the inner circle: the war log, the proving ground, every result in R, reconciled to broker records.">
+<meta property="og:title" content="regulus desk — the transparent book">
+<meta property="og:description" content="the war log, the proving ground, every result in R — broker-reconciled.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
@@ -168,6 +168,24 @@
   /* strategy nameplates */
   .chip{border:1px solid var(--gold-mark); color:var(--gold); font-size:.56rem; letter-spacing:.22em; padding:4px 9px; text-transform:uppercase; white-space:nowrap; flex-shrink:0;}
   .chip.mut{border-color:var(--hair); color:var(--faint);}
+  .chip.bad{border-color:var(--rust); color:var(--rust);}
+  .day{transition:transform .35s ease, border-color .35s ease;}
+  .day:hover{transform:translateY(-2px); border-color:var(--gold-mark);}
+  .lb-row{transition:background .3s ease;}
+  .lb-row:hover{background:var(--panel2);}
+  @media (prefers-reduced-motion: no-preference){
+    .chip.run{animation:chipglow 2.6s ease-in-out infinite;}
+    @keyframes chipglow{50%{box-shadow:0 0 14px rgba(211,169,79,.28);}}
+    .stagger .lb-row{opacity:0; transform:translateY(14px); transition:opacity .6s cubic-bezier(.2,.6,.2,1), transform .6s cubic-bezier(.2,.6,.2,1), background .3s;}
+    .stagger.in .lb-row{opacity:1; transform:none;}
+    .stagger.in .lb-row:nth-child(1){transition-delay:.06s}
+    .stagger.in .lb-row:nth-child(2){transition-delay:.14s}
+    .stagger.in .lb-row:nth-child(3){transition-delay:.22s}
+    .stagger.in .lb-row:nth-child(4){transition-delay:.3s}
+    .stagger.in .lb-row:nth-child(5){transition-delay:.38s}
+    .stagger.in .lb-row:nth-child(6){transition-delay:.46s}
+    .stagger.in .lb-row:nth-child(7){transition-delay:.54s}
+  }
 
   .card{border:1px solid var(--hair); background:var(--panel); padding:clamp(30px,7vw,48px) clamp(20px,6vw,36px); text-align:center;}
   .card p{max-width:46ch; margin:0 auto 26px; color:var(--ink-2); font-size:clamp(1rem,4.2vw,1.12rem);}
@@ -272,8 +290,8 @@
 <section id="book">
   <div class="page">
     <div class="sep rv">✦</div>
-    <h2 class="rv">the <span class="g">book</span></h2>
-    <p class="h2sub rv">each mark on the curve is a recorded session. open one — the events, the cost, and the rule it produced.</p>
+    <h2 class="rv">the <span class="g">war log</span></h2>
+    <p class="h2sub rv">the trading book, session by session. open a day — the events, the cost, and the rule it produced. nothing here is retouched.</p>
     <div class="book" id="bookbox"></div>
   </div>
 </section>
@@ -295,11 +313,28 @@
     <div class="sep rv">✦</div>
     <h2 class="rv">the <span class="g">desks</span></h2>
     <p class="h2sub rv">three systematic strategies run under one risk command, each measured against its own book.</p>
-    <div class="lawbook rv">
+    <div class="lawbook rv stagger">
       <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">pavanputra<small>intraday trend-following. rides the session's primary direction; the +1.59R day that opened this book was its work.</small></span><span class="chip">live</span></div>
       <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">the dawn<small>opening-structure system. reads the first hour's range before committing capital.</small></span><span class="chip">live</span></div>
       <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">the hunter<small>delayed-confirmation entries. waits for demonstrated intent mid-session; enters late by design.</small></span><span class="chip mut">calibrating</span></div>
       <p class="lb-foot"><b>one command, three books.</b> per-strategy R-ledgers publish automatically once the self-writing book ships — shortly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE PROVING GROUND ═══ -->
+<section id="proving">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">proving ground</span></h2>
+    <p class="h2sub rv">nothing reaches live execution on charm. every mechanism is tested against recorded sessions, with the bar fixed before the test — and results publish regardless of outcome.</p>
+    <div class="lawbook rv stagger">
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">exit discipline study<small>as-traded exits versus a no-intervention control, scored daily against broker records. an accumulating ledger decides the doctrine — not opinion.</small></span><span class="chip run">running</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">the volume gate<small>replayed against the −1.01R junk session of 3 july: it would have declined every entry taken that day. promoted to live execution.</small></span><span class="chip">wired</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">overnight carry study<small>historical reconstruction of carry sleeves against next-day gaps. the verdict upheld rule xxv — the desk sleeps flat.</small></span><span class="chip mut">closed</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">signal-grade audit<small>the desk's own conviction-grading system was tested for predictive power — and showed none at the current sample. reported here anyway; the grader does not touch sizing until it earns it.</small></span><span class="chip bad">failed · reported</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">regime classifier<small>trend/range boundary calibrated against ground-truth sessions rather than assumed; self-test 4 of 4 at the last audit.</small></span><span class="chip">live</span></div>
+      <p class="lb-foot"><b>the bar is fixed before the test runs.</b> passes, failures, and everything between — all of it publishes. that is what a transparent book means.</p>
     </div>
   </div>
 </section>
@@ -310,7 +345,7 @@
     <div class="sep rv">✦</div>
     <h2 class="rv">from the <span class="g">law book</span></h2>
     <p class="h2sub rv">the desk maintains a book of standing rules, each dated to the session that produced it. a selection:</p>
-    <div class="lawbook rv">
+    <div class="lawbook rv stagger">
       <div class="lb-row"><span class="lb-num">0.</span><span class="lb-title">the kaizen rule<small>improve the desk one percent every single day — the law above all laws.</small></span><span class="lb-date">carved 08 jun</span></div>
       <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
       <div class="lb-row"><span class="lb-num">viii.</span><span class="lb-title">the book never lies, never deletes<small>append-only. a wrong entry is corrected in daylight, never erased.</small></span><span class="lb-date">carved 08 jun</span></div>
