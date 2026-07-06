@@ -72,7 +72,8 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 22px;}
   #act-sky{height:230vh;} #act-thesis{height:280vh;} #act-numbers{height:340vh;} #act-curve{height:380vh;}
 
-  /* act i — the sky */
+  /* act i — the sky (masthead high, the globe owns the horizon) */
+  #act-sky .stage{justify-content:flex-start; padding-top:14vh;}
   #act-sky .mast{transition:none;}
   #act-sky .mast .lbl{display:block; margin-bottom:22px;}
   #act-sky h1{font-weight:400; margin:0; text-transform:uppercase;
@@ -369,63 +370,146 @@
      law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
   ];
 
-  /* ═══ THE SKY ═══ */
+  /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
   const cv=document.getElementById('sky'), cx=cv.getContext('2d');
-  let W,H,DPR,stars=[],t=0,mx=0,my=0,shoot=null,skyZoom=1,skyFade=1,leoScale=1;
-  const LEO={pts:{e:[.06,.30],m:[.11,.16],z:[.18,.22],g:[.26,.33],h:[.30,.50],a:[.33,.66],th:[.55,.58],d:[.60,.36],b:[.82,.44]},
-    lines:[['e','m'],['m','z'],['z','g'],['g','h'],['h','a'],['h','th'],['g','d'],['d','b'],['th','b'],['th','d']]};
+  let W,H,DPR,stars=[],t=0,mx=0,my=0,shoot=null,pts=[],leoS=[];
+  const G={cx:0, cy:0, R:100, alpha:1};       // globe pose, choreographed by the film
+  const TILT=.42, SPIN=.1, F=2.4;             // axial tilt · rad/s · perspective
+  // leo star patch on the sphere: my 2d chart mapped to (lon,lat) around the front
+  const LEO2D={e:[.06,.30],m:[.11,.16],z:[.18,.22],g:[.26,.33],h:[.30,.50],a:[.33,.66],th:[.55,.58],d:[.60,.36],b:[.82,.44]};
+  const LEOLINES=[['e','m'],['m','z'],['z','g'],['g','h'],['h','a'],['h','th'],['g','d'],['d','b'],['th','b'],['th','d']];
   function sizeSky(){
     W=innerWidth; H=innerHeight; DPR=Math.min(W<700?1.5:2, devicePixelRatio||1);
     cv.width=W*DPR; cv.height=H*DPR; cv.style.width=W+'px'; cv.style.height=H+'px';
     cx.setTransform(DPR,0,0,DPR,0,0);
-    const n=W<700?55:90;
+    const n=W<700?60:100;
     stars=[...Array(n)].map((_,i)=>{const r=(i*2654435761%4294967296)/4294967296;
-      return {x:(r*997%1)*W, y:(r*613%1)*H, r:.4+(r*7%1)*1.1, p:(r*331%1)*6.28};});
+      return {x:(r*997%1)*W, y:(r*613%1)*H, r:.4+(r*7%1)*1.0, p:(r*331%1)*6.28};});
+    // dust on the sphere (fibonacci)
+    const N=W<700?420:760;
+    pts=[...Array(N)].map((_,i)=>{
+      const y=1-2*(i+.5)/N, r=Math.sqrt(1-y*y), phi=i*2.39996323;
+      return {x:Math.cos(phi)*r, y, z:Math.sin(phi)*r, s:.5+((i*97)%100)/100*1.1};
+    });
+    // leo stars as (lon,lat) on the sphere
+    leoS={};
+    for(const k in LEO2D){
+      const [u,v]=LEO2D[k];
+      leoS[k]={lon:(u-.44)*1.15, lat:-(v-.42)*.95};
+    }
   }
-  function leoBox(){
-    // act i: centered + big; after: drifts to upper right, smaller
-    const p=actP.sky, mob=W<700;
-    const w0=Math.min(W*(mob?.92:.62), 720), w1=Math.min(W*.4,420);
-    const w=w0+(w1-w0)*p;
-    const x0=(W-w)/2, x1=W-w-W*.05;
-    const y0=H*(mob?.18:.14), y1=H*.06;
-    return {x:x0+(x1-x0)*p, y:y0+(y1-y0)*p, w, h:w*.72};
+  function project(p3, rot){
+    // p3 in sphere coords → rotate Y → tilt X → perspective
+    const ca=Math.cos(rot), sa=Math.sin(rot);
+    let x=p3.x*ca+p3.z*sa, z=-p3.x*sa+p3.z*ca, y=p3.y;
+    const ct=Math.cos(TILT), st=Math.sin(TILT);
+    const y2=y*ct-z*st, z2=y*st+z*ct;
+    const s=F/(F-z2);
+    return {x:G.cx+x*G.R*s, y:G.cy+y2*G.R*s, z:z2, s};
+  }
+  function leoPoint(k, rot){
+    const {lon,lat}=leoS[k];
+    const cl=Math.cos(lat);
+    return project({x:Math.sin(lon)*cl, y:Math.sin(lat), z:Math.cos(lon)*cl}, rot);
   }
   function paintSky(){
     cx.clearRect(0,0,W,H);
-    const px=mx*8, py=my*5, sy=-(scrollY||0)*.04;
+    const px=mx*8, py=my*5, sy=-(scrollY||0)*.03;
+    // deep field
     for(const s of stars){
-      const tw=(.32+.28*Math.sin(t*.9+s.p))*skyFade;
-      cx.globalAlpha=tw; cx.fillStyle='#EAE3D3';
-      cx.beginPath(); cx.arc(s.x+px*.4, ((s.y+sy)%H+H)%H+py*.4, s.r*skyZoom, 0, 6.28); cx.fill();
+      cx.globalAlpha=(.26+.22*Math.sin(t*.9+s.p));
+      cx.fillStyle='#EAE3D3';
+      cx.beginPath(); cx.arc(s.x+px*.4, ((s.y+sy)%H+H)%H+py*.4, s.r, 0, 6.28); cx.fill();
     }
+    // shooting star
     if(shoot){
       shoot.k+=.025;
       if(shoot.k>=1) shoot=null;
       else{
         const {x0,y0,dx,dy,k}=shoot;
-        cx.globalAlpha=Math.sin(k*3.14)*.7;
+        cx.globalAlpha=Math.sin(k*3.14)*.6;
         const g2=cx.createLinearGradient(x0+dx*k-dx*.12,y0+dy*k-dy*.12,x0+dx*k,y0+dy*k);
         g2.addColorStop(0,'rgba(211,169,79,0)'); g2.addColorStop(1,'rgba(234,227,211,.9)');
         cx.strokeStyle=g2; cx.lineWidth=1.4;
         cx.beginPath(); cx.moveTo(x0+dx*k-dx*.12,y0+dy*k-dy*.12); cx.lineTo(x0+dx*k,y0+dy*k); cx.stroke();
       }
     }
-    const B=leoBox(), P={};
-    for(const k in LEO.pts) P[k]=[B.x+LEO.pts[k][0]*B.w+px, B.y+LEO.pts[k][1]*B.h+py];
-    cx.globalAlpha=.55*skyFade; cx.strokeStyle='rgba(170,133,53,.4)'; cx.lineWidth=.9;
-    for(const [u,v] of LEO.lines){cx.beginPath(); cx.moveTo(P[u][0],P[u][1]); cx.lineTo(P[v][0],P[v][1]); cx.stroke();}
+    /* ── the globe ── */
+    const rot=t*SPIN, A=G.alpha;
+    if(A<=0.01) return;
+    const gx=G.cx+px*.6, gy=G.cy+py*.6, keep=G.cx; G.cx=gx; const keepy=G.cy; G.cy=gy;
+    // atmosphere glow
+    const glow=cx.createRadialGradient(gx,gy,G.R*.55,gx,gy,G.R*1.35);
+    glow.addColorStop(0,'rgba(211,169,79,'+(.07*A)+')');
+    glow.addColorStop(1,'rgba(211,169,79,0)');
+    cx.globalAlpha=1; cx.fillStyle=glow;
+    cx.beginPath(); cx.arc(gx,gy,G.R*1.35,0,6.28); cx.fill();
+    // back hemisphere dust (dim, occluded by the body)
+    for(const p of pts){
+      const q=project(p,rot);
+      if(q.z>=0) continue;
+      cx.globalAlpha=.12*A;
+      cx.fillStyle='#C9BFA8';
+      cx.beginPath(); cx.arc(q.x,q.y,p.s*.7,0,6.28); cx.fill();
+    }
+    // the body — a shade warmer than the void
+    cx.globalAlpha=.82*A; cx.fillStyle='#0F0D08';
+    cx.beginPath(); cx.arc(gx,gy,G.R,0,6.28); cx.fill();
+    // rim light
+    cx.globalAlpha=.22*A; cx.strokeStyle='#AA8535'; cx.lineWidth=1;
+    cx.beginPath(); cx.arc(gx,gy,G.R,0,6.28); cx.stroke();
+    // front hemisphere dust — gold near the meridian, ivory at the edges
+    for(const p of pts){
+      const q=project(p,rot);
+      if(q.z<0) continue;
+      const d=q.z; // 0..1 toward viewer
+      cx.globalAlpha=(.26+.62*d)*A;
+      cx.fillStyle=d>.5?'#D3A94F':'#D9CFBA';
+      cx.beginPath(); cx.arc(q.x,q.y,p.s*(.7+.55*d),0,6.28); cx.fill();
+    }
+    // leo, living on the sphere
+    const P={}; for(const k in leoS) P[k]=leoPoint(k,rot);
+    for(const [u,v] of LEOLINES){
+      const a=P[u], b=P[v], dm=Math.min(a.z,b.z);
+      if(dm<-.05) continue;
+      cx.globalAlpha=clamp(.1+.5*dm,0,.6)*A;
+      cx.strokeStyle='rgba(211,169,79,.8)'; cx.lineWidth=.9;
+      cx.beginPath(); cx.moveTo(a.x,a.y); cx.lineTo(b.x,b.y); cx.stroke();
+    }
     for(const k in P){
+      const q=P[k]; if(q.z<-.05) continue;
       const isA=k==='a';
-      const rr=(isA?3+1*Math.sin(t*1.6):1.7)*skyZoom;
-      cx.globalAlpha=(isA?.95:.8)*skyFade; cx.fillStyle=isA?'#D3A94F':'#C9BFA8';
-      cx.beginPath(); cx.arc(P[k][0],P[k][1],rr,0,6.28); cx.fill();
-      if(isA){
-        cx.globalAlpha=(.18+.1*Math.sin(t*1.6))*skyFade;
-        cx.beginPath(); cx.arc(P[k][0],P[k][1],14+4*Math.sin(t*1.6),0,6.28); cx.fillStyle='#D3A94F'; cx.fill();
+      const vis=clamp(.25+.75*q.z,0,1)*A;
+      cx.globalAlpha=vis;
+      cx.fillStyle=isA?'#D3A94F':'#EAE3D3';
+      cx.beginPath(); cx.arc(q.x,q.y,(isA?3.2+1.1*Math.sin(t*1.6):1.6)*q.s,0,6.28); cx.fill();
+      if(isA && q.z>0){
+        cx.globalAlpha=(.2+.12*Math.sin(t*1.6))*vis;
+        cx.fillStyle='#D3A94F';
+        cx.beginPath(); cx.arc(q.x,q.y,15+4*Math.sin(t*1.6),0,6.28); cx.fill();
       }
     }
+    G.cx=keep; G.cy=keepy;
     cx.globalAlpha=1;
+  }
+  /* globe choreography — pose per film phase */
+  function poseGlobe(){
+    const mob=W<700;
+    const heroR=Math.min(W*(mob?.85:.6), H*.78);
+    const floatR=Math.min(W*(mob?.5:.3), H*.36);
+    const p1=actP.sky, p2=actP.thesis, p3=actP.numbers, p4=actP.curve;
+    // start: horizon planet at the bottom → pull back to a floating sphere → dim through the acts
+    let cxg=W/2, cyg=H*1.04, R=heroR, al=1;
+    if(p1>0){
+      const k=ease(p1);
+      cyg=H*1.04+(H*.6-H*1.04)*k;
+      R=heroR+(floatR-heroR)*k;
+    }
+    if(p2>0){ al=1-.62*clamp(p2*1.6,0,1); cyg=H*.6; R=floatR; }
+    if(p3>0){ al=.38-.13*p3; }
+    if(p4>0){ al=.25-.13*p4; cyg=H*.6+(H*.5-H*.6)*p4; }
+    if(scrollY>(A.curve.offsetTop+A.curve.offsetHeight-innerHeight)) al=.12;
+    G.cx=cxg; G.cy=cyg; G.R=R; G.alpha=al;
   }
 
   /* ═══ THE BOOK ═══ */
@@ -558,9 +642,9 @@
   }
   function film(){
     for(const k in A) actP[k]=prog(A[k]);
-    // act i: mast fades + drifts up; sky zooms slightly
+    poseGlobe();
+    // act i: mast fades + drifts up as the globe pulls back
     const p1=actP.sky;
-    skyZoom=1+p1*.3; skyFade=1-clamp((p1-.75)/.25,0,1)*.35;
     mast.style.opacity=String(1-clamp((p1-.45)/.4,0,1));
     mast.style.transform='translateY('+(-p1*60)+'px)';
     document.querySelector('#act-sky .cue').style.opacity=String(1-clamp(p1/.25,0,1));
@@ -596,12 +680,12 @@
     raf=requestAnimationFrame(loop);
   }
   let raf=null;
-  function sizeAll(){ sizeSky(); buildCurve(); if(!reduce) film(); else { paintSky(); } }
+  function sizeAll(){ sizeSky(); buildCurve(); if(!reduce) film(); else { poseGlobe(); paintSky(); } }
   sizeAll();
   let rw=innerWidth;
   addEventListener('resize',()=>{ if(Math.abs(innerWidth-rw)>60){rw=innerWidth; sizeAll();} },{passive:true});
   if(reduce){
-    paintSky();
+    poseGlobe(); paintSky();
     setHud(data.length-1);
     document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));
   }else{
