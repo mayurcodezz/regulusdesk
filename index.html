@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>regulus desk — the verified ledger of mayur vaish</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="regulus desk — a private derivatives desk in india that keeps its trading book in public. every number broker-true: the ledger, the laws, the wins and the wounds.">
+<meta property="og:title" content="regulus desk — the verified ledger">
+<meta property="og:description" content="a live trading book kept in public. every number broker-true.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://regulusdesk.com">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
+<style>
+  :root{
+    --ground:#0B0A07; --panel:#13100A; --panel2:#181409;
+    --ink:#F3ECDC; --ink-2:#D9CFBA; --muted:#A89D86; --faint:#7C7259;
+    --gold:#D3A94F; --gold-mark:#AA8535; --rust:#C75F35; --rust-deep:#B0532D;
+    --hair:#2E2717; --hair-soft:#201B0F;
+    --serif:'Times New Roman', Times, Georgia, serif;
+    --mono:ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  html{background:var(--ground); scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--serif); font-size:19px; line-height:1.72;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--gold); color:var(--ground);}
+  a{color:var(--gold); text-decoration:none;}
+  a:hover{text-decoration:underline; text-underline-offset:3px;}
+  a:focus-visible, button:focus-visible, .day-head:focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:1px;}
+  .page{max-width:920px; margin:0 auto; padding:0 26px;}
+
+  .lbl{font-size:.7rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted);}
+  .lbl .star{color:var(--gold); letter-spacing:0;}
+
+  /* ── masthead ── */
+  header{padding:48px 0 0; text-align:center;}
+  .mast-top{display:flex; align-items:center; justify-content:center; gap:18px;}
+  .mast-top::before,.mast-top::after{content:""; flex:1; max-width:180px; border-top:1px solid var(--hair);}
+  .masthead{font-size:clamp(1.7rem,4.6vw,2.5rem); letter-spacing:.32em; text-indent:.32em; margin:20px 0 8px; font-weight:400; text-transform:uppercase;}
+  .mast-sub{font-size:.74rem; letter-spacing:.26em; text-indent:.26em; text-transform:uppercase; color:var(--faint); margin:0 0 30px;}
+  .mast-rule{border:0; border-top:1px solid var(--hair); margin:0;}
+
+  /* ── hero ── */
+  .hero{padding:72px 0 30px;}
+  .hero h1{font-size:clamp(2.7rem,7vw,4.6rem); line-height:1.08; font-weight:400; margin:.35em 0 .4em; letter-spacing:-.01em; text-wrap:balance; max-width:14ch;}
+  .hero h1 em{color:var(--gold); font-style:italic;}
+  .hero p{max-width:46ch; color:var(--ink-2); font-size:1.18rem; margin:0; line-height:1.6;}
+  .hero p b{color:var(--ink); font-weight:400;}
+
+  /* ── count-up strip ── */
+  .strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair); margin:52px 0 0;}
+  .stat{background:var(--panel); padding:24px 22px 20px;}
+  .stat .k{font-size:.64rem; letter-spacing:.22em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:10px;}
+  .stat .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.9rem; line-height:1; color:var(--ink); display:block;}
+  .stat .v.pos{color:var(--gold);} .stat .v.neg{color:var(--rust);}
+  .stat .s{font-size:.82rem; color:var(--faint); font-style:italic; display:block; margin-top:9px;}
+
+  /* ── sections ── */
+  section{padding:76px 0 8px;}
+  .sep{display:flex; align-items:center; gap:20px; color:var(--gold); font-size:.85rem; margin-bottom:14px;}
+  .sep::before,.sep::after{content:""; flex:1; border-top:1px solid var(--hair);}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem); font-weight:400; font-style:italic; text-align:center; margin:0 0 10px; letter-spacing:.01em;}
+  h2 .gild{color:var(--gold);}
+  .h2-sub{text-align:center; color:var(--muted); font-size:1.02rem; max-width:56ch; margin:0 auto 44px; font-style:italic;}
+
+  /* ── chart ── */
+  .chart-wrap{position:relative; border:1px solid var(--hair); background:var(--panel); padding:24px 14px 10px;}
+  .chart-head{display:flex; justify-content:space-between; align-items:baseline; padding:0 12px 12px; flex-wrap:wrap; gap:6px;}
+  .chart-head .t{font-style:italic; font-size:1.08rem; color:var(--ink-2);}
+  .chart-head .live{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:8px;}
+  .pulse{width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block;}
+  @media (prefers-reduced-motion: no-preference){
+    .pulse{animation:pulse 2.2s ease-out infinite;}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(211,169,79,.5)} 70%{box-shadow:0 0 0 9px rgba(211,169,79,0)} 100%{box-shadow:0 0 0 0 rgba(211,169,79,0)}}
+  }
+  #curve{display:block; width:100%; height:auto;}
+  #curve .hit{cursor:pointer;}
+  .tip{position:absolute; pointer-events:none; opacity:0; transition:opacity .12s; background:var(--panel2); border:1px solid var(--hair); padding:10px 14px 9px; font-size:.86rem; line-height:1.55; min-width:140px; z-index:3; color:var(--ink-2);}
+  .tip .d{font-style:italic; color:var(--muted); display:block; font-size:.8rem;}
+  .tip .p{font-family:var(--mono); font-variant-numeric:tabular-nums; display:block; font-size:1rem;}
+  .tip .p.pos{color:var(--gold);} .tip .p.neg{color:var(--rust);}
+  .tip .c{font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--ink); display:block;}
+  .tip .go{font-size:.74rem; color:var(--faint); font-style:italic; display:block; margin-top:3px;}
+  .chart-note{font-size:.95rem; color:var(--muted); font-style:italic; text-align:center; margin:16px 0 0; padding:0 12px;}
+  .chart-note b{color:var(--gold); font-weight:400;}
+
+  /* ── the book: day entries ── */
+  .book{margin-top:56px; border:1px solid var(--hair);}
+  .day{border-bottom:1px solid var(--hair-soft); background:var(--panel);}
+  .day:last-child{border-bottom:0;}
+  .day-head{
+    display:flex; align-items:center; gap:18px; width:100%; text-align:left;
+    background:none; border:0; color:var(--ink); font-family:var(--serif);
+    padding:20px 24px; cursor:pointer; font-size:1rem;
+  }
+  .day-head:hover{background:var(--panel2);}
+  .day-date{font-style:italic; color:var(--muted); min-width:96px; font-size:1.02rem;}
+  .day-title{flex:1; font-size:1.08rem; color:var(--ink-2);}
+  .day-pnl{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.05rem; white-space:nowrap;}
+  .day-pnl.pos{color:var(--gold);} .day-pnl.neg{color:var(--rust);} .day-pnl.zero{color:var(--muted); font-style:italic;}
+  .day-caret{color:var(--faint); transition:transform .25s; font-size:.8rem;}
+  .day.open .day-caret{transform:rotate(90deg);}
+  .day-body{display:none; padding:4px 26px 30px; position:relative;}
+  .day.open .day-body{display:block;}
+  .day.open{background:var(--panel2);}
+  .day-story{max-width:60ch; color:var(--ink-2); font-size:1.06rem; margin:0;}
+  .day-story b{color:var(--ink); font-weight:400;}
+  .law-tag{
+    display:inline-block; margin-top:18px; padding:10px 16px; border:1px solid var(--gold-mark);
+    color:var(--gold); font-size:.92rem; font-style:italic; background:rgba(170,133,53,.05);
+  }
+  .law-tag::before{content:"law carved · "; font-style:normal; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);}
+  .stamp{
+    position:absolute; top:14px; right:22px; transform:rotate(6deg);
+    font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+    border:1.5px solid; padding:5px 10px; opacity:.75; pointer-events:none;
+  }
+  .stamp.pos{color:var(--gold); border-color:var(--gold-mark);}
+  .stamp.neg{color:var(--rust); border-color:var(--rust-deep); transform:rotate(-5deg);}
+  @media (max-width:640px){
+    .day-head{flex-wrap:wrap; gap:6px 14px; padding:18px 18px;}
+    .day-title{flex-basis:100%; order:3;}
+    .day-body{padding:4px 18px 26px;}
+    .stamp{display:none;}
+  }
+
+  /* ── doctrine ── */
+  .laws{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair);}
+  .law{background:var(--panel); padding:36px 28px 40px;}
+  .law .num{font-style:italic; color:var(--gold); font-size:2rem; display:block; margin-bottom:12px;}
+  .law h3{font-size:1.3rem; font-weight:400; margin:0 0 12px; font-style:italic;}
+  .law p{font-size:1rem; color:var(--muted); margin:0; line-height:1.65;}
+  .law p b{color:var(--ink-2); font-weight:400;}
+
+  /* ── prose ── */
+  .prose{max-width:56ch; margin:0 auto 40px; font-size:1.14rem; color:var(--ink-2); text-align:center;}
+  .prose .lead-in{color:var(--gold); font-style:italic;}
+
+  /* ── correspondence ── */
+  .card{border:1px solid var(--hair); background:var(--panel); padding:48px 36px; text-align:center; margin-bottom:8px;}
+  .card p{max-width:48ch; margin:0 auto 28px; color:var(--ink-2); font-size:1.1rem;}
+  .mail{display:inline-block; font-family:var(--mono); font-size:1rem; letter-spacing:.04em; border:1px solid var(--gold-mark); color:var(--gold); padding:15px 34px; transition:background .2s,color .2s;}
+  .mail:hover{background:var(--gold); color:var(--ground); text-decoration:none;}
+
+  .door{text-align:center; padding:60px 0;}
+  .door a{color:var(--muted); font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; text-indent:.3em;}
+  .door a:hover{color:var(--gold); text-decoration:none;}
+  .door .sub{font-size:.85rem; color:var(--faint); font-style:italic; margin-top:10px;}
+
+  footer{border-top:1px solid var(--hair); padding:36px 0 56px; text-align:center;}
+  footer p{font-size:.82rem; color:var(--faint); max-width:64ch; margin:0 auto 10px; line-height:1.7;}
+  footer .cr{letter-spacing:.2em; text-transform:uppercase; font-size:.64rem; margin-top:18px;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards;}
+    .rise.d1{animation-delay:.08s} .rise.d2{animation-delay:.24s} .rise.d3{animation-delay:.4s} .rise.d4{animation-delay:.56s}
+    @keyframes rise{to{opacity:1; transform:none}}
+    #curve .draw{transition:stroke-dashoffset 1.6s cubic-bezier(.3,.5,.2,1);}
+    #curve .dot{transition:opacity .5s ease .2s, r .15s;}
+  }
+</style>
+</head>
+<body>
+<header class="page">
+  <div class="mast-top"><span class="lbl"><span class="star">✦</span>&nbsp;&nbsp;est. mmxxvi&nbsp;&nbsp;<span class="star">✦</span></span></div>
+  <h1 class="masthead">Regulus Desk</h1>
+  <p class="mast-sub">the desk under the royal star · india</p>
+  <hr class="mast-rule">
+</header>
+
+<div class="page hero">
+  <span class="lbl rise d1">a private derivatives desk · its book, kept in public</span>
+  <h1 class="rise d2">every number here is <em>broker-true.</em></h1>
+  <p class="rise d3">this is a <b>live trading book</b> — wins, wounds, and the laws carved from them — reconciled against the broker before a single line is written. most desks show you their curve once it's pretty. <b>this one grows in public.</b></p>
+
+  <div class="strip rise d4">
+    <div class="stat"><span class="k">net, all-time</span><span class="v pos" data-count="4355" data-prefix="+₹">+₹0</span><span class="s">on a ₹12,00,000 base</span></div>
+    <div class="stat"><span class="k">best session</span><span class="v pos" data-count="63432" data-prefix="+₹">+₹0</span><span class="s">23 june · left to run</span></div>
+    <div class="stat"><span class="k">worst session</span><span class="v neg" data-count="58907" data-prefix="−₹">−₹0</span><span class="s">24 june · published anyway</span></div>
+    <div class="stat"><span class="k">sessions in the book</span><span class="v" data-count="8" data-prefix="">0</span><span class="s">4 green · 4 red · 0 hidden</span></div>
+  </div>
+</div>
+
+<section class="page" id="ledger">
+  <div class="sep">✦</div>
+  <h2>the <span class="gild">ledger</span></h2>
+  <p class="h2-sub">the spine of the book. every mark is a real close, reconciled to the broker's rupee.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-head">
+      <span class="t">capital, marked at every close</span>
+      <span class="live"><span class="pulse"></span>live book</span>
+    </div>
+    <svg id="curve" viewBox="0 0 880 380" role="img" aria-label="capital curve from 19 june to 6 july 2026, starting at 12 lakh rupees, peaking at 12.63 lakh, ending at 12.04 lakh"></svg>
+    <div class="tip" id="tip"></div>
+    <p class="chart-note"><b>touch a day</b> — every mark on this curve has a page in the book below. hover to read it, click to open it.</p>
+  </div>
+
+  <div class="book" id="book"></div>
+</section>
+
+<section class="page" id="doctrine">
+  <div class="sep">✦</div>
+  <h2>the <span class="gild">doctrine</span></h2>
+  <p class="h2-sub">three laws above all others. everything in the book answers to these.</p>
+  <div class="laws">
+    <div class="law">
+      <span class="num">i.</span>
+      <h3>asymmetry over win-rate</h3>
+      <p><b>losers are cut small; winners are left to breathe.</b> the desk hunts convex days — four small scratches for one outsized run. the ledger above shows exactly that shape.</p>
+    </div>
+    <div class="law">
+      <span class="num">ii.</span>
+      <h3>survival before size</h3>
+      <p><b>a hard breaker guards the base every session.</b> no averaging down, no revenge sizing, no undefined risk. the desk's first job is to be alive tomorrow.</p>
+    </div>
+    <div class="law">
+      <span class="num">iii.</span>
+      <h3>evolve daily</h3>
+      <p><b>every close ends in a written law</b> — what broke, what's fixed, what compounds. the laws you see carved in the book are real, and each one cost real rupees to learn.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="keeper">
+  <div class="sep">✦</div>
+  <h2>the <span class="gild">man</span></h2>
+  <p class="prose"><span class="lead-in">mayur vaish, twenty-five.</span> self-taught, first-principles, allergic to narration. he builds the desk's machinery himself — the engine, the risk gates, the ledger you just read — and lets the broker's numbers do all the talking. the desk is named for <b>regulus</b>, the royal star at the heart of the lion: a fixed point, which is what a book of record should be.</p>
+</section>
+
+<section class="page" id="correspondence">
+  <div class="sep">✦</div>
+  <h2>the <span class="gild">correspondence</span></h2>
+  <div class="card">
+    <p>the desk is not an advisory. it sells no tips, no signals, no courses — it keeps a verified book and takes serious conversations slowly.</p>
+    <a class="mail" href="mailto:letters@regulusdesk.com">letters@regulusdesk.com</a>
+  </div>
+</section>
+
+<div class="page door">
+  <a href="#" title="the private cockpit — coming online" aria-disabled="true">🜂 kapidhvaja — desk access · crew only</a>
+  <p class="sub">the cockpit comes online soon.</p>
+</div>
+
+<footer class="page">
+  <p>trading in derivatives involves substantial risk of loss and is not suitable for everyone. nothing on this page is investment advice, research, or a solicitation to trade. the regulus desk trades proprietary capital only. past performance is no guarantee of future results.</p>
+  <p class="cr">✦ &nbsp;regulus desk · mmxxvi &nbsp;✦</p>
+</footer>
+
+<script>
+(function(){
+  /* ═══ the book — real entries, broker-reconciled ═══ */
+  const data=[
+    {d:'19 jun', pnl:null, cap:1200000, title:'the desk opens',
+     story:'base capital committed: <b>₹12,00,000</b>. the rule is set before the first trade: every mark in this book is reconciled against the broker before it is written, and no entry is ever edited after the fact.'},
+    {d:'23 jun', pnl:63432, cap:1263432, title:'first live fire — a runner, left to run',
+     story:'<b>pavanputra</b>, the desk\'s trend rider, caught a clean trend day and was left alone to work. no early banking, no fiddling — the whole doctrine in one session: <b>press the winner, touch nothing.</b>'},
+    {d:'24 jun', pnl:-58907, cap:1204525, title:'gave most of it back — and bought a fix with it',
+     story:'sixteen round-trips, squared flat by noon on the commander\'s call. the wound was structural: the regime brain existed but <b>wasn\'t wired into the hands</b>. it was wired in the same day.',
+     law:'a red day must buy a permanent fix — or it was a donation.'},
+    {d:'25 jun', pnl:12797, cap:1217322, title:'first multi-name bank',
+     story:'seven positions on a trend-up read, banked clean after the close. small, unglamorous, repeatable — <b>the kind of day a desk is actually built from.</b>'},
+    {d:'30 jun', pnl:-12680, cap:1204642, title:'paid rent to a regime that wasn\'t there',
+     story:'a chop day traded like a trend day; the market charged for the lesson. the post-close recorder went <b>fully automatic</b> the same evening — the book now writes itself at every close, no human hand needed.'},
+    {d:'1 jul', pnl:-15734, cap:1188908, title:'the book and the broker disagreed. the broker won.',
+     story:'a reconcile pass caught the ledger flattering itself by a few thousand rupees. the entry was rewritten to the broker\'s number — <b>an honest book hurts twice: once in the p&l, once in the rewrite.</b>',
+     law:'the broker\'s book is the only truth. the ledger reconciles to it, every close.'},
+    {d:'2 jul', pnl:46536, cap:1235444, title:'the fixed machine answers',
+     story:'a two-sided slate, winners pressed, losers scratched at the door. the exact shape law i promises — <b>four scratches don\'t matter when the runner runs.</b>'},
+    {d:'3 jul', pnl:-40431, cap:1195013, title:'a junk day the filters should have skipped',
+     story:'low-quality fires on a directionless tape. the autopsy built a <b>volume gate</b> that — replayed against this very day — would have skipped every one of these trades. the day was expensive; the gate is permanent.',
+     law:'junk days are skipped, not survived.'},
+    {d:'6 jul', pnl:9342, cap:1204355, title:'the day the desk fixed itself mid-flight',
+     story:'the wildest session in the book: a broker outage, forced exits, a mid-session refuel — and <b>twenty-five fixes shipped while the desk was live</b>. green by the close. some days you earn rupees; this day the desk earned its wings.',
+     law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
+  ];
+  const fmtP=v=>(v>0?'+₹':'−₹')+Math.abs(v).toLocaleString('en-IN');
+  const fmtL=v=>'₹'+(v/100000).toFixed(2)+'L';
+
+  /* ═══ count-up stats ═══ */
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const end=+el.dataset.count, pre=el.dataset.prefix;
+    const paint=v=>{el.textContent=pre+Math.round(v).toLocaleString('en-IN');};
+    if(reduce){paint(end); return;}
+    let started=false;
+    new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting&&!started){started=true;o.disconnect();
+      const t0=performance.now(), dur=1400;
+      const step=t=>{const k=Math.min(1,(t-t0)/dur); paint(end*(1-Math.pow(1-k,3))); if(k<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    }});},{threshold:.3}).observe(el);
+    setTimeout(()=>{if(!started){started=true;paint(end);}},4000);
+  });
+
+  /* ═══ the book ═══ */
+  const book=document.getElementById('book');
+  book.innerHTML=data.map((p,i)=>{
+    const pnl=p.pnl===null?'<span class="day-pnl zero">day zero</span>'
+      :'<span class="day-pnl '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>';
+    const stamp=p.pnl===null?'':'<span class="stamp '+(p.pnl>=0?'pos':'neg')+'">'+(p.pnl>=0?'green day':'red day')+'</span>';
+    const law=p.law?'<span class="law-tag">“'+p.law+'”</span>':'';
+    return '<div class="day" id="day-'+i+'">'
+      +'<button class="day-head" aria-expanded="false" data-i="'+i+'">'
+      +'<span class="day-date">'+p.d+' ’26</span>'
+      +'<span class="day-title">'+p.title+'</span>'
+      +pnl+'<span class="day-caret">▶</span></button>'
+      +'<div class="day-body">'+stamp+'<p class="day-story">'+p.story+'</p>'+law+'</div></div>';
+  }).join('');
+  const days=[...book.querySelectorAll('.day')];
+  function openDay(i, scroll){
+    days.forEach((d,j)=>{
+      d.classList.toggle('open', j===i ? (scroll?true:!d.classList.contains('open')) : false);
+      d.querySelector('.day-head').setAttribute('aria-expanded', d.classList.contains('open'));
+    });
+    if(scroll) days[i].scrollIntoView({block:'center', behavior:reduce?'auto':'smooth'});
+    paintDots();
+  }
+  book.addEventListener('click',e=>{
+    const h=e.target.closest('.day-head'); if(!h) return;
+    openDay(+h.dataset.i,false);
+  });
+  days[data.length-1].classList.add('open');
+  days[data.length-1].querySelector('.day-head').setAttribute('aria-expanded','true');
+
+  /* ═══ the curve ═══ */
+  const W=880,H=380,M={t:30,r:80,b:46,l:58};
+  const iw=W-M.l-M.r, ih=H-M.t-M.b;
+  const ymin=1180000, ymax=1270000;
+  const x=i=>M.l+(i/(data.length-1))*iw;
+  const y=v=>M.t+(1-(v-ymin)/(ymax-ymin))*ih;
+  const svg=document.getElementById('curve');
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);return n;};
+
+  for(let v=1190000;v<=1260000;v+=20000){
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y(v),y2:y(v),stroke:'#201B0F','stroke-width':1}));
+    const t=el('text',{x:M.l-10,y:y(v)+4,'text-anchor':'end',fill:'#7C7259','font-size':'12',style:'font-family:ui-monospace,Menlo,monospace'});
+    t.textContent=(v/100000).toFixed(1)+'L'; svg.appendChild(t);
+  }
+  svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y(1200000),y2:y(1200000),stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'2 5'}));
+  const bl=el('text',{x:W-M.r+8,y:y(1200000)+4,fill:'#7C7259','font-size':'12',style:'font-style:italic;font-family:Times New Roman,serif'});
+  bl.textContent='base'; svg.appendChild(bl);
+  data.forEach((p,i)=>{
+    const t=el('text',{x:x(i),y:H-16,'text-anchor':'middle',fill:'#7C7259','font-size':'12',style:'font-family:Times New Roman,serif;font-style:italic'});
+    t.textContent=p.d; svg.appendChild(t);
+  });
+
+  const pts=data.map((p,i)=>[x(i),y(p.cap)]);
+  const dLine=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const dArea=dLine+' L'+pts[pts.length-1][0].toFixed(1)+' '+y(ymin)+' L'+pts[0][0].toFixed(1)+' '+y(ymin)+' Z';
+  svg.appendChild(el('path',{d:dArea,fill:'rgba(170,133,53,0.07)'}));
+  const line=el('path',{d:dLine,fill:'none',stroke:'#AA8535','stroke-width':2.5,'stroke-linejoin':'round','stroke-linecap':'round','class':'draw'});
+  svg.appendChild(line);
+
+  const dots=[];
+  data.forEach((p,i)=>{
+    const last=i===data.length-1;
+    const c=el('circle',{cx:x(i),cy:y(p.cap),r:last?6:4.5,
+      fill:p.pnl===null?'#A89D86':(p.pnl>=0?'#AA8535':'#B0532D'),
+      stroke:'#13100A','stroke-width':2,'class':'dot'});
+    svg.appendChild(c); dots.push(c);
+  });
+  function paintDots(){
+    days.forEach((d,i)=>{
+      const open=d.classList.contains('open');
+      dots[i].setAttribute('stroke', open? '#D3A94F' : '#13100A');
+      dots[i].setAttribute('stroke-width', open? 2.5 : 2);
+    });
+  }
+  const endT=el('text',{x:x(data.length-1)+12,y:y(data[data.length-1].cap)+4,fill:'#D3A94F','font-size':'13',style:'font-family:ui-monospace,Menlo,monospace'});
+  endT.textContent=fmtL(data[data.length-1].cap); svg.appendChild(endT);
+  const peakT=el('text',{x:x(1),y:y(data[1].cap)-12,'text-anchor':'middle',fill:'#A89D86','font-size':'12',style:'font-family:ui-monospace,Menlo,monospace'});
+  peakT.textContent=fmtL(data[1].cap); svg.appendChild(peakT);
+
+  const cross=el('line',{y1:M.t,y2:H-M.b,stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'3 4',opacity:0});
+  svg.appendChild(cross);
+  const tip=document.getElementById('tip');
+  const wrap=svg.parentElement;
+  data.forEach((p,i)=>{
+    const hit=el('rect',{x:x(i)-iw/(data.length-1)/2,y:M.t,width:iw/(data.length-1),height:ih,fill:'transparent','class':'hit'});
+    hit.addEventListener('mouseenter',()=>{
+      cross.setAttribute('x1',x(i)); cross.setAttribute('x2',x(i)); cross.setAttribute('opacity',1);
+      dots[i].setAttribute('r', i===data.length-1?7.5:6.5);
+      tip.innerHTML='<span class="d">'+p.d+' 2026 — '+p.title+'</span>'
+        +(p.pnl===null?'<span class="p" style="color:#A89D86">the desk opens</span>'
+          :'<span class="p '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>')
+        +'<span class="c">'+fmtL(p.cap)+'</span><span class="go">click to open this page ↓</span>';
+      tip.style.opacity=1;
+      const r=wrap.getBoundingClientRect(), sr=svg.getBoundingClientRect();
+      let lx=sr.left-r.left+(x(i)/W)*sr.width+14;
+      if(lx+170>r.width) lx-=200;
+      tip.style.left=lx+'px';
+      tip.style.top=(sr.top-r.top+(y(p.cap)/H)*sr.height-24)+'px';
+    });
+    hit.addEventListener('mouseleave',()=>{
+      cross.setAttribute('opacity',0); tip.style.opacity=0;
+      dots[i].setAttribute('r', i===data.length-1?6:4.5);
+    });
+    hit.addEventListener('click',()=>openDay(i,true));
+    svg.appendChild(hit);
+  });
+  paintDots();
+
+  if(!reduce && 'IntersectionObserver' in window){
+    const len=line.getTotalLength();
+    line.style.strokeDasharray=len; line.style.strokeDashoffset=len;
+    dots.forEach(d=>d.style.opacity=0);
+    let drawn=false;
+    const draw=()=>{if(drawn)return; drawn=true;
+      requestAnimationFrame(()=>{line.style.strokeDashoffset=0;});
+      setTimeout(()=>dots.forEach(d=>d.style.opacity=1),900);
+    };
+    new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){draw();o.disconnect();}});},{threshold:.15}).observe(svg);
+    setTimeout(draw,4000);
+  }
+})();
+</script>
+</body>
+</html>
