@@ -9,9 +9,9 @@
 <meta property="og:image" content="https://regulusdesk.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://regulusdesk.com/og.png">
-<meta name="description" content="regulus desk — a private derivatives desk in india that keeps its trading book in public. every result broker-true, written in R: the ledger, the laws, the wins and the wounds.">
-<meta property="og:title" content="regulus desk — the verified ledger">
-<meta property="og:description" content="a live trading book kept in public. every result broker-true, written in R.">
+<meta name="description" content="regulus desk — a private systematic derivatives desk in india. its book, kept for the inner circle: every result in R-multiples, reconciled to broker records at each close.">
+<meta property="og:title" content="regulus desk — the verified book">
+<meta property="og:description" content="a systematic derivatives book, kept in the open. every result broker-reconciled, written in R.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
@@ -165,6 +165,10 @@
   .prose{max-width:56ch; margin:0 auto; font-size:clamp(1.05rem,4.4vw,1.2rem); color:var(--ink-2); text-align:center; padding:0 4px;}
   .prose .li{color:var(--gold); font-style:italic;}
 
+  /* strategy nameplates */
+  .chip{border:1px solid var(--gold-mark); color:var(--gold); font-size:.56rem; letter-spacing:.22em; padding:4px 9px; text-transform:uppercase; white-space:nowrap; flex-shrink:0;}
+  .chip.mut{border-color:var(--hair); color:var(--faint);}
+
   .card{border:1px solid var(--hair); background:var(--panel); padding:clamp(30px,7vw,48px) clamp(20px,6vw,36px); text-align:center;}
   .card p{max-width:46ch; margin:0 auto 26px; color:var(--ink-2); font-size:clamp(1rem,4.2vw,1.12rem);}
   .mail{display:inline-block; font-family:var(--mono); font-size:clamp(.85rem,3.8vw,.98rem); border:1px solid var(--gold-mark); color:var(--gold); padding:15px 26px;}
@@ -235,7 +239,7 @@
       <span class="line">every number</span>
       <span class="line">here is</span>
       <span class="line"><em>broker-true.</em></span>
-      <p class="after">a live trading book, kept in public — wins, wounds, and the laws carved from them.</p>
+      <p class="after">a systematic derivatives book, maintained for the desk's inner circle — every figure reconciled to the broker's record before publication. results, drawdowns, and the rules they produced.</p>
     </div>
   </div>
 </div>
@@ -243,9 +247,9 @@
 <!-- ═══ ACT III — THE NUMBERS ═══ -->
 <div class="act" id="act-numbers">
   <div class="stage">
-    <div class="moment"><span class="k">best session</span><span class="v pos">+1.59R</span><span class="m">23 june — a runner caught, and left alone to run.</span></div>
-    <div class="moment"><span class="k">worst session</span><span class="v neg">−1.47R</span><span class="m">24 june — published like everything else. it bought a permanent fix.</span></div>
-    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions in the book · 4 green · 4 red · <b style="color:var(--gold); font-weight:400;">0 hidden</b> · net +0.11R.</span></div>
+    <div class="moment"><span class="k">largest gain</span><span class="v pos">+1.59R</span><span class="m">23 june — a trend position identified early and held to its full run.</span></div>
+    <div class="moment"><span class="k">largest loss</span><span class="v neg">−1.47R</span><span class="m">24 june — recorded like every other session. it financed a permanent fix.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions · hit ratio 50% · avg win +0.83R · avg loss −0.80R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +0.11R. a young sample, published from n=1.</span></div>
   </div>
 </div>
 
@@ -253,7 +257,7 @@
 <div class="act" id="act-curve">
   <div class="stage">
     <p class="title">ride the <span class="g">ledger</span></p>
-    <p class="sub2">keep scrolling — the gold rider walks every close, broker-reconciled. <b style="color:var(--ink-2); font-weight:400;">1R is the most the desk allows itself to lose in a single day</b> — every result is a multiple of that promise.</p>
+    <p class="sub2">scroll to walk the book, close by close. <b style="color:var(--ink-2); font-weight:400;">1R denotes the desk's fixed per-session risk budget</b> — all results are expressed as R-multiples and reconciled to broker records at each close.</p>
     <div id="curvebox"><svg id="curve" role="img" aria-label="the book in R multiples from 19 june to 6 july 2026: best day +1.59R, worst −1.47R, net +0.11R"></svg></div>
     <div id="hud">
       <span class="hd" id="hd">19 jun ’26</span>
@@ -269,7 +273,7 @@
   <div class="page">
     <div class="sep rv">✦</div>
     <h2 class="rv">the <span class="g">book</span></h2>
-    <p class="h2sub rv">every mark on the curve has a page. open a day — what happened, what it cost, what law it carved.</p>
+    <p class="h2sub rv">each mark on the curve is a recorded session. open one — the events, the cost, and the rule it produced.</p>
     <div class="book" id="bookbox"></div>
   </div>
 </section>
@@ -280,9 +284,24 @@
     <div class="sep rv">✦</div>
     <h2 class="rv">the <span class="g">doctrine</span></h2>
   </div>
-  <div class="creed rv"><span class="n">i.</span><h3>asymmetry over win-rate</h3><p><b>losers are cut small; winners are left to breathe.</b> four small scratches for one outsized run — the curve above shows exactly that shape.</p></div>
-  <div class="creed rv"><span class="n">ii.</span><h3>survival before size</h3><p><b>a hard breaker guards the base every session.</b> no averaging down, no revenge, no undefined risk. the desk's first job is to be alive tomorrow.</p></div>
-  <div class="creed rv"><span class="n">iii.</span><h3>evolve daily</h3><p><b>every close ends in a written law</b> — what broke, what's fixed, what compounds. one percent sharper, every single day.</p></div>
+  <div class="creed rv"><span class="n">i.</span><h3>asymmetry over win-rate</h3><p><b>losing positions are cut small; winning positions are given room.</b> the desk trades for positive skew — several small scratches financed by one extended run. the distribution above shows that shape.</p></div>
+  <div class="creed rv"><span class="n">ii.</span><h3>survival before size</h3><p><b>a fixed breaker guards the base every session.</b> no averaging down, no size escalation after a loss, no undefined risk. the desk's first obligation is to open tomorrow.</p></div>
+  <div class="creed rv"><span class="n">iii.</span><h3>evolve daily</h3><p><b>every close produces a written rule</b> — what failed, what was corrected, what compounds. one percent sharper each session, in writing.</p></div>
+</section>
+
+<!-- ═══ THE DESKS ═══ -->
+<section id="desks">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">desks</span></h2>
+    <p class="h2sub rv">three systematic strategies run under one risk command, each measured against its own book.</p>
+    <div class="lawbook rv">
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">pavanputra<small>intraday trend-following. rides the session's primary direction; the +1.59R day that opened this book was its work.</small></span><span class="chip">live</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">the dawn<small>opening-structure system. reads the first hour's range before committing capital.</small></span><span class="chip">live</span></div>
+      <div class="lb-row"><span class="lb-num">✦</span><span class="lb-title">the hunter<small>delayed-confirmation entries. waits for demonstrated intent mid-session; enters late by design.</small></span><span class="chip mut">calibrating</span></div>
+      <p class="lb-foot"><b>one command, three books.</b> per-strategy R-ledgers publish automatically once the self-writing book ships — shortly.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ THE LAW BOOK ═══ -->
@@ -290,7 +309,7 @@
   <div class="page">
     <div class="sep rv">✦</div>
     <h2 class="rv">from the <span class="g">law book</span></h2>
-    <p class="h2sub rv">the desk keeps a book of laws — each carved on the day that paid for it. a selection:</p>
+    <p class="h2sub rv">the desk maintains a book of standing rules, each dated to the session that produced it. a selection:</p>
     <div class="lawbook rv">
       <div class="lb-row"><span class="lb-num">0.</span><span class="lb-title">the kaizen rule<small>improve the desk one percent every single day — the law above all laws.</small></span><span class="lb-date">carved 08 jun</span></div>
       <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
@@ -299,7 +318,7 @@
       <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −3.5R night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
       <div class="lb-row"><span class="lb-num">xxviii.</span><span class="lb-title">earn in every regime<small>never twelve bets one way — the slate matches the weather, trend or chop.</small></span><span class="lb-date">carved 18 jun</span></div>
       <div class="lb-row"><span class="lb-num">xxxiv.</span><span class="lb-title">the tank law<small>capital is verified at the broker before the bell — never discovered by a rejection.</small></span><span class="lb-date">carved 06 jul</span></div>
-      <p class="lb-foot"><b>thirty-five laws and counting.</b> each one carved by a day the desk paid for — the full law book joins the site soon.</p>
+      <p class="lb-foot"><b>thirty-five rules and counting.</b> each one produced by a session the desk paid for — the complete law book joins this site shortly.</p>
     </div>
   </div>
 </section>
@@ -309,7 +328,7 @@
   <div class="page">
     <div class="sep rv">✦</div>
     <h2 class="rv">the <span class="g">man</span></h2>
-    <p class="prose rv" style="margin-top:5vh;"><span class="li">mayur vaish, twenty-five.</span> self-taught, first-principles, allergic to narration. he builds the desk's machinery himself — the engine, the risk gates, the ledger you just rode — and lets the broker's numbers do all the talking. the desk is named for <b style="font-weight:400; color:var(--ink);">regulus</b>, the royal star at the heart of the lion: a fixed point, which is what a book of record should be.</p>
+    <p class="prose rv" style="margin-top:5vh;"><span class="li">mayur vaish, twenty-five.</span> principal of the desk; a cfa program candidate, self-taught and first-principles by temperament. he builds the desk's machinery himself — the execution engine, the risk gates, the ledger above — and lets the broker's record speak for the work. the desk is named for <b style="font-weight:400; color:var(--ink);">regulus</b>, the fixed star at the heart of leo: a constant, which is what a book of record should be.</p>
   </div>
 </section>
 
@@ -319,7 +338,7 @@
     <div class="sep rv">✦</div>
     <h2 class="rv">the <span class="g">correspondence</span></h2>
     <div class="card rv" style="margin-top:5vh;">
-      <p>the desk is not an advisory. it sells no tips, no signals, no courses — it keeps a verified book and takes serious conversations slowly.</p>
+      <p>the desk is proprietary and manages no outside capital. it sells no advice, no signals, no products — it keeps a verified book for its inner circle and reads serious correspondence slowly.</p>
       <a class="mail" href="mailto:letters@regulusdesk.com">letters@regulusdesk.com</a>
     </div>
   </div>
@@ -347,26 +366,26 @@
   /* ═══ the data — broker-reconciled, written in R (1R = the daily risk allowance) ═══ */
   const data=[
     {d:'19 jun', r:null, cum:0, title:'the desk opens',
-     story:'the unit is fixed before the first trade: <b>1R — the most the desk may lose in a single day.</b> every result in this book is a multiple of that promise, reconciled against the broker before it is written, and no entry is ever edited after the fact.'},
+     story:'the unit is fixed before the first trade: <b>1R — the maximum the desk may lose in a single session.</b> every entry that follows is a multiple of that allowance, reconciled to the broker before it is written. no entry is edited after the fact.'},
     {d:'23 jun', r:1.59, cum:1.59, title:'first live fire — a runner, left to run',
-     story:'<b>pavanputra</b>, the desk\'s trend rider, caught a clean trend day and was left alone to work. no early banking, no fiddling — the whole doctrine in one session: <b>press the winner, touch nothing.</b>'},
+     story:'<b>pavanputra</b>, the desk\'s trend-following system, identified a sustained directional session and was allowed to complete it. no premature booking, no interference — <b>the winner was pressed; nothing else was touched.</b>'},
     {d:'24 jun', r:-1.47, cum:0.11, title:'gave most of it back — and bought a fix with it',
-     story:'sixteen round-trips, squared flat by noon on the commander\'s call. the wound was structural: the regime brain existed but <b>wasn\'t wired into the hands</b>. it was wired in the same day.',
+     story:'sixteen round-trips; the book was squared flat by noon on a discretionary risk call. the failure was structural — the regime classifier existed but <b>was not yet wired into execution.</b> it was wired the same day.',
      law:'a red day must buy a permanent fix — or it was a donation.'},
     {d:'25 jun', r:0.32, cum:0.43, title:'first multi-name bank',
-     story:'seven positions on a trend-up read, banked clean after the close. small, unglamorous, repeatable — <b>the kind of day a desk is actually built from.</b>'},
+     story:'seven positions taken on a trend-up reading and banked after the close. small, repeatable, unremarkable — <b>the kind of session a durable desk is built from.</b>'},
     {d:'30 jun', r:-0.32, cum:0.11, title:'paid rent to a regime that wasn\'t there',
-     story:'a chop day traded like a trend day; the market charged for the lesson. the post-close recorder went <b>fully automatic</b> the same evening — the book now writes itself at every close.'},
+     story:'a range-bound session traded as if it were trending; the market charged accordingly. the post-close recorder was made <b>fully automatic</b> the same evening — the book now writes itself at every close.'},
     {d:'1 jul', r:-0.39, cum:-0.28, title:'the book and the broker disagreed. the broker won.',
-     story:'a reconcile pass caught the ledger flattering itself by a sliver of an R. the entry was rewritten to the broker\'s number — <b>an honest book hurts twice: once in the result, once in the rewrite.</b>',
+     story:'a reconciliation pass found the internal ledger overstating the session by a fraction of an R. the entry was restated to the broker\'s figure — <b>an honest book costs twice: once in the result, once in the restatement.</b>',
      law:'the broker\'s book is the only truth. the ledger reconciles to it, every close.'},
     {d:'2 jul', r:1.16, cum:0.88, title:'the fixed machine answers',
-     story:'a two-sided slate, winners pressed, losers scratched at the door. the exact shape law i promises — <b>four scratches don\'t matter when the runner runs.</b>'},
+     story:'a two-sided slate: winners pressed, losers cut at their thresholds. the distribution law i promises — <b>small scratches are immaterial when the run completes.</b>'},
     {d:'3 jul', r:-1.01, cum:-0.13, title:'a junk day the filters should have skipped',
-     story:'low-quality fires on a directionless tape. the autopsy built a <b>volume gate</b> that — replayed against this very day — would have skipped every one of these trades. the day was expensive; the gate is permanent.',
+     story:'low-quality entries on a directionless tape. the post-mortem produced a <b>volume gate</b> which, replayed against this session, would have declined every one of these trades. the tuition was paid once; the gate is permanent.',
      law:'junk days are skipped, not survived.'},
     {d:'6 jul', r:0.23, cum:0.11, title:'the day the desk fixed itself mid-flight',
-     story:'the wildest session in the book: a broker outage, forced exits, a mid-session refuel — and <b>twenty-five fixes shipped while the desk was live</b>. green by the close. some days you bank; this day the desk earned its wings.',
+     story:'the most demanding session on record: a broker outage, forced exits, an intra-session capital top-up — and <b>twenty-five corrections shipped while the desk remained live.</b> the day still closed positive. the machinery earned its rating.',
      law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
   ];
 
