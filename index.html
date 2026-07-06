@@ -9,9 +9,9 @@
 <meta property="og:image" content="https://regulusdesk.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://regulusdesk.com/og.png">
-<meta name="description" content="regulus desk — a private derivatives desk in india that keeps its trading book in public. every number broker-true: the ledger, the laws, the wins and the wounds.">
+<meta name="description" content="regulus desk — a private derivatives desk in india that keeps its trading book in public. every result broker-true, written in R: the ledger, the laws, the wins and the wounds.">
 <meta property="og:title" content="regulus desk — the verified ledger">
-<meta property="og:description" content="a live trading book kept in public. every number broker-true.">
+<meta property="og:description" content="a live trading book kept in public. every result broker-true, written in R.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
@@ -243,9 +243,9 @@
 <!-- ═══ ACT III — THE NUMBERS ═══ -->
 <div class="act" id="act-numbers">
   <div class="stage">
-    <div class="moment"><span class="k">best session</span><span class="v pos">+₹63,432</span><span class="m">23 june — a runner caught, and left alone to run.</span></div>
-    <div class="moment"><span class="k">worst session</span><span class="v neg">−₹58,907</span><span class="m">24 june — published like everything else. it bought a permanent fix.</span></div>
-    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions in the book · 4 green · 4 red · <b style="color:var(--gold); font-weight:400;">0 hidden</b> · net +₹4,355 on ₹12,00,000.</span></div>
+    <div class="moment"><span class="k">best session</span><span class="v pos">+1.59R</span><span class="m">23 june — a runner caught, and left alone to run.</span></div>
+    <div class="moment"><span class="k">worst session</span><span class="v neg">−1.47R</span><span class="m">24 june — published like everything else. it bought a permanent fix.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions in the book · 4 green · 4 red · <b style="color:var(--gold); font-weight:400;">0 hidden</b> · net +0.11R.</span></div>
   </div>
 </div>
 
@@ -253,12 +253,12 @@
 <div class="act" id="act-curve">
   <div class="stage">
     <p class="title">ride the <span class="g">ledger</span></p>
-    <p class="sub2">keep scrolling — the gold rider walks every close, broker-reconciled.</p>
-    <div id="curvebox"><svg id="curve" role="img" aria-label="capital curve from 19 june to 6 july 2026: base 12 lakh, peak 12.63 lakh, close 12.04 lakh"></svg></div>
+    <p class="sub2">keep scrolling — the gold rider walks every close, broker-reconciled. <b style="color:var(--ink-2); font-weight:400;">1R is the most the desk allows itself to lose in a single day</b> — every result is a multiple of that promise.</p>
+    <div id="curvebox"><svg id="curve" role="img" aria-label="the book in R multiples from 19 june to 6 july 2026: best day +1.59R, worst −1.47R, net +0.11R"></svg></div>
     <div id="hud">
       <span class="hd" id="hd">19 jun ’26</span>
       <span class="hp zero" id="hp">day zero</span>
-      <span class="hc"><span class="cap-k">capital</span><span id="hc">₹12.00L</span></span>
+      <span class="hc"><span class="cap-k">the book</span><span id="hc">0.00R</span></span>
     </div>
   </div>
 </div>
@@ -296,10 +296,10 @@
       <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
       <div class="lb-row"><span class="lb-num">viii.</span><span class="lb-title">the book never lies, never deletes<small>append-only. a wrong entry is corrected in daylight, never erased.</small></span><span class="lb-date">carved 08 jun</span></div>
       <div class="lb-row"><span class="lb-num">xi.</span><span class="lb-title">the broker's truth<small>a live position's p&amp;l is watched at the broker and booked at the broker — never a proxy.</small></span><span class="lb-date">carved 08 jun</span></div>
-      <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −₹1.4L night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
+      <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −3.5R night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
       <div class="lb-row"><span class="lb-num">xxviii.</span><span class="lb-title">earn in every regime<small>never twelve bets one way — the slate matches the weather, trend or chop.</small></span><span class="lb-date">carved 18 jun</span></div>
       <div class="lb-row"><span class="lb-num">xxxiv.</span><span class="lb-title">the tank law<small>capital is verified at the broker before the bell — never discovered by a rejection.</small></span><span class="lb-date">carved 06 jul</span></div>
-      <p class="lb-foot"><b>thirty-five laws and counting.</b> each one carved by a day that cost real rupees — the full law book joins the site soon.</p>
+      <p class="lb-foot"><b>thirty-five laws and counting.</b> each one carved by a day the desk paid for — the full law book joins the site soon.</p>
     </div>
   </div>
 </section>
@@ -341,32 +341,32 @@
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const ease=t=>1-Math.pow(1-t,3);
-  const fmtP=v=>(v>0?'+₹':'−₹')+Math.abs(v).toLocaleString('en-IN');
-  const fmtL=v=>'₹'+(v/100000).toFixed(2)+'L';
+  const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
+  const fmtB=v=>(v<0?'−':'')+Math.abs(v).toFixed(2)+'R';
 
-  /* ═══ the data — broker-reconciled ═══ */
+  /* ═══ the data — broker-reconciled, written in R (1R = the daily risk allowance) ═══ */
   const data=[
-    {d:'19 jun', pnl:null, cap:1200000, title:'the desk opens',
-     story:'base capital committed: <b>₹12,00,000</b>. the rule is set before the first trade: every mark in this book is reconciled against the broker before it is written, and no entry is ever edited after the fact.'},
-    {d:'23 jun', pnl:63432, cap:1263432, title:'first live fire — a runner, left to run',
+    {d:'19 jun', r:null, cum:0, title:'the desk opens',
+     story:'the unit is fixed before the first trade: <b>1R — the most the desk may lose in a single day.</b> every result in this book is a multiple of that promise, reconciled against the broker before it is written, and no entry is ever edited after the fact.'},
+    {d:'23 jun', r:1.59, cum:1.59, title:'first live fire — a runner, left to run',
      story:'<b>pavanputra</b>, the desk\'s trend rider, caught a clean trend day and was left alone to work. no early banking, no fiddling — the whole doctrine in one session: <b>press the winner, touch nothing.</b>'},
-    {d:'24 jun', pnl:-58907, cap:1204525, title:'gave most of it back — and bought a fix with it',
+    {d:'24 jun', r:-1.47, cum:0.11, title:'gave most of it back — and bought a fix with it',
      story:'sixteen round-trips, squared flat by noon on the commander\'s call. the wound was structural: the regime brain existed but <b>wasn\'t wired into the hands</b>. it was wired in the same day.',
      law:'a red day must buy a permanent fix — or it was a donation.'},
-    {d:'25 jun', pnl:12797, cap:1217322, title:'first multi-name bank',
+    {d:'25 jun', r:0.32, cum:0.43, title:'first multi-name bank',
      story:'seven positions on a trend-up read, banked clean after the close. small, unglamorous, repeatable — <b>the kind of day a desk is actually built from.</b>'},
-    {d:'30 jun', pnl:-12680, cap:1204642, title:'paid rent to a regime that wasn\'t there',
+    {d:'30 jun', r:-0.32, cum:0.11, title:'paid rent to a regime that wasn\'t there',
      story:'a chop day traded like a trend day; the market charged for the lesson. the post-close recorder went <b>fully automatic</b> the same evening — the book now writes itself at every close.'},
-    {d:'1 jul', pnl:-15734, cap:1188908, title:'the book and the broker disagreed. the broker won.',
-     story:'a reconcile pass caught the ledger flattering itself by a few thousand rupees. the entry was rewritten to the broker\'s number — <b>an honest book hurts twice: once in the p&l, once in the rewrite.</b>',
+    {d:'1 jul', r:-0.39, cum:-0.28, title:'the book and the broker disagreed. the broker won.',
+     story:'a reconcile pass caught the ledger flattering itself by a sliver of an R. the entry was rewritten to the broker\'s number — <b>an honest book hurts twice: once in the result, once in the rewrite.</b>',
      law:'the broker\'s book is the only truth. the ledger reconciles to it, every close.'},
-    {d:'2 jul', pnl:46536, cap:1235444, title:'the fixed machine answers',
+    {d:'2 jul', r:1.16, cum:0.88, title:'the fixed machine answers',
      story:'a two-sided slate, winners pressed, losers scratched at the door. the exact shape law i promises — <b>four scratches don\'t matter when the runner runs.</b>'},
-    {d:'3 jul', pnl:-40431, cap:1195013, title:'a junk day the filters should have skipped',
+    {d:'3 jul', r:-1.01, cum:-0.13, title:'a junk day the filters should have skipped',
      story:'low-quality fires on a directionless tape. the autopsy built a <b>volume gate</b> that — replayed against this very day — would have skipped every one of these trades. the day was expensive; the gate is permanent.',
      law:'junk days are skipped, not survived.'},
-    {d:'6 jul', pnl:9342, cap:1204355, title:'the day the desk fixed itself mid-flight',
-     story:'the wildest session in the book: a broker outage, forced exits, a mid-session refuel — and <b>twenty-five fixes shipped while the desk was live</b>. green by the close. some days you earn rupees; this day the desk earned its wings.',
+    {d:'6 jul', r:0.23, cum:0.11, title:'the day the desk fixed itself mid-flight',
+     story:'the wildest session in the book: a broker outage, forced exits, a mid-session refuel — and <b>twenty-five fixes shipped while the desk was live</b>. green by the close. some days you bank; this day the desk earned its wings.',
      law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
   ];
 
@@ -515,9 +515,9 @@
   /* ═══ THE BOOK ═══ */
   const bookbox=document.getElementById('bookbox');
   bookbox.innerHTML=data.map((p,i)=>{
-    const pnl=p.pnl===null?'<span class="day-pnl zero">day zero</span>'
-      :'<span class="day-pnl '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>';
-    const stamp=p.pnl===null?'':'<span class="stamp '+(p.pnl>=0?'pos':'neg')+'">'+(p.pnl>=0?'green day':'red day')+'</span>';
+    const pnl=p.r===null?'<span class="day-pnl zero">day zero</span>'
+      :'<span class="day-pnl '+(p.r>=0?'pos':'neg')+'">'+fmtR(p.r)+'</span>';
+    const stamp=p.r===null?'':'<span class="stamp '+(p.r>=0?'pos':'neg')+'">'+(p.r>=0?'green day':'red day')+'</span>';
     const law=p.law?'<span class="law-tag">“'+p.law+'”</span>':'';
     return '<div class="day" id="day-'+p.d.replace(/\s+/g,'-')+'-26">'
       +'<button class="day-head" aria-expanded="false" data-i="'+i+'">'
@@ -561,7 +561,7 @@
   const NS='http://www.w3.org/2000/svg';
   const el=(tag,a)=>{const n=document.createElementNS(NS,tag); for(const k in a)n.setAttribute(k,a[k]); return n;};
   let line, rider, riderGlow, dots=[], CW, CH, CM, lineLen=0, xs=[];
-  const ymin=1180000, ymax=1270000;
+  const ymin=-0.65, ymax=1.9;
   function buildCurve(){
     svg.innerHTML=''; dots=[];
     const mob=innerWidth<700;
@@ -572,25 +572,25 @@
     const x=i=>CM.l+(i/(data.length-1))*iw;
     const y=v=>CM.t+(1-(v-ymin)/(ymax-ymin))*ih;
     xs=data.map((_,i)=>x(i));
-    for(let v=1190000;v<=1260000;v+=20000){
+    for(let v=-0.5;v<=1.51;v+=0.5){
       svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(v),y2:y(v),stroke:'#201B0F','stroke-width':1}));
       const tl=el('text',{x:CM.l-8,y:y(v)+3.5,'text-anchor':'end',fill:'#7C7259','font-size':mob?'9':'11',style:'font-family:ui-monospace,Menlo,monospace'});
-      tl.textContent=(v/100000).toFixed(1)+'L'; svg.appendChild(tl);
+      tl.textContent=(v>0?'+':'')+v.toFixed(1)+'R'; svg.appendChild(tl);
     }
-    svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(1200000),y2:y(1200000),stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'2 5'}));
+    svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(0),y2:y(0),stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'2 5'}));
     data.forEach((p,i)=>{
       if(mob && i%2===1 && i!==data.length-1) return;
       const tl=el('text',{x:x(i),y:CH-12,'text-anchor':'middle',fill:'#7C7259','font-size':mob?'9':'11',style:'font-family:Times New Roman,serif;font-style:italic'});
       tl.textContent=p.d; svg.appendChild(tl);
     });
-    const pts=data.map((p,i)=>[x(i),y(p.cap)]);
+    const pts=data.map((p,i)=>[x(i),y(p.cum)]);
     const dL=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
     svg.appendChild(el('path',{d:dL+' L'+pts[pts.length-1][0]+' '+y(ymin)+' L'+pts[0][0]+' '+y(ymin)+' Z',fill:'rgba(170,133,53,0.06)'}));
     line=el('path',{d:dL,fill:'none',stroke:'#AA8535','stroke-width':mob?2:2.5,'stroke-linejoin':'round','stroke-linecap':'round'});
     svg.appendChild(line);
     data.forEach((p,i)=>{
-      const c=el('circle',{cx:x(i),cy:y(p.cap),r:mob?3.4:4.5,
-        fill:p.pnl===null?'#A89D86':(p.pnl>=0?'#AA8535':'#B0532D'),
+      const c=el('circle',{cx:x(i),cy:y(p.cum),r:mob?3.4:4.5,
+        fill:p.r===null?'#A89D86':(p.r>=0?'#AA8535':'#B0532D'),
         stroke:'#0B0A07','stroke-width':2,opacity:0});
       svg.appendChild(c); dots.push(c);
     });
@@ -608,9 +608,9 @@
     if(i===hudIdx) return; hudIdx=i;
     const p=data[i];
     hd.textContent=p.d+' ’26';
-    if(p.pnl===null){hp.textContent='day zero'; hp.className='hp zero';}
-    else{hp.textContent=fmtP(p.pnl); hp.className='hp '+(p.pnl>=0?'pos':'neg');}
-    hc.textContent=fmtL(p.cap);
+    if(p.r===null){hp.textContent='day zero'; hp.className='hp zero';}
+    else{hp.textContent=fmtR(p.r); hp.className='hp '+(p.r>=0?'pos':'neg');}
+    hc.textContent=fmtB(p.cum);
   }
   function scrubCurve(p){
     const q=clamp((p-.08)/.84,0,1);
@@ -698,7 +698,7 @@
   }
 
   /* mood favicon */
-  const lastPnl=data[data.length-1].pnl;
+  const lastPnl=data[data.length-1].r;
   const ring=lastPnl===null?'%239C927D':(lastPnl>=0?'%23D3A94F':'%23C75F35');
   const fav=document.createElement('link'); fav.rel='icon';
   fav.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='none' stroke='"+ring+"' stroke-width='6'/><text x='50' y='58' text-anchor='middle' font-size='56'>🦁</text></svg>";
