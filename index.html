@@ -16,329 +16,334 @@
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
 <style>
+  /*
+    DESIGN BLUEPRINT (immutable): deep warm black #0B0A07 · warm ivory ink · ONE gold family
+    (#D3A94F display / #AA8535 marks) · rust #C75F35 strictly for losses · Times/serif · tracked caps
+    · ✦ · hairlines · tabular numerals. FORM: a scroll-film — one thought per screen, phone-first.
+  */
   :root{
     --ground:#0B0A07; --panel:#13100A; --panel2:#181409;
     --ink:#F3ECDC; --ink-2:#D9CFBA; --muted:#A89D86; --faint:#7C7259;
-    --gold:#D3A94F; --gold-mark:#AA8535; --rust:#C75F35; --rust-deep:#B0532D;
+    --gold:#D3A94F; --gold-mark:#AA8535; --rust:#C75F35;
     --hair:#2E2717; --hair-soft:#201B0F;
     --serif:'Times New Roman', Times, Georgia, serif;
     --mono:ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --vh100:100vh;
   }
-  html{background:var(--ground); scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  @supports (height:100svh){ :root{--vh100:100svh;} }
+  html{background:var(--ground);}
   body{
     margin:0; background:var(--ground); color:var(--ink);
-    font-family:var(--serif); font-size:19px; line-height:1.72;
+    font-family:var(--serif); font-size:18px; line-height:1.65;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
   }
-  /*
-    DESIGN BLUEPRINT (extracted, immutable — the private-edition field manual):
-    ground deep warm black #0B0A07 · ink warm ivory · ONE gold accent family (#D3A94F display / #AA8535 marks)
-    rust #C75F35 strictly for losses · Times/serif everywhere · tracked-caps labels · ✦ separators
-    hairline rules · tabular numerals · one orchestrated motion system · the sky behind everything
-  */
-  /* the sky — the desk under the royal star */
-  #sky{position:fixed; inset:0; z-index:0; pointer-events:none;}
-  header,.hero,section,.door,footer{position:relative; z-index:2;}
-  /* paper grain — the private-edition stock */
-  body::after{
-    content:""; position:fixed; inset:0; z-index:9; pointer-events:none; opacity:.05;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-  }
-  /* the gold thread — reading progress */
-  #thread{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg, var(--gold-mark), var(--gold)); z-index:20;}
-  /* gold-leaf glint on the gilded words */
-  .gild, .hero h1 em{transition:text-shadow .35s ease;}
-  .gild:hover, .hero h1 em:hover{text-shadow:0 0 22px rgba(211,169,79,.45);}
   ::selection{background:var(--gold); color:var(--ground);}
   a{color:var(--gold); text-decoration:none;}
-  a:hover{text-decoration:underline; text-underline-offset:3px;}
-  a:focus-visible, button:focus-visible, .day-head:focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:1px;}
-  .page{max-width:920px; margin:0 auto; padding:0 26px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .lbl{font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted);}
+  .lbl .s{color:var(--gold); letter-spacing:0;}
 
-  .lbl{font-size:.7rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted);}
-  .lbl .star{color:var(--gold); letter-spacing:0;}
+  /* the sky behind everything */
+  #sky{position:fixed; inset:0; z-index:0; pointer-events:none;}
+  /* grain */
+  body::after{content:""; position:fixed; inset:0; z-index:40; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");}
+  #thread{position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--gold-mark),var(--gold)); z-index:50;}
 
-  /* ── masthead ── */
-  header{padding:48px 0 0; text-align:center;}
-  .mast-top{display:flex; align-items:center; justify-content:center; gap:18px;}
-  .mast-top::before,.mast-top::after{content:""; flex:1; max-width:180px; border-top:1px solid var(--hair);}
-  .masthead{font-size:clamp(1.7rem,4.6vw,2.5rem); letter-spacing:.32em; text-indent:.32em; margin:20px 0 8px; font-weight:400; text-transform:uppercase;}
-  .mast-sub{font-size:.74rem; letter-spacing:.26em; text-indent:.26em; text-transform:uppercase; color:var(--faint); margin:0 0 30px;}
-  .mast-rule{border:0; border-top:1px solid var(--hair); margin:0;}
-  nav{display:flex; justify-content:center; gap:34px; flex-wrap:wrap; padding:16px 0 14px; border-bottom:1px solid var(--hair);}
-  nav a{font-size:.62rem; letter-spacing:.26em; text-transform:uppercase; color:var(--muted);}
-  nav a:hover{color:var(--gold); text-decoration:none;}
-
-  /* ── hero ── */
-  .hero{padding:72px 0 30px;}
-  .hero h1{font-size:clamp(2.7rem,7vw,4.6rem); line-height:1.08; font-weight:400; margin:.35em 0 .4em; letter-spacing:-.01em; text-wrap:balance; max-width:14ch;}
-  .hero h1 em{color:var(--gold); font-style:italic;}
-  .hero p{max-width:46ch; color:var(--ink-2); font-size:1.18rem; margin:0; line-height:1.6;}
-  .hero p b{color:var(--ink); font-weight:400;}
-
-  /* ── count-up strip ── */
-  .strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair); margin:52px 0 0;}
-  .stat{background:var(--panel); padding:24px 22px 20px;}
-  .stat .k{font-size:.64rem; letter-spacing:.22em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:10px;}
-  .stat .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.9rem; line-height:1; color:var(--ink); display:block;}
-  .stat .v.pos{color:var(--gold);} .stat .v.neg{color:var(--rust);}
-  .stat .s{font-size:.82rem; color:var(--faint); font-style:italic; display:block; margin-top:9px;}
-
-  /* ── sections ── */
-  section{padding:76px 0 8px;}
-  .sep{display:flex; align-items:center; gap:20px; color:var(--gold); font-size:.85rem; margin-bottom:14px;}
-  .sep::before,.sep::after{content:""; flex:1; border-top:1px solid var(--hair);}
-  h2{font-size:clamp(1.7rem,4vw,2.4rem); font-weight:400; font-style:italic; text-align:center; margin:0 0 10px; letter-spacing:.01em;}
-  h2 .gild{color:var(--gold);}
-  .h2-sub{text-align:center; color:var(--muted); font-size:1.02rem; max-width:56ch; margin:0 auto 44px; font-style:italic;}
-
-  /* ── chart ── */
-  .chart-wrap{position:relative; border:1px solid var(--hair); background:var(--panel); padding:24px 14px 10px;}
-  .chart-head{display:flex; justify-content:space-between; align-items:baseline; padding:0 12px 12px; flex-wrap:wrap; gap:6px;}
-  .chart-head .t{font-style:italic; font-size:1.08rem; color:var(--ink-2);}
-  .chart-head .live{font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:8px;}
-  .pulse{width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block;}
-  @media (prefers-reduced-motion: no-preference){
-    .pulse{animation:pulse 2.2s ease-out infinite;}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(211,169,79,.5)} 70%{box-shadow:0 0 0 9px rgba(211,169,79,0)} 100%{box-shadow:0 0 0 0 rgba(211,169,79,0)}}
+  /* fixed slim header — appears after act i */
+  #bar{position:fixed; top:0; left:0; right:0; z-index:45; display:flex; justify-content:space-between; align-items:center;
+    padding:14px 18px; opacity:0; transform:translateY(-8px); transition:opacity .4s, transform .4s; pointer-events:none;
+    background:linear-gradient(#0B0A07ee,#0B0A0700);}
+  #bar.on{opacity:1; transform:none; pointer-events:auto;}
+  #bar .brand{font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-2);}
+  #bar .brand .s{color:var(--gold);}
+  #bar .links{display:flex; gap:20px;}
+  #bar .links a{font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); white-space:nowrap;}
+  #bar .links a:hover{color:var(--gold);}
+  @media (max-width:520px){
+    #bar .brand .word{display:none;}
+    #bar .links{gap:16px;}
   }
+
+  /* ═══ the acts (pinned scroll stages) ═══ */
+  .act{position:relative; z-index:2;}
+  .act .stage{position:sticky; top:0; height:100vh; height:var(--vh100); overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 22px;}
+  #act-sky{height:230vh;} #act-thesis{height:280vh;} #act-numbers{height:340vh;} #act-curve{height:380vh;}
+
+  /* act i — the sky */
+  #act-sky .mast{transition:none;}
+  #act-sky .mast .lbl{display:block; margin-bottom:22px;}
+  #act-sky h1{font-weight:400; margin:0; text-transform:uppercase;
+    font-size:clamp(2rem, 9.5vw, 4.6rem); letter-spacing:.28em; text-indent:.28em; line-height:1.2; text-wrap:balance;}
+  #act-sky .sub{margin-top:18px; font-size:clamp(.66rem, 2.6vw, .8rem); letter-spacing:.3em; text-indent:.3em; text-transform:uppercase; color:var(--muted);}
+  .cue{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:var(--faint); font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; text-indent:.3em;}
+  .cue::after{content:"↓"; display:block; margin-top:6px; font-size:1rem; letter-spacing:0; text-indent:0;}
+  @media (prefers-reduced-motion: no-preference){ .cue::after{animation:dip 2s ease-in-out infinite;} @keyframes dip{50%{transform:translateY(6px)}} }
+
+  /* act ii — the thesis */
+  #act-thesis .line{display:block; font-size:clamp(3rem, 13vw, 7.5rem); line-height:1.04; font-weight:400; letter-spacing:-.01em;
+    opacity:0; transform:translateY(40px);}
+  #act-thesis .line em{color:var(--gold); font-style:italic;}
+  #act-thesis .after{margin-top:30px; font-size:clamp(1rem, 4vw, 1.25rem); color:var(--muted); font-style:italic; opacity:0; max-width:34ch;}
+
+  /* act iii — the numbers */
+  #act-numbers .moment{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 20px; opacity:0;}
+  #act-numbers .k{font-size:clamp(.66rem,2.8vw,.8rem); letter-spacing:.32em; text-indent:.32em; text-transform:uppercase; color:var(--muted); margin-bottom:18px;}
+  #act-numbers .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(3.4rem, 17vw, 9rem); line-height:1; color:var(--ink);}
+  #act-numbers .v.pos{color:var(--gold);} #act-numbers .v.neg{color:var(--rust);}
+  #act-numbers .m{margin-top:20px; font-style:italic; color:var(--ink-2); font-size:clamp(1.02rem, 4.2vw, 1.3rem); max-width:30ch;}
+
+  /* act iv — the ride */
+  #act-curve .stage{justify-content:flex-start; padding-top:12vh;}
+  #act-curve .title{font-size:clamp(1.7rem,7vw,2.6rem); font-style:italic; margin:0 0 6px;}
+  #act-curve .title .g{color:var(--gold);}
+  #act-curve .sub2{color:var(--muted); font-style:italic; font-size:clamp(.92rem,3.6vw,1.05rem); margin:0 0 4vh; max-width:38ch;}
+  #curvebox{width:min(94vw, 1080px);}
   #curve{display:block; width:100%; height:auto;}
-  #curve .hit{cursor:pointer;}
-  .tip{position:absolute; pointer-events:none; opacity:0; transition:opacity .12s; background:var(--panel2); border:1px solid var(--hair); padding:10px 14px 9px; font-size:.86rem; line-height:1.55; min-width:140px; z-index:3; color:var(--ink-2);}
-  .tip .d{font-style:italic; color:var(--muted); display:block; font-size:.8rem;}
-  .tip .p{font-family:var(--mono); font-variant-numeric:tabular-nums; display:block; font-size:1rem;}
-  .tip .p.pos{color:var(--gold);} .tip .p.neg{color:var(--rust);}
-  .tip .c{font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--ink); display:block;}
-  .tip .go{font-size:.74rem; color:var(--faint); font-style:italic; display:block; margin-top:3px;}
-  .chart-note{font-size:.95rem; color:var(--muted); font-style:italic; text-align:center; margin:16px 0 0; padding:0 12px;}
-  .chart-note b{color:var(--gold); font-weight:400;}
+  #hud{display:flex; gap:clamp(14px,4vw,44px); justify-content:center; align-items:baseline; margin-top:3vh;
+    font-family:var(--mono); font-variant-numeric:tabular-nums;}
+  #hud .hd{font-size:clamp(.8rem,3.4vw,1rem); color:var(--muted); font-family:var(--serif); font-style:italic; min-width:9ch;}
+  #hud .hp{font-size:clamp(1.3rem,6.5vw,2.2rem); min-width:6ch;}
+  #hud .hp.pos{color:var(--gold);} #hud .hp.neg{color:var(--rust);} #hud .hp.zero{color:var(--muted);}
+  #hud .hc{font-size:clamp(.9rem,4vw,1.2rem); color:var(--ink-2);}
+  #hud .cap-k{font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); display:block; font-family:var(--serif);}
 
-  /* ── the book: day entries ── */
-  .book{margin-top:56px; border:1px solid var(--hair);}
-  .day{border-bottom:1px solid var(--hair-soft); background:var(--panel);}
-  .day:last-child{border-bottom:0;}
-  .day-head{
-    display:flex; align-items:center; gap:18px; width:100%; text-align:left;
-    background:none; border:0; color:var(--ink); font-family:var(--serif);
-    padding:20px 24px; cursor:pointer; font-size:1rem;
-  }
-  .day-head:hover{background:var(--panel2);}
-  .day-date{font-style:italic; color:var(--muted); min-width:96px; font-size:1.02rem;}
-  .day-title{flex:1; font-size:1.08rem; color:var(--ink-2);}
-  .day-pnl{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.05rem; white-space:nowrap;}
-  .day-pnl.pos{color:var(--gold);} .day-pnl.neg{color:var(--rust);} .day-pnl.zero{color:var(--muted); font-style:italic;}
-  .day-caret{color:var(--faint); transition:transform .25s; font-size:.8rem;}
-  .day.open .day-caret{transform:rotate(90deg);}
-  .day-body{display:none; padding:4px 26px 30px; position:relative;}
+  /* ═══ the book ═══ */
+  main{position:relative; z-index:2;}
+  section{padding:14vh 0 4vh; position:relative; z-index:2;}
+  .page{max-width:960px; margin:0 auto; padding:0 20px;}
+  .sep{display:flex; align-items:center; gap:20px; color:var(--gold); font-size:.85rem; margin-bottom:12px;}
+  .sep::before,.sep::after{content:""; flex:1; border-top:1px solid var(--hair);}
+  h2{font-size:clamp(2rem, 8vw, 3rem); font-weight:400; font-style:italic; text-align:center; margin:0 0 10px;}
+  h2 .g{color:var(--gold);}
+  .h2sub{text-align:center; color:var(--muted); font-style:italic; font-size:clamp(.95rem,3.8vw,1.1rem); max-width:52ch; margin:0 auto 7vh; padding:0 8px;}
+
+  .book{display:flex; flex-direction:column; gap:14px;}
+  .day{border:1px solid var(--hair); background:var(--panel);}
+  .day-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 16px; width:100%; text-align:left;
+    background:none; border:0; color:var(--ink); font-family:var(--serif); padding:20px 20px 18px; cursor:pointer;}
+  .day-head:active{background:var(--panel2);}
+  .day-date{font-style:italic; color:var(--muted); font-size:clamp(.95rem,3.6vw,1.05rem);}
+  .day-pnl{margin-left:auto; font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(1.05rem,4.4vw,1.25rem);}
+  .day-pnl.pos{color:var(--gold);} .day-pnl.neg{color:var(--rust);} .day-pnl.zero{color:var(--muted); font-style:italic; font-size:1rem;}
+  .day-title{flex-basis:100%; font-size:clamp(1.15rem,5vw,1.5rem); font-style:italic; line-height:1.35; color:var(--ink); text-wrap:balance;}
+  .day-body{display:none; padding:2px 20px 24px; position:relative;}
   .day.open .day-body{display:block;}
   .day.open{background:var(--panel2);}
-  .day-story{max-width:60ch; color:var(--ink-2); font-size:1.06rem; margin:0;}
+  .day-story{max-width:58ch; color:var(--ink-2); font-size:clamp(1rem,4.2vw,1.1rem); margin:0; line-height:1.7;}
   .day-story b{color:var(--ink); font-weight:400;}
-  .law-tag{
-    display:inline-block; margin-top:18px; padding:10px 16px; border:1px solid var(--gold-mark);
-    color:var(--gold); font-size:.92rem; font-style:italic; background:rgba(170,133,53,.05);
-  }
-  .law-tag::before{content:"law carved · "; font-style:normal; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);}
-  .stamp{
-    position:absolute; top:14px; right:22px; transform:rotate(6deg);
-    font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
-    border:1.5px solid; padding:5px 10px; opacity:.75; pointer-events:none;
-  }
+  .law-tag{display:inline-block; margin-top:18px; padding:10px 16px; border:1px solid var(--gold-mark);
+    color:var(--gold); font-size:clamp(.88rem,3.6vw,.95rem); font-style:italic; background:rgba(170,133,53,.05);}
+  .law-tag::before{content:"law carved · "; font-style:normal; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);}
+  .stamp{position:absolute; top:12px; right:16px; transform:rotate(6deg); font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    border:1.5px solid; padding:4px 9px; opacity:.7; pointer-events:none;}
   .stamp.pos{color:var(--gold); border-color:var(--gold-mark);}
-  .stamp.neg{color:var(--rust); border-color:var(--rust-deep); transform:rotate(-5deg);}
-  @media (max-width:640px){
-    .day-head{flex-wrap:wrap; gap:6px 14px; padding:18px 18px;}
-    .day-title{flex-basis:100%; order:3;}
-    .day-body{padding:4px 18px 26px;}
-    .stamp{display:none;}
-  }
+  .stamp.neg{color:var(--rust); border-color:var(--rust); transform:rotate(-5deg);}
 
-  /* ── doctrine ── */
-  .laws{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair);}
-  .law{background:var(--panel); padding:36px 28px 40px;}
-  .law .num{font-style:italic; color:var(--gold); font-size:2rem; display:block; margin-bottom:12px;}
-  .law h3{font-size:1.3rem; font-weight:400; margin:0 0 12px; font-style:italic;}
-  .law p{font-size:1rem; color:var(--muted); margin:0; line-height:1.65;}
-  .law p b{color:var(--ink-2); font-weight:400;}
+  /* ═══ the creeds (doctrine, one thought per screen) ═══ */
+  .creed{min-height:74vh; min-height:74svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 24px;}
+  .creed .n{font-style:italic; color:var(--gold); font-size:clamp(1.4rem,6vw,2rem); margin-bottom:14px;}
+  .creed h3{font-weight:400; font-style:italic; font-size:clamp(2rem,9vw,3.6rem); line-height:1.15; margin:0 0 18px; max-width:16ch; text-wrap:balance;}
+  .creed p{color:var(--muted); font-size:clamp(1rem,4.2vw,1.18rem); max-width:44ch; margin:0;}
+  .creed p b{color:var(--ink-2); font-weight:400;}
 
-  /* ── the law book ── */
+  /* law book list */
   .lawbook{border:1px solid var(--hair); background:var(--panel);}
-  .lb-row{display:flex; gap:20px; align-items:baseline; padding:18px 26px; border-bottom:1px solid var(--hair-soft);}
+  .lb-row{display:flex; gap:16px; align-items:baseline; padding:18px 20px; border-bottom:1px solid var(--hair-soft);}
   .lb-row:last-child{border-bottom:0;}
-  .lb-num{font-style:italic; color:var(--gold); font-size:1.15rem; min-width:52px; text-align:right;}
-  .lb-title{flex:1; font-size:1.05rem; color:var(--ink); font-style:italic;}
-  .lb-title small{display:block; font-style:normal; font-size:.88rem; color:var(--muted); margin-top:3px;}
-  .lb-date{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:.75rem; color:var(--faint); white-space:nowrap;}
-  .lb-foot{text-align:center; font-style:italic; color:var(--muted); font-size:.95rem; padding:20px 26px 22px; border-top:1px solid var(--hair);}
+  .lb-num{font-style:italic; color:var(--gold); font-size:1.1rem; min-width:46px; text-align:right; flex-shrink:0;}
+  .lb-title{flex:1; font-size:clamp(1rem,4.2vw,1.1rem); color:var(--ink); font-style:italic;}
+  .lb-title small{display:block; font-style:normal; font-size:clamp(.86rem,3.6vw,.92rem); color:var(--muted); margin-top:4px; line-height:1.55;}
+  .lb-date{font-family:var(--mono); font-size:.7rem; color:var(--faint); white-space:nowrap;}
+  .lb-foot{text-align:center; font-style:italic; color:var(--muted); font-size:.95rem; padding:20px 22px; border-top:1px solid var(--hair);}
   .lb-foot b{color:var(--gold); font-weight:400;}
-  @media (max-width:560px){ .lb-row{padding:16px 18px; gap:14px;} .lb-num{min-width:36px;} .lb-date{display:none;} }
+  @media (max-width:560px){ .lb-date{display:none;} .lb-num{min-width:34px;} }
 
-  /* ── prose ── */
-  .prose{max-width:56ch; margin:0 auto 40px; font-size:1.14rem; color:var(--ink-2); text-align:center;}
-  .prose .lead-in{color:var(--gold); font-style:italic;}
+  .prose{max-width:56ch; margin:0 auto; font-size:clamp(1.05rem,4.4vw,1.2rem); color:var(--ink-2); text-align:center; padding:0 4px;}
+  .prose .li{color:var(--gold); font-style:italic;}
 
-  /* ── correspondence ── */
-  .card{border:1px solid var(--hair); background:var(--panel); padding:48px 36px; text-align:center; margin-bottom:8px;}
-  .card p{max-width:48ch; margin:0 auto 28px; color:var(--ink-2); font-size:1.1rem;}
-  .mail{display:inline-block; font-family:var(--mono); font-size:1rem; letter-spacing:.04em; border:1px solid var(--gold-mark); color:var(--gold); padding:15px 34px; transition:background .2s,color .2s;}
-  .mail:hover{background:var(--gold); color:var(--ground); text-decoration:none;}
+  .card{border:1px solid var(--hair); background:var(--panel); padding:clamp(30px,7vw,48px) clamp(20px,6vw,36px); text-align:center;}
+  .card p{max-width:46ch; margin:0 auto 26px; color:var(--ink-2); font-size:clamp(1rem,4.2vw,1.12rem);}
+  .mail{display:inline-block; font-family:var(--mono); font-size:clamp(.85rem,3.8vw,.98rem); border:1px solid var(--gold-mark); color:var(--gold); padding:15px 26px;}
+  .mail:active,.mail:hover{background:var(--gold); color:var(--ground);}
 
-  .door{text-align:center; padding:60px 0;}
-  .door a{color:var(--muted); font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; text-indent:.3em;}
-  .door a:hover{color:var(--gold); text-decoration:none;}
-  .door .sub{font-size:.85rem; color:var(--faint); font-style:italic; margin-top:10px;}
+  .door{text-align:center; padding:10vh 20px;}
+  .door a{color:var(--muted); font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; text-indent:.28em;}
+  .door .sub{font-size:.82rem; color:var(--faint); font-style:italic; margin-top:10px;}
+  footer{border-top:1px solid var(--hair); padding:34px 20px 56px; text-align:center; position:relative; z-index:2;}
+  footer p{font-size:.78rem; color:var(--faint); max-width:64ch; margin:0 auto 10px; line-height:1.7;}
+  footer .cr{letter-spacing:.2em; text-transform:uppercase; font-size:.6rem; margin-top:16px; color:var(--faint);}
 
-  footer{border-top:1px solid var(--hair); padding:36px 0 56px; text-align:center;}
-  footer p{font-size:.82rem; color:var(--faint); max-width:64ch; margin:0 auto 10px; line-height:1.7;}
-  footer .cr{letter-spacing:.2em; text-transform:uppercase; font-size:.64rem; margin-top:18px;}
-
-  /* scroll choreography — sections rise as the reader arrives */
+  /* reveals for flow sections */
   @media (prefers-reduced-motion: no-preference){
-    .reveal{opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1);}
-    .reveal.in{opacity:1; transform:none;}
+    .rv{opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1);}
+    .rv.in{opacity:1; transform:none;}
   }
-
-  /* the field-manual print edition — A4, ink-safe */
+  /* reduced motion: unpin the film, show everything */
+  @media (prefers-reduced-motion: reduce){
+    .act{height:auto !important;}
+    .act .stage{position:relative; height:auto; min-height:70vh; padding:14vh 22px;}
+    #act-thesis .line,#act-thesis .after,#act-numbers .moment{opacity:1 !important; transform:none !important; position:relative;}
+    .cue{display:none;}
+  }
+  /* print: the flow content only */
   @media print{
     @page{margin:18mm 16mm;}
     body{background:#fff; color:#111; font-size:11.5pt;}
-    body::after, #thread, .pulse, .tip, .day-caret, .door, .chart-note b, #sky, nav{display:none !important;}
-    .lbl,.mast-sub,.stat .k,.tile .k, h2, th{color:#666 !important;}
-    .gild,.law .num,.hero h1 em,.method h3,.prose .lead-in{color:#8a6a1f !important; text-shadow:none !important;}
-    .stat .v,.day-pnl,td,.day-title,.day-story,.law p,.prose,.hero p,.card p{color:#111 !important;}
-    .stat .v.pos,.day-pnl.pos,td .pos{color:#7a5c14 !important;}
-    .stat .v.neg,.day-pnl.neg,td .neg{color:#8c3a1c !important;}
-    .strip,.tiles,.laws,.book,.card,.chart-wrap,.ledger-wrap{border-color:#bbb; background:#fff;}
-    .stat,.law,.day,.tile{background:#fff;}
+    #sky,#thread,#bar,body::after,.cue,.stamp,.door{display:none !important;}
+    .act{height:auto !important;} .act .stage{position:static; height:auto; padding:20px 0;}
+    #act-numbers .moment{position:static; opacity:1;}
+    #act-thesis .line,#act-thesis .after{opacity:1; transform:none;}
     .day-body{display:block !important;}
-    .stamp{opacity:.9;}
-    section,.hero{padding:22px 0; break-inside:avoid-page;}
-    a{color:#111; text-decoration:none;}
-  }
-  @media (prefers-reduced-motion: no-preference){
-    .rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards;}
-    .rise.d1{animation-delay:.08s} .rise.d2{animation-delay:.24s} .rise.d3{animation-delay:.4s} .rise.d4{animation-delay:.56s}
-    @keyframes rise{to{opacity:1; transform:none}}
-    #curve .draw{transition:stroke-dashoffset 1.6s cubic-bezier(.3,.5,.2,1);}
-    #curve .dot{transition:opacity .5s ease .2s, r .15s;}
+    .creed{min-height:0; padding:16px 0;}
+    *{color:#111 !important;}
   }
 </style>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
 <div id="thread" aria-hidden="true"></div>
-<header class="page">
-  <div class="mast-top"><span class="lbl"><span class="star">✦</span>&nbsp;&nbsp;est. mmxxvi&nbsp;&nbsp;<span class="star">✦</span></span></div>
-  <h1 class="masthead">Regulus Desk</h1>
-  <p class="mast-sub">the desk under the royal star · india</p>
-  <nav aria-label="the book">
-    <a href="#ledger">the ledger</a>
-    <a href="#doctrine">the doctrine</a>
-    <a href="#lawbook">the law book</a>
-    <a href="#keeper">the man</a>
-    <a href="#correspondence">letters</a>
+
+<header id="bar" aria-label="regulus desk">
+  <span class="brand"><span class="s">✦</span><span class="word">&nbsp; regulus desk</span></span>
+  <nav class="links">
+    <a href="#book">the book</a>
+    <a href="#laws">the laws</a>
+    <a href="#letters">letters</a>
   </nav>
 </header>
 
-<div class="page hero">
-  <span class="lbl rise d1">a private derivatives desk · its book, kept in public</span>
-  <h1 class="rise d2">every number here is <em>broker-true.</em></h1>
-  <p class="rise d3">this is a <b>live trading book</b> — wins, wounds, and the laws carved from them — reconciled against the broker before a single line is written. most desks show you their curve once it's pretty. <b>this one grows in public.</b></p>
-
-  <div class="strip rise d4">
-    <div class="stat"><span class="k">net, all-time</span><span class="v pos" data-count="4355" data-prefix="+₹">+₹0</span><span class="s">on a ₹12,00,000 base</span></div>
-    <div class="stat"><span class="k">best session</span><span class="v pos" data-count="63432" data-prefix="+₹">+₹0</span><span class="s">23 june · left to run</span></div>
-    <div class="stat"><span class="k">worst session</span><span class="v neg" data-count="58907" data-prefix="−₹">−₹0</span><span class="s">24 june · published anyway</span></div>
-    <div class="stat"><span class="k">sessions in the book</span><span class="v" data-count="8" data-prefix="">0</span><span class="s">4 green · 4 red · 0 hidden</span></div>
+<!-- ═══ ACT I — THE SKY ═══ -->
+<div class="act" id="act-sky">
+  <div class="stage">
+    <div class="mast" id="mast">
+      <span class="lbl"><span class="s">✦</span>&nbsp;&nbsp;est. mmxxvi&nbsp;&nbsp;<span class="s">✦</span></span>
+      <h1>Regulus Desk</h1>
+      <p class="sub">the desk under the royal star · india</p>
+    </div>
+    <div class="cue">scroll</div>
   </div>
 </div>
 
-<section class="page" id="ledger">
-  <div class="sep">✦</div>
-  <h2>the <span class="gild">ledger</span></h2>
-  <p class="h2-sub">the spine of the book. every mark is a real close, reconciled to the broker's rupee.</p>
-
-  <div class="chart-wrap">
-    <div class="chart-head">
-      <span class="t">capital, marked at every close</span>
-      <span class="live"><span class="pulse"></span>live book</span>
-    </div>
-    <svg id="curve" viewBox="0 0 880 380" role="img" aria-label="capital curve from 19 june to 6 july 2026, starting at 12 lakh rupees, peaking at 12.63 lakh, ending at 12.04 lakh"></svg>
-    <div class="tip" id="tip"></div>
-    <p class="chart-note"><b>touch a day</b> — every mark on this curve has a page in the book below. hover to read it, click to open it.</p>
-  </div>
-
-  <div class="book" id="book"></div>
-</section>
-
-<section class="page" id="doctrine">
-  <div class="sep">✦</div>
-  <h2>the <span class="gild">doctrine</span></h2>
-  <p class="h2-sub">three laws above all others. everything in the book answers to these.</p>
-  <div class="laws">
-    <div class="law">
-      <span class="num">i.</span>
-      <h3>asymmetry over win-rate</h3>
-      <p><b>losers are cut small; winners are left to breathe.</b> the desk hunts convex days — four small scratches for one outsized run. the ledger above shows exactly that shape.</p>
-    </div>
-    <div class="law">
-      <span class="num">ii.</span>
-      <h3>survival before size</h3>
-      <p><b>a hard breaker guards the base every session.</b> no averaging down, no revenge sizing, no undefined risk. the desk's first job is to be alive tomorrow.</p>
-    </div>
-    <div class="law">
-      <span class="num">iii.</span>
-      <h3>evolve daily</h3>
-      <p><b>every close ends in a written law</b> — what broke, what's fixed, what compounds. the laws you see carved in the book are real, and each one cost real rupees to learn.</p>
+<!-- ═══ ACT II — THE THESIS ═══ -->
+<div class="act" id="act-thesis">
+  <div class="stage">
+    <div>
+      <span class="line">every number</span>
+      <span class="line">here is</span>
+      <span class="line"><em>broker-true.</em></span>
+      <p class="after">a live trading book, kept in public — wins, wounds, and the laws carved from them.</p>
     </div>
   </div>
-</section>
+</div>
 
-<section class="page" id="lawbook">
-  <div class="sep">✦</div>
-  <h2>from the <span class="gild">law book</span></h2>
-  <p class="h2-sub">the desk keeps a book of laws — each one carved on the day that paid for it. a selection:</p>
-  <div class="lawbook">
-    <div class="lb-row"><span class="lb-num">0.</span><span class="lb-title">the kaizen rule<small>improve the desk one percent every single day — the law above all laws.</small></span><span class="lb-date">carved 08 jun</span></div>
-    <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
-    <div class="lb-row"><span class="lb-num">viii.</span><span class="lb-title">the book never lies, never deletes<small>append-only. a wrong entry is corrected in daylight, never erased.</small></span><span class="lb-date">carved 08 jun</span></div>
-    <div class="lb-row"><span class="lb-num">xi.</span><span class="lb-title">a live position's p&amp;l is the broker's truth — never a proxy<small>the desk watches at the broker and books at the broker.</small></span><span class="lb-date">carved 08 jun</span></div>
-    <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −₹1.4L night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
-    <div class="lb-row"><span class="lb-num">xxviii.</span><span class="lb-title">earn in every regime<small>never twelve bets one way — the slate matches the weather, trend or chop.</small></span><span class="lb-date">carved 18 jun</span></div>
-    <div class="lb-row"><span class="lb-num">xxxiv.</span><span class="lb-title">the tank law<small>capital is verified at the broker before the bell — never discovered by a rejection.</small></span><span class="lb-date">carved 06 jul</span></div>
-    <p class="lb-foot"><b>thirty-five laws and counting.</b> each one was carved by a day that cost real rupees — the full law book joins the site soon.</p>
+<!-- ═══ ACT III — THE NUMBERS ═══ -->
+<div class="act" id="act-numbers">
+  <div class="stage">
+    <div class="moment"><span class="k">best session</span><span class="v pos">+₹63,432</span><span class="m">23 june — a runner caught, and left alone to run.</span></div>
+    <div class="moment"><span class="k">worst session</span><span class="v neg">−₹58,907</span><span class="m">24 june — published like everything else. it bought a permanent fix.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions in the book · 4 green · 4 red · <b style="color:var(--gold); font-weight:400;">0 hidden</b> · net +₹4,355 on ₹12,00,000.</span></div>
+  </div>
+</div>
+
+<!-- ═══ ACT IV — THE RIDE ═══ -->
+<div class="act" id="act-curve">
+  <div class="stage">
+    <p class="title">ride the <span class="g">ledger</span></p>
+    <p class="sub2">keep scrolling — the gold rider walks every close, broker-reconciled.</p>
+    <div id="curvebox"><svg id="curve" role="img" aria-label="capital curve from 19 june to 6 july 2026: base 12 lakh, peak 12.63 lakh, close 12.04 lakh"></svg></div>
+    <div id="hud">
+      <span class="hd" id="hd">19 jun ’26</span>
+      <span class="hp zero" id="hp">day zero</span>
+      <span class="hc"><span class="cap-k">capital</span><span id="hc">₹12.00L</span></span>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- ═══ THE BOOK ═══ -->
+<section id="book">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">book</span></h2>
+    <p class="h2sub rv">every mark on the curve has a page. open a day — what happened, what it cost, what law it carved.</p>
+    <div class="book" id="bookbox"></div>
   </div>
 </section>
 
-<section class="page" id="keeper">
-  <div class="sep">✦</div>
-  <h2>the <span class="gild">man</span></h2>
-  <p class="prose"><span class="lead-in">mayur vaish, twenty-five.</span> self-taught, first-principles, allergic to narration. he builds the desk's machinery himself — the engine, the risk gates, the ledger you just read — and lets the broker's numbers do all the talking. the desk is named for <b>regulus</b>, the royal star at the heart of the lion: a fixed point, which is what a book of record should be.</p>
+<!-- ═══ THE DOCTRINE ═══ -->
+<section id="doctrine">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">doctrine</span></h2>
+  </div>
+  <div class="creed rv"><span class="n">i.</span><h3>asymmetry over win-rate</h3><p><b>losers are cut small; winners are left to breathe.</b> four small scratches for one outsized run — the curve above shows exactly that shape.</p></div>
+  <div class="creed rv"><span class="n">ii.</span><h3>survival before size</h3><p><b>a hard breaker guards the base every session.</b> no averaging down, no revenge, no undefined risk. the desk's first job is to be alive tomorrow.</p></div>
+  <div class="creed rv"><span class="n">iii.</span><h3>evolve daily</h3><p><b>every close ends in a written law</b> — what broke, what's fixed, what compounds. one percent sharper, every single day.</p></div>
 </section>
 
-<section class="page" id="correspondence">
-  <div class="sep">✦</div>
-  <h2>the <span class="gild">correspondence</span></h2>
-  <div class="card">
-    <p>the desk is not an advisory. it sells no tips, no signals, no courses — it keeps a verified book and takes serious conversations slowly.</p>
-    <a class="mail" href="mailto:letters@regulusdesk.com">letters@regulusdesk.com</a>
+<!-- ═══ THE LAW BOOK ═══ -->
+<section id="laws">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">from the <span class="g">law book</span></h2>
+    <p class="h2sub rv">the desk keeps a book of laws — each carved on the day that paid for it. a selection:</p>
+    <div class="lawbook rv">
+      <div class="lb-row"><span class="lb-num">0.</span><span class="lb-title">the kaizen rule<small>improve the desk one percent every single day — the law above all laws.</small></span><span class="lb-date">carved 08 jun</span></div>
+      <div class="lb-row"><span class="lb-num">ii.</span><span class="lb-title">the asymmetry is the edge<small>not the win-rate. a winning desk can look like a coin-flip — the shape of the wins is the truth.</small></span><span class="lb-date">carved 08 jun</span></div>
+      <div class="lb-row"><span class="lb-num">viii.</span><span class="lb-title">the book never lies, never deletes<small>append-only. a wrong entry is corrected in daylight, never erased.</small></span><span class="lb-date">carved 08 jun</span></div>
+      <div class="lb-row"><span class="lb-num">xi.</span><span class="lb-title">the broker's truth<small>a live position's p&amp;l is watched at the broker and booked at the broker — never a proxy.</small></span><span class="lb-date">carved 08 jun</span></div>
+      <div class="lb-row"><span class="lb-num">xxv.</span><span class="lb-title">no overnight carry<small>the desk sleeps flat. the one −₹1.4L night that taught this is in the book.</small></span><span class="lb-date">carved 13 jun</span></div>
+      <div class="lb-row"><span class="lb-num">xxviii.</span><span class="lb-title">earn in every regime<small>never twelve bets one way — the slate matches the weather, trend or chop.</small></span><span class="lb-date">carved 18 jun</span></div>
+      <div class="lb-row"><span class="lb-num">xxxiv.</span><span class="lb-title">the tank law<small>capital is verified at the broker before the bell — never discovered by a rejection.</small></span><span class="lb-date">carved 06 jul</span></div>
+      <p class="lb-foot"><b>thirty-five laws and counting.</b> each one carved by a day that cost real rupees — the full law book joins the site soon.</p>
+    </div>
   </div>
 </section>
 
-<div class="page door">
+<!-- ═══ THE MAN ═══ -->
+<section id="keeper">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">man</span></h2>
+    <p class="prose rv" style="margin-top:5vh;"><span class="li">mayur vaish, twenty-five.</span> self-taught, first-principles, allergic to narration. he builds the desk's machinery himself — the engine, the risk gates, the ledger you just rode — and lets the broker's numbers do all the talking. the desk is named for <b style="font-weight:400; color:var(--ink);">regulus</b>, the royal star at the heart of the lion: a fixed point, which is what a book of record should be.</p>
+  </div>
+</section>
+
+<!-- ═══ LETTERS ═══ -->
+<section id="letters">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">correspondence</span></h2>
+    <div class="card rv" style="margin-top:5vh;">
+      <p>the desk is not an advisory. it sells no tips, no signals, no courses — it keeps a verified book and takes serious conversations slowly.</p>
+      <a class="mail" href="mailto:letters@regulusdesk.com">letters@regulusdesk.com</a>
+    </div>
+  </div>
+</section>
+
+<div class="door rv">
   <a href="#" title="the private cockpit — coming online" aria-disabled="true">🜂 kapidhvaja — desk access · crew only</a>
   <p class="sub">the cockpit comes online soon.</p>
 </div>
+</main>
 
-<footer class="page">
+<footer>
   <p>trading in derivatives involves substantial risk of loss and is not suitable for everyone. nothing on this page is investment advice, research, or a solicitation to trade. the regulus desk trades proprietary capital only. past performance is no guarantee of future results.</p>
   <p class="cr">✦ &nbsp;regulus desk · mmxxvi &nbsp;✦</p>
 </footer>
 
 <script>
 (function(){
-  /* ═══ the book — real entries, broker-reconciled ═══ */
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const ease=t=>1-Math.pow(1-t,3);
+  const fmtP=v=>(v>0?'+₹':'−₹')+Math.abs(v).toLocaleString('en-IN');
+  const fmtL=v=>'₹'+(v/100000).toFixed(2)+'L';
+
+  /* ═══ the data — broker-reconciled ═══ */
   const data=[
     {d:'19 jun', pnl:null, cap:1200000, title:'the desk opens',
      story:'base capital committed: <b>₹12,00,000</b>. the rule is set before the first trade: every mark in this book is reconciled against the broker before it is written, and no entry is ever edited after the fact.'},
@@ -350,7 +355,7 @@
     {d:'25 jun', pnl:12797, cap:1217322, title:'first multi-name bank',
      story:'seven positions on a trend-up read, banked clean after the close. small, unglamorous, repeatable — <b>the kind of day a desk is actually built from.</b>'},
     {d:'30 jun', pnl:-12680, cap:1204642, title:'paid rent to a regime that wasn\'t there',
-     story:'a chop day traded like a trend day; the market charged for the lesson. the post-close recorder went <b>fully automatic</b> the same evening — the book now writes itself at every close, no human hand needed.'},
+     story:'a chop day traded like a trend day; the market charged for the lesson. the post-close recorder went <b>fully automatic</b> the same evening — the book now writes itself at every close.'},
     {d:'1 jul', pnl:-15734, cap:1188908, title:'the book and the broker disagreed. the broker won.',
      story:'a reconcile pass caught the ledger flattering itself by a few thousand rupees. the entry was rewritten to the broker\'s number — <b>an honest book hurts twice: once in the p&l, once in the rewrite.</b>',
      law:'the broker\'s book is the only truth. the ledger reconciles to it, every close.'},
@@ -363,39 +368,80 @@
      story:'the wildest session in the book: a broker outage, forced exits, a mid-session refuel — and <b>twenty-five fixes shipped while the desk was live</b>. green by the close. some days you earn rupees; this day the desk earned its wings.',
      law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
   ];
-  const fmtP=v=>(v>0?'+₹':'−₹')+Math.abs(v).toLocaleString('en-IN');
-  const fmtL=v=>'₹'+(v/100000).toFixed(2)+'L';
 
-  /* ═══ count-up stats ═══ */
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    const end=+el.dataset.count, pre=el.dataset.prefix;
-    const paint=v=>{el.textContent=pre+Math.round(v).toLocaleString('en-IN');};
-    if(reduce){paint(end); return;}
-    let started=false;
-    new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting&&!started){started=true;o.disconnect();
-      const t0=performance.now(), dur=1400;
-      const step=t=>{const k=Math.min(1,(t-t0)/dur); paint(end*(1-Math.pow(1-k,3))); if(k<1)requestAnimationFrame(step);};
-      requestAnimationFrame(step);
-    }});},{threshold:.3}).observe(el);
-    setTimeout(()=>{if(!started){started=true;paint(end);}},4000);
-  });
+  /* ═══ THE SKY ═══ */
+  const cv=document.getElementById('sky'), cx=cv.getContext('2d');
+  let W,H,DPR,stars=[],t=0,mx=0,my=0,shoot=null,skyZoom=1,skyFade=1,leoScale=1;
+  const LEO={pts:{e:[.06,.30],m:[.11,.16],z:[.18,.22],g:[.26,.33],h:[.30,.50],a:[.33,.66],th:[.55,.58],d:[.60,.36],b:[.82,.44]},
+    lines:[['e','m'],['m','z'],['z','g'],['g','h'],['h','a'],['h','th'],['g','d'],['d','b'],['th','b'],['th','d']]};
+  function sizeSky(){
+    W=innerWidth; H=innerHeight; DPR=Math.min(W<700?1.5:2, devicePixelRatio||1);
+    cv.width=W*DPR; cv.height=H*DPR; cv.style.width=W+'px'; cv.style.height=H+'px';
+    cx.setTransform(DPR,0,0,DPR,0,0);
+    const n=W<700?55:90;
+    stars=[...Array(n)].map((_,i)=>{const r=(i*2654435761%4294967296)/4294967296;
+      return {x:(r*997%1)*W, y:(r*613%1)*H, r:.4+(r*7%1)*1.1, p:(r*331%1)*6.28};});
+  }
+  function leoBox(){
+    // act i: centered + big; after: drifts to upper right, smaller
+    const p=actP.sky, mob=W<700;
+    const w0=Math.min(W*(mob?.92:.62), 720), w1=Math.min(W*.4,420);
+    const w=w0+(w1-w0)*p;
+    const x0=(W-w)/2, x1=W-w-W*.05;
+    const y0=H*(mob?.18:.14), y1=H*.06;
+    return {x:x0+(x1-x0)*p, y:y0+(y1-y0)*p, w, h:w*.72};
+  }
+  function paintSky(){
+    cx.clearRect(0,0,W,H);
+    const px=mx*8, py=my*5, sy=-(scrollY||0)*.04;
+    for(const s of stars){
+      const tw=(.32+.28*Math.sin(t*.9+s.p))*skyFade;
+      cx.globalAlpha=tw; cx.fillStyle='#EAE3D3';
+      cx.beginPath(); cx.arc(s.x+px*.4, ((s.y+sy)%H+H)%H+py*.4, s.r*skyZoom, 0, 6.28); cx.fill();
+    }
+    if(shoot){
+      shoot.k+=.025;
+      if(shoot.k>=1) shoot=null;
+      else{
+        const {x0,y0,dx,dy,k}=shoot;
+        cx.globalAlpha=Math.sin(k*3.14)*.7;
+        const g2=cx.createLinearGradient(x0+dx*k-dx*.12,y0+dy*k-dy*.12,x0+dx*k,y0+dy*k);
+        g2.addColorStop(0,'rgba(211,169,79,0)'); g2.addColorStop(1,'rgba(234,227,211,.9)');
+        cx.strokeStyle=g2; cx.lineWidth=1.4;
+        cx.beginPath(); cx.moveTo(x0+dx*k-dx*.12,y0+dy*k-dy*.12); cx.lineTo(x0+dx*k,y0+dy*k); cx.stroke();
+      }
+    }
+    const B=leoBox(), P={};
+    for(const k in LEO.pts) P[k]=[B.x+LEO.pts[k][0]*B.w+px, B.y+LEO.pts[k][1]*B.h+py];
+    cx.globalAlpha=.55*skyFade; cx.strokeStyle='rgba(170,133,53,.4)'; cx.lineWidth=.9;
+    for(const [u,v] of LEO.lines){cx.beginPath(); cx.moveTo(P[u][0],P[u][1]); cx.lineTo(P[v][0],P[v][1]); cx.stroke();}
+    for(const k in P){
+      const isA=k==='a';
+      const rr=(isA?3+1*Math.sin(t*1.6):1.7)*skyZoom;
+      cx.globalAlpha=(isA?.95:.8)*skyFade; cx.fillStyle=isA?'#D3A94F':'#C9BFA8';
+      cx.beginPath(); cx.arc(P[k][0],P[k][1],rr,0,6.28); cx.fill();
+      if(isA){
+        cx.globalAlpha=(.18+.1*Math.sin(t*1.6))*skyFade;
+        cx.beginPath(); cx.arc(P[k][0],P[k][1],14+4*Math.sin(t*1.6),0,6.28); cx.fillStyle='#D3A94F'; cx.fill();
+      }
+    }
+    cx.globalAlpha=1;
+  }
 
-  /* ═══ the book ═══ */
-  const book=document.getElementById('book');
-  book.innerHTML=data.map((p,i)=>{
+  /* ═══ THE BOOK ═══ */
+  const bookbox=document.getElementById('bookbox');
+  bookbox.innerHTML=data.map((p,i)=>{
     const pnl=p.pnl===null?'<span class="day-pnl zero">day zero</span>'
       :'<span class="day-pnl '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>';
     const stamp=p.pnl===null?'':'<span class="stamp '+(p.pnl>=0?'pos':'neg')+'">'+(p.pnl>=0?'green day':'red day')+'</span>';
     const law=p.law?'<span class="law-tag">“'+p.law+'”</span>':'';
     return '<div class="day" id="day-'+p.d.replace(/\s+/g,'-')+'-26">'
       +'<button class="day-head" aria-expanded="false" data-i="'+i+'">'
-      +'<span class="day-date">'+p.d+' ’26</span>'
-      +'<span class="day-title">'+p.title+'</span>'
-      +pnl+'<span class="day-caret">▶</span></button>'
+      +'<span class="day-date">'+p.d+' ’26</span>'+pnl
+      +'<span class="day-title">'+p.title+'</span></button>'
       +'<div class="day-body">'+stamp+'<p class="day-story">'+p.story+'</p>'+law+'</div></div>';
   }).join('');
-  const days=[...book.querySelectorAll('.day')];
+  const days=[...bookbox.querySelectorAll('.day')];
   function openDay(i, scroll){
     days.forEach((d,j)=>{
       d.classList.toggle('open', j===i ? (scroll?true:!d.classList.contains('open')) : false);
@@ -403,126 +449,16 @@
     });
     if(days[i].classList.contains('open')) history.replaceState(null,'','#'+days[i].id);
     if(scroll) days[i].scrollIntoView({block:'center', behavior:reduce?'auto':'smooth'});
-    paintDots();
   }
-  book.addEventListener('click',e=>{
-    const h=e.target.closest('.day-head'); if(!h) return;
-    openDay(+h.dataset.i,false);
+  bookbox.addEventListener('click',e=>{
+    const h=e.target.closest('.day-head'); if(!h) return; openDay(+h.dataset.i,false);
   });
-  days[data.length-1].classList.add('open');
-  days[data.length-1].querySelector('.day-head').setAttribute('aria-expanded','true');
-
-  /* ═══ the curve ═══ */
-  const W=880,H=380,M={t:30,r:80,b:46,l:58};
-  const iw=W-M.l-M.r, ih=H-M.t-M.b;
-  const ymin=1180000, ymax=1270000;
-  const x=i=>M.l+(i/(data.length-1))*iw;
-  const y=v=>M.t+(1-(v-ymin)/(ymax-ymin))*ih;
-  const svg=document.getElementById('curve');
-  const NS='http://www.w3.org/2000/svg';
-  const el=(t,a)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);return n;};
-
-  for(let v=1190000;v<=1260000;v+=20000){
-    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y(v),y2:y(v),stroke:'#201B0F','stroke-width':1}));
-    const t=el('text',{x:M.l-10,y:y(v)+4,'text-anchor':'end',fill:'#7C7259','font-size':'12',style:'font-family:ui-monospace,Menlo,monospace'});
-    t.textContent=(v/100000).toFixed(1)+'L'; svg.appendChild(t);
-  }
-  svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y(1200000),y2:y(1200000),stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'2 5'}));
-  const bl=el('text',{x:W-M.r+8,y:y(1200000)+4,fill:'#7C7259','font-size':'12',style:'font-style:italic;font-family:Times New Roman,serif'});
-  bl.textContent='base'; svg.appendChild(bl);
-  data.forEach((p,i)=>{
-    const t=el('text',{x:x(i),y:H-16,'text-anchor':'middle',fill:'#7C7259','font-size':'12',style:'font-family:Times New Roman,serif;font-style:italic'});
-    t.textContent=p.d; svg.appendChild(t);
-  });
-
-  const pts=data.map((p,i)=>[x(i),y(p.cap)]);
-  const dLine=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-  const dArea=dLine+' L'+pts[pts.length-1][0].toFixed(1)+' '+y(ymin)+' L'+pts[0][0].toFixed(1)+' '+y(ymin)+' Z';
-  svg.appendChild(el('path',{d:dArea,fill:'rgba(170,133,53,0.07)'}));
-  const line=el('path',{d:dLine,fill:'none',stroke:'#AA8535','stroke-width':2.5,'stroke-linejoin':'round','stroke-linecap':'round','class':'draw'});
-  svg.appendChild(line);
-
-  const dots=[];
-  data.forEach((p,i)=>{
-    const last=i===data.length-1;
-    const c=el('circle',{cx:x(i),cy:y(p.cap),r:last?6:4.5,
-      fill:p.pnl===null?'#A89D86':(p.pnl>=0?'#AA8535':'#B0532D'),
-      stroke:'#13100A','stroke-width':2,'class':'dot'});
-    svg.appendChild(c); dots.push(c);
-  });
-  function paintDots(){
-    days.forEach((d,i)=>{
-      const open=d.classList.contains('open');
-      dots[i].setAttribute('stroke', open? '#D3A94F' : '#13100A');
-      dots[i].setAttribute('stroke-width', open? 2.5 : 2);
-    });
-  }
-  const endT=el('text',{x:x(data.length-1)+12,y:y(data[data.length-1].cap)+4,fill:'#D3A94F','font-size':'13',style:'font-family:ui-monospace,Menlo,monospace'});
-  endT.textContent=fmtL(data[data.length-1].cap); svg.appendChild(endT);
-  const peakT=el('text',{x:x(1),y:y(data[1].cap)-12,'text-anchor':'middle',fill:'#A89D86','font-size':'12',style:'font-family:ui-monospace,Menlo,monospace'});
-  peakT.textContent=fmtL(data[1].cap); svg.appendChild(peakT);
-
-  const cross=el('line',{y1:M.t,y2:H-M.b,stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'3 4',opacity:0});
-  svg.appendChild(cross);
-  const tip=document.getElementById('tip');
-  const wrap=svg.parentElement;
-  data.forEach((p,i)=>{
-    const hit=el('rect',{x:x(i)-iw/(data.length-1)/2,y:M.t,width:iw/(data.length-1),height:ih,fill:'transparent','class':'hit'});
-    hit.addEventListener('mouseenter',()=>{
-      cross.setAttribute('x1',x(i)); cross.setAttribute('x2',x(i)); cross.setAttribute('opacity',1);
-      dots[i].setAttribute('r', i===data.length-1?7.5:6.5);
-      tip.innerHTML='<span class="d">'+p.d+' 2026 — '+p.title+'</span>'
-        +(p.pnl===null?'<span class="p" style="color:#A89D86">the desk opens</span>'
-          :'<span class="p '+(p.pnl>=0?'pos':'neg')+'">'+fmtP(p.pnl)+'</span>')
-        +'<span class="c">'+fmtL(p.cap)+'</span><span class="go">click to open this page ↓</span>';
-      tip.style.opacity=1;
-      const r=wrap.getBoundingClientRect(), sr=svg.getBoundingClientRect();
-      let lx=sr.left-r.left+(x(i)/W)*sr.width+14;
-      if(lx+170>r.width) lx-=200;
-      tip.style.left=lx+'px';
-      tip.style.top=(sr.top-r.top+(y(p.cap)/H)*sr.height-24)+'px';
-    });
-    hit.addEventListener('mouseleave',()=>{
-      cross.setAttribute('opacity',0); tip.style.opacity=0;
-      dots[i].setAttribute('r', i===data.length-1?6:4.5);
-    });
-    hit.addEventListener('click',()=>openDay(i,true));
-    svg.appendChild(hit);
-  });
-  paintDots();
-
-  if(!reduce && 'IntersectionObserver' in window){
-    const len=line.getTotalLength();
-    line.style.strokeDasharray=len; line.style.strokeDashoffset=len;
-    dots.forEach(d=>d.style.opacity=0);
-    let drawn=false;
-    const draw=()=>{if(drawn)return; drawn=true;
-      requestAnimationFrame(()=>{line.style.strokeDashoffset=0;});
-      setTimeout(()=>dots.forEach(d=>d.style.opacity=1),900);
-    };
-    new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){draw();o.disconnect();}});},{threshold:.15}).observe(svg);
-    setTimeout(draw,4000);
-  }
-
-  /* ═══ the gold thread ═══ */
-  const thread=document.getElementById('thread');
-  const onScroll=()=>{
-    const h=document.documentElement;
-    const k=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
-    thread.style.width=(k*100)+'%';
-  };
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-  /* ═══ deep link: #day-6-jul-26 opens that page of the book ═══ */
+  days[days.length-1].classList.add('open');
+  days[days.length-1].querySelector('.day-head').setAttribute('aria-expanded','true');
   if(location.hash){
-    const t=document.getElementById(location.hash.slice(1));
-    if(t && t.classList.contains('day')){
-      const i=days.indexOf(t);
-      if(i>=0) setTimeout(()=>openDay(i,true), reduce?0:350);
-    }
+    const el=document.getElementById(location.hash.slice(1));
+    if(el&&el.classList.contains('day')){const i=days.indexOf(el); if(i>=0) setTimeout(()=>openDay(i,true),reduce?0:400);}
   }
-
-  /* ═══ keyboard: j/k turn the pages, escape closes ═══ */
   addEventListener('keydown',e=>{
     if(e.target.closest('input,textarea')||e.metaKey||e.ctrlKey||e.altKey) return;
     const cur=days.findIndex(d=>d.classList.contains('open'));
@@ -532,96 +468,152 @@
     }else if(e.key==='Escape'&&cur>=0){
       days[cur].classList.remove('open');
       days[cur].querySelector('.day-head').setAttribute('aria-expanded','false');
-      history.replaceState(null,'',location.pathname); paintDots();
+      history.replaceState(null,'',location.pathname);
     }
   });
 
-  /* ═══ the sky — leo drawn in hairline gold, regulus pulsing at the heart ═══ */
-  (function sky(){
-    const cv=document.getElementById('sky'), cx=cv.getContext('2d');
-    let W2,H2,DPR=Math.min(2,devicePixelRatio||1), stars=[], t=0, mx=0, my=0, shoot=null;
-    // leo, normalized (x,y): the sickle ε→μ→ζ→γ→η→α(regulus) + back δ + tail β + hip θ
-    const LEO={pts:{e:[.06,.30],m:[.11,.16],z:[.18,.22],g:[.26,.33],h:[.30,.50],a:[.33,.66],th:[.55,.58],d:[.60,.36],b:[.82,.44]},
-      lines:[['e','m'],['m','z'],['z','g'],['g','h'],['h','a'],['h','th'],['g','d'],['d','b'],['th','b'],['th','d']]};
-    function size(){
-      W2=innerWidth; H2=innerHeight;
-      cv.width=W2*DPR; cv.height=H2*DPR; cv.style.width=W2+'px'; cv.style.height=H2+'px';
-      cx.setTransform(DPR,0,0,DPR,0,0);
-      const seed=[...Array(90)].map((_,i)=>i*2654435761%4294967296/4294967296);
-      stars=seed.map((r,i)=>({x:(r*997%1)*W2, y:(r*613%1)*H2, r:.4+(r*7%1)*1.1, p:(r*331%1)*6.28}));
+  /* ═══ THE CURVE (built parametric, scrubbed by scroll) ═══ */
+  const svg=document.getElementById('curve');
+  const NS='http://www.w3.org/2000/svg';
+  const el=(tag,a)=>{const n=document.createElementNS(NS,tag); for(const k in a)n.setAttribute(k,a[k]); return n;};
+  let line, rider, riderGlow, dots=[], CW, CH, CM, lineLen=0, xs=[];
+  const ymin=1180000, ymax=1270000;
+  function buildCurve(){
+    svg.innerHTML=''; dots=[];
+    const mob=innerWidth<700;
+    CW=mob?400:960; CH=mob?Math.round(innerHeight*.42):380;
+    CM={t:24, r:mob?52:80, b:34, l:mob?42:56};
+    svg.setAttribute('viewBox','0 0 '+CW+' '+CH);
+    const iw=CW-CM.l-CM.r, ih=CH-CM.t-CM.b;
+    const x=i=>CM.l+(i/(data.length-1))*iw;
+    const y=v=>CM.t+(1-(v-ymin)/(ymax-ymin))*ih;
+    xs=data.map((_,i)=>x(i));
+    for(let v=1190000;v<=1260000;v+=20000){
+      svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(v),y2:y(v),stroke:'#201B0F','stroke-width':1}));
+      const tl=el('text',{x:CM.l-8,y:y(v)+3.5,'text-anchor':'end',fill:'#7C7259','font-size':mob?'9':'11',style:'font-family:ui-monospace,Menlo,monospace'});
+      tl.textContent=(v/100000).toFixed(1)+'L'; svg.appendChild(tl);
     }
-    function leoBox(){
-      const w=Math.min(W2*.46,560), h=w*.72;
-      return {x:W2-w-Math.max(20,W2*.06), y:Math.max(64,H2*.10), w, h};
-    }
-    function paint(){
-      cx.clearRect(0,0,W2,H2);
-      const px=mx*8, py=my*5, sy=-(scrollY||0)*.06;
-      // field stars
-      for(const s of stars){
-        const tw=.35+.3*Math.sin(t*.9+s.p);
-        cx.globalAlpha=tw; cx.fillStyle='#EAE3D3';
-        cx.beginPath(); cx.arc(s.x+px*.4, ((s.y+sy*.5)%H2+H2)%H2 + py*.4, s.r, 0, 6.28); cx.fill();
-      }
-      // shooting star (rare, quiet)
-      if(shoot){
-        shoot.k+=.025;
-        if(shoot.k>=1){shoot=null;}
-        else{
-          const {x0,y0,dx,dy,k}=shoot;
-          cx.globalAlpha=Math.sin(k*3.14)*.7;
-          const grad=cx.createLinearGradient(x0+dx*k-dx*.12,y0+dy*k-dy*.12,x0+dx*k,y0+dy*k);
-          grad.addColorStop(0,'rgba(211,169,79,0)'); grad.addColorStop(1,'rgba(234,227,211,.9)');
-          cx.strokeStyle=grad; cx.lineWidth=1.4;
-          cx.beginPath(); cx.moveTo(x0+dx*k-dx*.12,y0+dy*k-dy*.12); cx.lineTo(x0+dx*k,y0+dy*k); cx.stroke();
-        }
-      }
-      // leo
-      const B=leoBox(), P={};
-      for(const k in LEO.pts) P[k]=[B.x+LEO.pts[k][0]*B.w+px, B.y+LEO.pts[k][1]*B.h+py+sy];
-      cx.globalAlpha=.5; cx.strokeStyle='rgba(170,133,53,.34)'; cx.lineWidth=.8;
-      for(const [u,v] of LEO.lines){cx.beginPath(); cx.moveTo(P[u][0],P[u][1]); cx.lineTo(P[v][0],P[v][1]); cx.stroke();}
-      for(const k in P){
-        const isA=k==='a';
-        const rr=isA?2.6+.9*Math.sin(t*1.6):1.5;
-        cx.globalAlpha=isA?.95:.75; cx.fillStyle=isA?'#D3A94F':'#C9BFA8';
-        cx.beginPath(); cx.arc(P[k][0],P[k][1],rr,0,6.28); cx.fill();
-        if(isA){
-          cx.globalAlpha=.16+.1*Math.sin(t*1.6);
-          cx.beginPath(); cx.arc(P[k][0],P[k][1],11+3*Math.sin(t*1.6),0,6.28);
-          cx.fillStyle='#D3A94F'; cx.fill();
-        }
-      }
-      cx.globalAlpha=1;
-    }
-    function loop(){
-      t+=.016; paint();
-      if(!shoot && Math.random()<.0012) shoot={x0:Math.random()*W2*.7, y0:Math.random()*H2*.3, dx:180+Math.random()*160, dy:70+Math.random()*60, k:0};
-      raf=requestAnimationFrame(loop);
-    }
-    let raf=null;
-    size(); addEventListener('resize',size,{passive:true});
-    if(reduce){ paint(); }
-    else{
-      addEventListener('mousemove',e=>{mx=e.clientX/W2-.5; my=e.clientY/H2-.5;},{passive:true});
-      document.addEventListener('visibilitychange',()=>{
-        if(document.hidden){cancelAnimationFrame(raf);} else {loop();}
-      });
-      loop();
-    }
-  })();
-
-  /* ═══ scroll choreography ═══ */
-  const toReveal=[...document.querySelectorAll('section, .door')];
-  toReveal.forEach(el=>el.classList.add('reveal'));
-  if(reduce){ toReveal.forEach(el=>el.classList.add('in')); }
-  else{
-    const ro=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }}),{threshold:.12});
-    toReveal.forEach(el=>ro.observe(el));
-    setTimeout(()=>toReveal.forEach(el=>el.classList.add('in')), 5000); // fail-safe: content never stays hidden
+    svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(1200000),y2:y(1200000),stroke:'#7C7259','stroke-width':1,'stroke-dasharray':'2 5'}));
+    data.forEach((p,i)=>{
+      if(mob && i%2===1 && i!==data.length-1) return;
+      const tl=el('text',{x:x(i),y:CH-12,'text-anchor':'middle',fill:'#7C7259','font-size':mob?'9':'11',style:'font-family:Times New Roman,serif;font-style:italic'});
+      tl.textContent=p.d; svg.appendChild(tl);
+    });
+    const pts=data.map((p,i)=>[x(i),y(p.cap)]);
+    const dL=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    svg.appendChild(el('path',{d:dL+' L'+pts[pts.length-1][0]+' '+y(ymin)+' L'+pts[0][0]+' '+y(ymin)+' Z',fill:'rgba(170,133,53,0.06)'}));
+    line=el('path',{d:dL,fill:'none',stroke:'#AA8535','stroke-width':mob?2:2.5,'stroke-linejoin':'round','stroke-linecap':'round'});
+    svg.appendChild(line);
+    data.forEach((p,i)=>{
+      const c=el('circle',{cx:x(i),cy:y(p.cap),r:mob?3.4:4.5,
+        fill:p.pnl===null?'#A89D86':(p.pnl>=0?'#AA8535':'#B0532D'),
+        stroke:'#0B0A07','stroke-width':2,opacity:0});
+      svg.appendChild(c); dots.push(c);
+    });
+    riderGlow=el('circle',{r:mob?11:14,fill:'#D3A94F',opacity:0});
+    rider=el('circle',{r:mob?5:6.5,fill:'#D3A94F',stroke:'#0B0A07','stroke-width':2,opacity:0});
+    svg.appendChild(riderGlow); svg.appendChild(rider);
+    lineLen=line.getTotalLength();
+    line.style.strokeDasharray=lineLen;
+    line.style.strokeDashoffset=reduce?0:lineLen;
+    if(reduce){dots.forEach(d=>d.setAttribute('opacity',1));}
+  }
+  const hd=document.getElementById('hd'), hp=document.getElementById('hp'), hc=document.getElementById('hc');
+  let hudIdx=-1;
+  function setHud(i){
+    if(i===hudIdx) return; hudIdx=i;
+    const p=data[i];
+    hd.textContent=p.d+' ’26';
+    if(p.pnl===null){hp.textContent='day zero'; hp.className='hp zero';}
+    else{hp.textContent=fmtP(p.pnl); hp.className='hp '+(p.pnl>=0?'pos':'neg');}
+    hc.textContent=fmtL(p.cap);
+  }
+  function scrubCurve(p){
+    const q=clamp((p-.08)/.84,0,1);
+    const L=lineLen*ease(q);
+    line.style.strokeDashoffset=lineLen-L;
+    const pt=line.getPointAtLength(L);
+    const on=q>0&&q<1?1:(q>=1?1:0);
+    rider.setAttribute('cx',pt.x); rider.setAttribute('cy',pt.y); rider.setAttribute('opacity',q>0?1:0);
+    riderGlow.setAttribute('cx',pt.x); riderGlow.setAttribute('cy',pt.y);
+    riderGlow.setAttribute('opacity',q>0?(.14+.08*Math.sin(t*2)):0);
+    dots.forEach((d,i)=>d.setAttribute('opacity', pt.x>=xs[i]-1?1:0));
+    let idx=0; for(let i=0;i<xs.length;i++){ if(pt.x>=xs[i]-1) idx=i; }
+    setHud(q<=0?0:idx);
   }
 
-  /* ═══ the mood favicon — the lion wears the last close ═══ */
+  /* ═══ THE FILM ENGINE ═══ */
+  const actP={sky:0, thesis:0, numbers:0, curve:0};
+  const A={sky:document.getElementById('act-sky'), thesis:document.getElementById('act-thesis'),
+           numbers:document.getElementById('act-numbers'), curve:document.getElementById('act-curve')};
+  const mast=document.getElementById('mast');
+  const lines=[...document.querySelectorAll('#act-thesis .line')];
+  const after=document.querySelector('#act-thesis .after');
+  const moments=[...document.querySelectorAll('#act-numbers .moment')];
+  const bar=document.getElementById('bar');
+  const thread=document.getElementById('thread');
+  function prog(elm){
+    const r=elm.getBoundingClientRect(), vh=innerHeight;
+    return clamp(-r.top/(r.height-vh),0,1);
+  }
+  function film(){
+    for(const k in A) actP[k]=prog(A[k]);
+    // act i: mast fades + drifts up; sky zooms slightly
+    const p1=actP.sky;
+    skyZoom=1+p1*.3; skyFade=1-clamp((p1-.75)/.25,0,1)*.35;
+    mast.style.opacity=String(1-clamp((p1-.45)/.4,0,1));
+    mast.style.transform='translateY('+(-p1*60)+'px)';
+    document.querySelector('#act-sky .cue').style.opacity=String(1-clamp(p1/.25,0,1));
+    // act ii: lines land at .1/.3/.5, sub at .75
+    const p2=actP.thesis;
+    lines.forEach((l,i)=>{
+      const k=clamp((p2-(0.08+i*.2))/.16,0,1);
+      l.style.opacity=String(k); l.style.transform='translateY('+(40*(1-ease(k)))+'px)';
+    });
+    const ka=clamp((p2-.72)/.18,0,1);
+    after.style.opacity=String(ka);
+    // act iii: moments crossfade in thirds
+    const p3=actP.numbers;
+    moments.forEach((m,i)=>{
+      const c=(i+.5)/3, d=Math.abs(p3-c);
+      const o=clamp(1-d*5.2,0,1);
+      m.style.opacity=String(o);
+      m.style.transform='scale('+(0.94+.06*o)+')';
+    });
+    // act iv
+    scrubCurve(actP.curve);
+    // chrome
+    bar.classList.toggle('on', scrollY>innerHeight*1.7);
+    const h=document.documentElement;
+    thread.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100)+'%';
+  }
+  /* main loop */
+  function loop(){
+    t+=.016;
+    if(!shoot && Math.random()<.0012 && actP.sky<.9) shoot={x0:Math.random()*W*.7, y0:Math.random()*H*.3, dx:180+Math.random()*160, dy:70+Math.random()*60, k:0};
+    if(!reduce) film();
+    paintSky();
+    raf=requestAnimationFrame(loop);
+  }
+  let raf=null;
+  function sizeAll(){ sizeSky(); buildCurve(); if(!reduce) film(); else { paintSky(); } }
+  sizeAll();
+  let rw=innerWidth;
+  addEventListener('resize',()=>{ if(Math.abs(innerWidth-rw)>60){rw=innerWidth; sizeAll();} },{passive:true});
+  if(reduce){
+    paintSky();
+    setHud(data.length-1);
+    document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));
+  }else{
+    addEventListener('mousemove',e=>{mx=e.clientX/W-.5; my=e.clientY/H-.5;},{passive:true});
+    document.addEventListener('visibilitychange',()=>{ if(document.hidden){cancelAnimationFrame(raf);} else {loop();} });
+    loop();
+    const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); ro.unobserve(e.target);}}),{threshold:.12});
+    document.querySelectorAll('.rv').forEach(e=>ro.observe(e));
+    setTimeout(()=>document.querySelectorAll('.rv').forEach(e=>e.classList.add('in')), 6000);
+  }
+
+  /* mood favicon */
   const lastPnl=data[data.length-1].pnl;
   const ring=lastPnl===null?'%239C927D':(lastPnl>=0?'%23D3A94F':'%23C75F35');
   const fav=document.createElement('link'); fav.rel='icon';
