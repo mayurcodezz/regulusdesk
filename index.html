@@ -265,9 +265,9 @@
 <!-- ═══ ACT III — THE NUMBERS ═══ -->
 <div class="act" id="act-numbers">
   <div class="stage">
-    <div class="moment"><span class="k">largest gain</span><span class="v pos">+1.59R</span><span class="m">23 june — a trend position identified early and held to its full run.</span></div>
+    <div class="moment"><span class="k">largest gain</span><span class="v pos">+2.08R</span><span class="m">7 july — sixteen positions on one book; the runner pressed to its full move.</span></div>
     <div class="moment"><span class="k">largest loss</span><span class="v neg">−1.47R</span><span class="m">24 june — recorded like every other session. it financed a permanent fix.</span></div>
-    <div class="moment"><span class="k">the whole truth</span><span class="v">8</span><span class="m">sessions · hit ratio 50% · avg win +0.83R · avg loss −0.80R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +0.11R. a young sample, published from n=1.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">9</span><span class="m">sessions · hit ratio 56% · avg win +1.08R · avg loss −0.80R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +2.19R. a young sample, published from n=1.</span></div>
   </div>
 </div>
 
@@ -276,7 +276,7 @@
   <div class="stage">
     <p class="title">ride the <span class="g">ledger</span></p>
     <p class="sub2">scroll to walk the book, close by close. <b style="color:var(--ink-2); font-weight:400;">1R denotes the desk's fixed per-session risk budget</b> — all results are expressed as R-multiples and reconciled to broker records at each close.</p>
-    <div id="curvebox"><svg id="curve" role="img" aria-label="the book in R multiples from 19 june to 6 july 2026: best day +1.59R, worst −1.47R, net +0.11R"></svg></div>
+    <div id="curvebox"><svg id="curve" role="img" aria-label="the book in R multiples from 19 june to 7 july 2026: best day +2.08R, worst −1.47R, net +2.19R"></svg></div>
     <div id="hud">
       <span class="hd" id="hd">19 jun ’26</span>
       <span class="hp zero" id="hp">day zero</span>
@@ -421,7 +421,10 @@
      law:'junk days are skipped, not survived.'},
     {d:'6 jul', r:0.23, cum:0.11, title:'the day the desk fixed itself mid-flight',
      story:'the most demanding session on record: a broker outage, forced exits, an intra-session capital top-up — and <b>twenty-five corrections shipped while the desk remained live.</b> the day still closed positive. the machinery earned its rating.',
-     law:'execution can be repaired in flight. the edge is never blamed for slow hands.'}
+     law:'execution can be repaired in flight. the edge is never blamed for slow hands.'},
+    {d:'7 jul', r:2.08, cum:2.19, title:'the record session — width, one runner, and a lesson in exits',
+     story:'the widest book to date: <b>sixteen positions across four systems</b> on a dispersion tape. one trend runner did the heavy lifting — identified at 9:50, pressed to +193% — while losers stayed cut small: <b>wins outweighed losses 3.7 to 1.</b> the post-close study was published without varnish: an untouched rule-based exit would have kept ~0.5R more. the rule now holds the pen.',
+     law:'the machine holds the pen to the bell; the banking rule calls the harvest.'}
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
@@ -615,7 +618,7 @@
   const NS='http://www.w3.org/2000/svg';
   const el=(tag,a)=>{const n=document.createElementNS(NS,tag); for(const k in a)n.setAttribute(k,a[k]); return n;};
   let line, rider, riderGlow, dots=[], CW, CH, CM, lineLen=0, xs=[];
-  const ymin=-0.65, ymax=1.9;
+  const ymin=-0.65, ymax=2.6;
   function buildCurve(){
     svg.innerHTML=''; dots=[];
     const mob=innerWidth<700;
@@ -626,7 +629,7 @@
     const x=i=>CM.l+(i/(data.length-1))*iw;
     const y=v=>CM.t+(1-(v-ymin)/(ymax-ymin))*ih;
     xs=data.map((_,i)=>x(i));
-    for(let v=-0.5;v<=1.51;v+=0.5){
+    for(let v=-0.5;v<=2.51;v+=0.5){
       svg.appendChild(el('line',{x1:CM.l,x2:CW-CM.r,y1:y(v),y2:y(v),stroke:'#201B0F','stroke-width':1}));
       const tl=el('text',{x:CM.l-8,y:y(v)+3.5,'text-anchor':'end',fill:'#7C7259','font-size':mob?'9':'11',style:'font-family:ui-monospace,Menlo,monospace'});
       tl.textContent=(v>0?'+':'')+v.toFixed(1)+'R'; svg.appendChild(tl);
