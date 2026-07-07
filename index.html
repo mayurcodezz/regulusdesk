@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260707-165207">
+<meta name="build" content="20260707-165503">
 <style>
   /*
     DESIGN BLUEPRINT (immutable): deep warm black #0B0A07 · warm ivory ink · ONE gold family
@@ -252,12 +252,12 @@
   html.force-motion .rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.6,.2,1) forwards;}
   html.force-motion .stagger .lb-row{opacity:0; transform:translateY(14px); transition:opacity .6s cubic-bezier(.2,.6,.2,1), transform .6s cubic-bezier(.2,.6,.2,1), background .3s;}
   html.force-motion .stagger.in .lb-row{opacity:1; transform:none;}
-  /* reduced motion: unpin the film, show everything */
+  /* reduced motion: unpin the film, show everything — UNLESS the owner's motion switch overrides */
   @media (prefers-reduced-motion: reduce){
-    .act{height:auto !important;}
-    .act .stage{position:relative; height:auto; min-height:70vh; padding:14vh 22px;}
-    #act-thesis .line,#act-thesis .after,#act-numbers .moment{opacity:1 !important; transform:none !important; position:relative;}
-    .cue{display:none;}
+    html:not(.force-motion) .act{height:auto !important;}
+    html:not(.force-motion) .act .stage{position:relative; height:auto; min-height:70vh; padding:14vh 22px;}
+    html:not(.force-motion) #act-thesis .line, html:not(.force-motion) #act-thesis .after, html:not(.force-motion) #act-numbers .moment{opacity:1 !important; transform:none !important; position:relative;}
+    html:not(.force-motion) .cue{display:none;}
   }
   /* print: the flow content only */
   @media print{
