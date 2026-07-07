@@ -471,7 +471,8 @@
 (function(){
   const _mq=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const _saved=(function(){try{return localStorage.getItem('motion')}catch(e){return null}})();
-  const reduce=_saved ? _saved==='off' : _mq;
+  // the film is the site: motion defaults ON everywhere; only the visible switch turns it off
+  const reduce=_saved==='off';
   if(!reduce && _mq) document.documentElement.classList.add('force-motion');
   (function(){
     const b=document.getElementById('motionbtn'); if(!b) return;
