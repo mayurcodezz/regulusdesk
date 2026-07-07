@@ -855,6 +855,7 @@
   const after=document.querySelector('#act-thesis .after');
   const moments=[...document.querySelectorAll('#act-numbers .moment')];
   const bar=document.getElementById('bar');
+  bar.classList.add('on');
   const thread=document.getElementById('thread');
   function prog(elm){
     const r=elm.getBoundingClientRect(), vh=innerHeight;
@@ -887,7 +888,7 @@
     // act iv
     scrubCurve(actP.curve);
     // chrome
-    bar.classList.toggle('on', scrollY>innerHeight*1.7);
+    // bar always visible — the menu and the motion switch must never hide (mayur 07-07)
     const h=document.documentElement;
     thread.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100)+'%';
   }

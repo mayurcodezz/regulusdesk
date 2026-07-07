@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260707-165852">
+<meta name="build" content="20260707-170037">
 <style>
   /*
     DESIGN BLUEPRINT (immutable): deep warm black #0B0A07 · warm ivory ink · ONE gold family
@@ -866,6 +866,7 @@
   const after=document.querySelector('#act-thesis .after');
   const moments=[...document.querySelectorAll('#act-numbers .moment')];
   const bar=document.getElementById('bar');
+  bar.classList.add('on');
   const thread=document.getElementById('thread');
   function prog(elm){
     const r=elm.getBoundingClientRect(), vh=innerHeight;
@@ -898,7 +899,7 @@
     // act iv
     scrubCurve(actP.curve);
     // chrome
-    bar.classList.toggle('on', scrollY>innerHeight*1.7);
+    // bar always visible — the menu and the motion switch must never hide (mayur 07-07)
     const h=document.documentElement;
     thread.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100)+'%';
   }
