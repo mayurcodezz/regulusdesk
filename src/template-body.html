@@ -57,7 +57,20 @@
   #bar .links a{font-family:var(--grot); font-weight:500; font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); white-space:nowrap; padding-bottom:3px; border-bottom:1px solid transparent;}
   #bar .links a:hover{color:var(--gold); text-decoration:none;}
   #bar .links a.cur{color:var(--gold); border-bottom-color:var(--gold-mark);}
-  @media (max-width:520px){ #bar .brand .word{display:none;} #bar .links{gap:14px;} }
+  #bar .navwrap{position:relative; max-width:78vw;}
+  #bar .navwrap::after{content:""; position:absolute; right:0; top:0; bottom:0; width:34px; background:linear-gradient(90deg, transparent, #0A0907f0); pointer-events:none;}
+  @media (max-width:520px){
+    #bar{padding:10px 14px;}
+    #bar .brand .word{display:none;}
+    #bar .links{gap:13px; max-width:none;}
+    #bar .navwrap{max-width:84vw;}
+    #ticker{padding:5px 0;}
+    #ticker .tk{font-size:.58rem;}
+    section{padding:11vh 0 4vh;}
+    .stage{padding:22px 12px 26px 26px;}
+    .stage::before{left:-7px; top:28px;}
+    h2{padding-top:22px;}
+  }
 
   /* ── the tape ── */
   #ticker{position:absolute; top:100%; left:0; right:0; overflow:hidden; border-bottom:1px solid var(--hair);
@@ -283,7 +296,7 @@
 
 <header id="bar" aria-label="regulus desk">
   <span class="brand"><span class="s">✦</span><span class="word">&nbsp; regulus desk</span></span>
-  <nav class="links">
+  <nav class="navwrap"><div class="links">
     <a href="#plain">plain terms</a>
     <a href="#mission">the mission</a>
     <a href="#act-curve">the ledger</a>
@@ -295,7 +308,7 @@
     <a href="#keeper">principal</a>
     <a href="#letters">letters</a>
     <a href="#" id="motionbtn" title="toggle animations">motion</a>
-  </nav>
+  </div></nav>
   <div id="ticker" aria-hidden="true"><div class="tk"></div></div>
 </header>
 
