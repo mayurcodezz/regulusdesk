@@ -72,7 +72,7 @@
     font-size:.68rem; letter-spacing:.12em; color:var(--muted); will-change:transform;}
   #ticker .tk b{color:var(--gold); font-weight:400;}
   #ticker .tk .neg{color:var(--rust);}
-  #ticker .tk .sep{color:var(--gold-mark); margin:0 14px;}
+  #ticker .tk .tsep{display:inline; color:var(--gold-mark); margin:0 14px;}
   @media (prefers-reduced-motion: no-preference){
     #ticker .tk{animation:tape 55s linear infinite;}
     @keyframes tape{from{transform:translateX(0)} to{transform:translateX(-50%)}}
@@ -86,6 +86,7 @@
   .slate .r{text-align:right;}
   .slate .pos{color:var(--gold);} .slate .neg{color:var(--rust);}
   .slate-note{font-size:.72rem; color:var(--faint); font-style:italic; margin-top:8px;}
+  .day-star{display:inline-block; margin:0 0 12px; padding:6px 12px; border:1px solid var(--gold-mark); color:var(--gold); font-size:.62rem; letter-spacing:.22em; text-transform:uppercase;}
   /* plain terms */
   .plain{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair);}
   .plain > div{background:var(--panel); padding:30px 26px 34px;}
@@ -502,27 +503,27 @@
   const data=[
     {d:'19 jun', r:null, cum:0, title:'the desk opens',
      story:'the unit is fixed before the first trade: <b>1R — the maximum the desk may lose in a single session.</b> every entry that follows is a multiple of that allowance, reconciled to the broker before it is written. no entry is edited after the fact.'},
-    {d:'23 jun', r:1.59, cum:1.59, title:'first live fire — a runner, left to run',
+    {d:'23 jun', r:1.59, cum:1.59, star:'pavanputra', title:'first live fire — a runner, left to run',
      story:'<b>pavanputra</b>, the desk\'s trend-following system, identified a sustained directional session and was allowed to complete it. no premature booking, no interference — <b>the winner was pressed; nothing else was touched.</b>'},
     {d:'24 jun', r:-1.47, cum:0.11, title:'gave most of it back — and bought a fix with it',
      story:'sixteen round-trips; the book was squared flat by noon on a discretionary risk call. the failure was structural — the regime classifier existed but <b>was not yet wired into execution.</b> it was wired the same day.',
      law:'a red day must buy a permanent fix — or it was a donation.'},
-    {d:'25 jun', r:0.32, cum:0.43, title:'first multi-name bank',
+    {d:'25 jun', r:0.32, cum:0.43, star:'the dawn', title:'first multi-name bank',
      story:'seven positions taken on a trend-up reading and banked after the close. small, repeatable, unremarkable — <b>the kind of session a durable desk is built from.</b>'},
     {d:'30 jun', r:-0.32, cum:0.11, title:'paid rent to a regime that wasn\'t there',
      story:'a range-bound session traded as if it were trending; the market charged accordingly. the post-close recorder was made <b>fully automatic</b> the same evening — the book now writes itself at every close.'},
     {d:'1 jul', r:-0.39, cum:-0.28, title:'the book and the broker disagreed. the broker won.',
      story:'a reconciliation pass found the internal ledger overstating the session by a fraction of an R. the entry was restated to the broker\'s figure — <b>an honest book costs twice: once in the result, once in the restatement.</b>',
      law:'the broker\'s book is the only truth. the ledger reconciles to it, every close.'},
-    {d:'2 jul', r:1.16, cum:0.88, title:'the fixed machine answers',
+    {d:'2 jul', r:1.16, cum:0.88, star:'the dawn', title:'the fixed machine answers',
      story:'a two-sided slate: winners pressed, losers cut at their thresholds. the distribution law i promises — <b>small scratches are immaterial when the run completes.</b>'},
     {d:'3 jul', r:-1.01, cum:-0.13, title:'a junk day the filters should have skipped',
      story:'low-quality entries on a directionless tape. the post-mortem produced a <b>volume gate</b> which, replayed against this session, would have declined every one of these trades. the tuition was paid once; the gate is permanent.',
      law:'junk days are skipped, not survived.'},
-    {d:'6 jul', r:0.23, cum:0.11, title:'the day the desk fixed itself mid-flight',
+    {d:'6 jul', r:0.23, cum:0.11, star:'the hunter', title:'the day the desk fixed itself mid-flight',
      story:'the most demanding session on record: a broker outage, forced exits, an intra-session capital top-up — and <b>twenty-five corrections shipped while the desk remained live.</b> the day still closed positive. the machinery earned its rating.',
      law:'execution can be repaired in flight. the edge is never blamed for slow hands.'},
-    {d:'7 jul', r:2.08, cum:2.19, title:'the record session — width, one runner, and a lesson in exits',
+    {d:'7 jul', r:2.08, cum:2.19, star:'the dawn', title:'the record session — width, one runner, and a lesson in exits',
      trades:[
       {s:'NAUKRI 1060 CE', v:'long', e:29.62, x:85.95, pc:190},
       {s:'TECHM 1420 CE', v:'long', e:47.70, x:64.00, pc:34},
@@ -694,6 +695,7 @@
       :'<span class="day-pnl '+(p.r>=0?'pos':'neg')+'">'+fmtR(p.r)+'</span>';
     const stamp=p.r===null?'':'<span class="stamp '+(p.r>=0?'pos':'neg')+'">'+(p.r>=0?'green day':'red day')+'</span>';
     const law=p.law?'<span class="law-tag">“'+p.law+'”</span>':'';
+    const star=p.star?'<span class="day-star">★ star of the session — '+p.star+'</span>':'';
     let slate='';
     if(p.trades){
       slate='<div class="slate"><table><thead><tr><th>contract</th><th>view</th><th class="r">entry</th><th class="r">exit</th><th class="r">move</th></tr></thead><tbody>'
@@ -704,7 +706,7 @@
       +'<button class="day-head" aria-expanded="false" data-i="'+i+'">'
       +'<span class="day-date">'+p.d+' ’26</span>'+pnl
       +'<span class="day-title">'+p.title+'</span></button>'
-      +'<div class="day-body">'+stamp+'<p class="day-story">'+p.story+'</p>'+law+slate+'</div></div>';
+      +'<div class="day-body">'+stamp+star+'<p class="day-story">'+p.story+'</p>'+law+slate+'</div></div>';
   }).join('');
   const rbx=document.getElementById('ranksbox');
   if(rbx){
@@ -924,7 +926,7 @@
       'LOSERS CUT SMALL · WINNERS GIVEN ROOM',
       'NO OVERNIGHT POSITIONS'
     ];
-    const half=items.join('<span class="sep">✦</span>')+'<span class="sep">✦</span>';
+    const half=items.join('<span class="tsep">✦</span>')+'<span class="tsep">✦</span>';
     el.innerHTML=half+half;
   })();
 
