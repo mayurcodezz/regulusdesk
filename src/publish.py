@@ -29,12 +29,13 @@ META = """<meta name="description" content="regulus desk — a private systemati
 def sh(*cmd, **kw):
     return subprocess.run(cmd, capture_output=True, text=True, cwd=str(REPO), **kw)
 
-def assemble() -> str:
+def assemble(stamp: str) -> str:
     src = SRC.read_text()
     head, body = src.split("</style>", 1)
     head += "</style>"
+    build_meta = META + f'<meta name="build" content="{stamp}">\n'
     html = ("<!doctype html>\n<html lang=\"en\">\n<head>\n"
-            + head.replace("<style>", META + "<style>")
+            + head.replace("<style>", build_meta + "<style>")
             + "\n</head>\n<body>\n" + body.strip() + "\n</body>\n</html>\n")
     OUT.write_text(html)
     return html
@@ -50,8 +51,12 @@ def main() -> int:
     args = sys.argv[1:]
     if "--expect" in args:
         expect = args[args.index("--expect") + 1]
-    html = assemble()
-    fp = expect or newest_day(html)
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    html = assemble(stamp)
+    # the fingerprint MUST be unique per build — a pre-existing string verifies against the OLD
+    # deployment and lies (learned live, 2026-07-07: '7 jul' passed against v10 while v11 was still building)
+    fp = expect or f'name="build" content="{stamp}"'
+    print(f"newest day: {newest_day(html)}")
     print(f"assembled {len(html):,} bytes · fingerprint: '{fp}'")
     if "--no-deploy" in args:
         return 0
