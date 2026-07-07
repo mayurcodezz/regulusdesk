@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260707-165608">
+<meta name="build" content="20260707-165852">
 <style>
   /*
     DESIGN BLUEPRINT (immutable): deep warm black #0B0A07 · warm ivory ink · ONE gold family
@@ -59,7 +59,8 @@
   #bar.on{opacity:1; transform:none; pointer-events:auto;}
   #bar .brand{font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-2);}
   #bar .brand .s{color:var(--gold);}
-  #bar .links{display:flex; gap:20px;}
+  #bar .links{display:flex; gap:20px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; max-width:78vw;}
+  #bar .links::-webkit-scrollbar{display:none;}
   #bar .links a{font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); white-space:nowrap;}
   #bar .links a:hover{color:var(--gold);}
   @media (max-width:520px){
@@ -280,9 +281,14 @@
 <header id="bar" aria-label="regulus desk">
   <span class="brand"><span class="s">✦</span><span class="word">&nbsp; regulus desk</span></span>
   <nav class="links">
+    <a href="#plain">plain terms</a>
+    <a href="#act-curve">the ledger</a>
     <a href="#book">the book</a>
+    <a href="#desks">strategies</a>
+    <a href="#proving">proving</a>
     <a href="#lessons">lessons</a>
     <a href="#mistakes">mistakes</a>
+    <a href="#keeper">principal</a>
     <a href="#letters">letters</a>
     <a href="#" id="motionbtn" title="toggle animations">motion</a>
   </nav>
