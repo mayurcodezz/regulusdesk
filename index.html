@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260707-172909">
+<meta name="build" content="20260708-114627">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -299,6 +299,69 @@
     .creed{min-height:0; padding:16px 0;}
     *{color:#111 !important;}
   }
+
+  /* ═══════════ THE COMMAND DECK — god's-eye terminal (2026-07-08) ═══════════ */
+  #deck{position:relative; z-index:3; min-height:100vh; min-height:100svh; display:flex; align-items:stretch; padding:clamp(10px,2vw,20px);}
+  .cd-frame{flex:1; border:1px solid var(--hair); display:flex; flex-direction:column; background:linear-gradient(180deg, #0A09070a, #0A0907); position:relative; overflow:hidden;}
+  .cd-frame::before{content:""; position:absolute; inset:0; pointer-events:none; z-index:5;
+    background:repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,.14) 3px, transparent 4px); opacity:.5; mix-blend-mode:multiply;}
+  @media (prefers-reduced-motion: reduce){ .cd-frame::before{display:none;} }
+  /* top status rail */
+  .cd-rail{display:flex; align-items:center; gap:14px; padding:11px clamp(12px,2.4vw,20px); border-bottom:1px solid var(--hair); font-family:var(--mono); font-size:.62rem; letter-spacing:.08em; color:var(--muted); flex-wrap:wrap;}
+  .cd-rail .id{color:var(--ink); font-family:var(--grot); font-weight:700; letter-spacing:.26em; text-transform:uppercase; display:flex; align-items:center; gap:9px;}
+  .cd-rail .ld{width:7px; height:7px; border-radius:50%; background:var(--gold);}
+  @media (prefers-reduced-motion: no-preference){ .cd-rail .ld{animation:cdpulse 2s ease-out infinite;} @keyframes cdpulse{0%{box-shadow:0 0 0 0 rgba(201,162,78,.55)}70%{box-shadow:0 0 0 7px rgba(201,162,78,0)}100%{box-shadow:0 0 0 0 rgba(201,162,78,0)}} }
+  .cd-rail .sp{flex:1;}
+  .cd-rail b{color:var(--gold); font-weight:400;}
+  .cd-rail .neg{color:var(--rust);}
+  /* the grid */
+  .cd-grid{flex:1; display:grid; grid-template-columns:1fr; gap:1px; background:var(--hair); }
+  @media (min-width:760px){ .cd-grid{grid-template-columns:repeat(6,1fr); grid-auto-rows:minmax(0,1fr);} }
+  .cdp{background:var(--ground); padding:0; display:flex; flex-direction:column; min-height:150px; position:relative;}
+  .cdp > .h{font-family:var(--grot); font-weight:700; font-size:.55rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint); padding:10px 14px 8px; border-bottom:1px solid var(--hair-soft); display:flex; justify-content:space-between; align-items:center;}
+  .cdp > .h .t{color:var(--gold); margin-right:6px;}
+  .cdp > .b{padding:14px; flex:1; display:flex; flex-direction:column;}
+  /* spans */
+  @media (min-width:760px){
+    .cd-identity{grid-column:span 4;} .cd-vitals{grid-column:span 2; grid-row:span 2;}
+    .cd-book{grid-column:span 4; grid-row:span 2;} .cd-last{grid-column:span 3;} .cd-lanes{grid-column:span 3;}
+  }
+  /* identity */
+  .cd-identity .b{justify-content:center;}
+  .cd-identity .nm{font-family:var(--serif); font-weight:400; font-size:clamp(2rem,6vw,3.4rem); letter-spacing:.06em; line-height:1; color:var(--ink);}
+  .cd-identity .nm b{color:var(--gold); font-weight:400; font-style:italic;}
+  .cd-identity .tag{font-family:var(--grot); font-weight:600; font-size:.62rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-top:14px;}
+  .cd-identity .man{font-family:var(--serif); font-style:italic; color:var(--ink-2); font-size:clamp(.95rem,2.2vw,1.1rem); margin-top:16px; max-width:46ch; line-height:1.55;}
+  /* vitals data grid */
+  .cd-vitals .b{padding:0;}
+  .vg{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hair-soft); flex:1;}
+  .vg > div{background:var(--ground); padding:13px 14px; display:flex; flex-direction:column; justify-content:center;}
+  .vg .k{font-family:var(--grot); font-weight:600; font-size:.5rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);}
+  .vg .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(1.15rem,3.4vw,1.5rem); line-height:1.1; margin-top:5px; color:var(--ink);}
+  .vg .v.pos{color:var(--gold);} .vg .v.neg{color:var(--rust);}
+  /* book curve */
+  .cd-book .b{padding:8px 6px 6px;}
+  #cdcurve{width:100%; height:100%; min-height:150px; display:block;}
+  /* lanes */
+  .cd-lanes .b{gap:9px; justify-content:center;}
+  .cl2{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:10px; font-family:var(--mono); font-size:.72rem;}
+  .cl2 .nm{color:var(--ink-2); font-family:var(--grot); font-weight:600; font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; min-width:8ch;}
+  .cl2 .track{height:6px; background:var(--hair); position:relative;}
+  .cl2 .track i{position:absolute; top:0; bottom:0; background:var(--gold-mark);}
+  .cl2 .track i.neg{background:var(--rust); right:50%;} .cl2 .track i.pos{left:50%;}
+  .cl2 .r{color:var(--gold); font-variant-numeric:tabular-nums;} .cl2 .r.neg{color:var(--rust);}
+  /* last session */
+  .cd-last .b{justify-content:center; gap:8px;}
+  .cd-last .dt{font-family:var(--mono); font-size:.64rem; color:var(--faint); letter-spacing:.06em;}
+  .cd-last .r{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(1.6rem,5vw,2.4rem);}
+  .cd-last .r.pos{color:var(--gold);} .cd-last .r.neg{color:var(--rust);}
+  .cd-last .ti{font-family:var(--serif); font-style:italic; color:var(--ink-2); font-size:clamp(.92rem,2.2vw,1.05rem); line-height:1.45;}
+  /* foot / enter hint */
+  .cd-foot{border-top:1px solid var(--hair); padding:11px clamp(12px,2.4vw,20px); display:flex; justify-content:space-between; align-items:center; font-family:var(--grot); font-weight:600; font-size:.56rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint);}
+  .cd-foot a{color:var(--muted);} .cd-foot a:hover{color:var(--gold); text-decoration:none;}
+  .cd-foot .ent{color:var(--gold);}
+  @media (prefers-reduced-motion: no-preference){ .cd-foot .ent{animation:cddip 2s ease-in-out infinite;} @keyframes cddip{50%{opacity:.45}} }
+
 </style>
 </head>
 <body>
@@ -323,8 +386,55 @@
   <div id="ticker" aria-hidden="true"><div class="tk"></div></div>
 </header>
 
-<!-- ═══ ACT I — THE SKY ═══ -->
-<div class="act" id="act-sky">
+<!-- ═══ THE COMMAND DECK — god's-eye terminal ═══ -->
+<section id="deck">
+  <div class="cd-frame">
+    <div class="cd-rail">
+      <span class="id"><span class="ld"></span>Regulus&nbsp;Desk</span>
+      <span>TERMINAL</span>
+      <span class="sp"></span>
+      <span id="cd-net">NET —</span>
+      <span>·</span>
+      <span id="cd-clock">—:—:— IST</span>
+    </div>
+    <div class="cd-grid">
+      <div class="cdp cd-identity">
+        <div class="h"><span><span class="t">▸</span>the desk</span><span>EST · MMXXVI</span></div>
+        <div class="b">
+          <div class="nm">Regulus <b>Desk</b></div>
+          <div class="tag">systematic derivatives · published record · india</div>
+          <div class="man">a live trading book kept in the open — every result in R, reconciled to the broker, wins and errors alike. the record is the product.</div>
+        </div>
+      </div>
+      <div class="cdp cd-vitals">
+        <div class="h"><span><span class="t">▸</span>vitals</span><span id="cd-n">n=—</span></div>
+        <div class="b"><div class="vg" id="cd-vg"></div></div>
+      </div>
+      <div class="cdp cd-book">
+        <div class="h"><span><span class="t">▸</span>the book · cumulative R</span><span id="cd-range">—</span></div>
+        <div class="b"><svg id="cdcurve" role="img" aria-label="cumulative R equity curve"></svg></div>
+      </div>
+      <div class="cdp cd-last">
+        <div class="h"><span><span class="t">▸</span>last session</span><span id="cd-ldt">—</span></div>
+        <div class="b">
+          <div class="r" id="cd-lr">—</div>
+          <div class="ti" id="cd-lt">—</div>
+        </div>
+      </div>
+      <div class="cdp cd-lanes">
+        <div class="h"><span><span class="t">▸</span>strategies · attribution R</span><span>ALL-TIME</span></div>
+        <div class="b" id="cd-lanes"></div>
+      </div>
+    </div>
+    <div class="cd-foot">
+      <span>🜂 the public terminal</span>
+      <span class="ent">↓ enter the book</span>
+      <a href="/desk.html">crew access →</a>
+    </div>
+  </div>
+</section>
+
+<div class="act" id="act-sky" hidden aria-hidden="true">
   <div class="stage">
     <div class="mast" id="mast">
       <span class="lbl"><span class="s">✦</span>&nbsp;&nbsp;est. mmxxvi&nbsp;&nbsp;<span class="s">✦</span></span>
@@ -595,7 +705,7 @@
   const fmtB=v=>(v<0?'−':'')+Math.abs(v).toFixed(2)+'R';
 
   /* ═══ the data — broker-reconciled, written in R (1R = the daily risk allowance) ═══ */
-  const data=[
+  const data=window.RG_DATA=[
     {d:'19 jun', r:null, cum:0, title:'the desk opens',
      story:'the unit is fixed before the first trade: <b>1R — the maximum the desk may lose in a single session.</b> every entry that follows is a multiple of that allowance, reconciled to the broker before it is written. no entry is edited after the fact.'},
     {d:'23 jun', r:1.59, cum:1.59, star:'pavanputra', title:'first live fire — a runner, left to run',
@@ -1033,6 +1143,70 @@
   fav.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='none' stroke='"+ring+"' stroke-width='6'/><text x='50' y='58' text-anchor='middle' font-size='56'>🦁</text></svg>";
   document.querySelectorAll("link[rel='icon']").forEach(l=>l.remove());
   document.head.appendChild(fav);
+})();
+</script>
+
+<script>
+(function deck(){
+  const boot = () => {
+    const data = window.RG_DATA; if(!data){ return setTimeout(boot, 60); }
+    const rs = data.filter(x => x.r != null).map(x => x.r);
+    const wins = rs.filter(v => v>0), losses = rs.filter(v => v<0);
+    const net = rs.reduce((a,b)=>a+b,0);
+    const avgW = wins.length ? wins.reduce((a,b)=>a+b,0)/wins.length : 0;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const rr = v => (v>=0?'+':'−') + Math.abs(v).toFixed(2) + 'R';
+    const nn = document.getElementById('cd-net');
+    if(nn) nn.innerHTML = 'NET <b class="' + (net>=0?'':'neg') + '">' + rr(net) + '</b>';
+    const cn = document.getElementById('cd-n'); if(cn) cn.textContent = 'n=' + rs.length;
+    const clk = document.getElementById('cd-clock');
+    if(clk){ const tick = () => { clk.textContent = new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Kolkata'}) + ' IST'; }; tick(); if(!reduce) setInterval(tick,1000); }
+    const V = [
+      ['net · all-time', rr(net), net>=0?'pos':'neg'],
+      ['sessions', String(rs.length), ''],
+      ['hit rate', Math.round(wins.length/rs.length*100) + '%', ''],
+      ['best', rr(Math.max(...rs)), 'pos'],
+      ['worst', rr(Math.min(...rs)), 'neg'],
+      ['avg win', rr(avgW), 'pos'],
+    ];
+    const vg = document.getElementById('cd-vg'); if(vg) vg.innerHTML = V.map(v => `<div><span class="k">${v[0]}</span><span class="v ${v[2]}">${v[1]}</span></div>`).join('');
+    const last = data[data.length-1];
+    const ld = document.getElementById('cd-ldt'); if(ld) ld.textContent = last.d + ' ’26';
+    const lr = document.getElementById('cd-lr'); if(lr){ lr.textContent = last.r!=null?rr(last.r):'—'; lr.className = 'r ' + (last.r>=0?'pos':'neg'); }
+    const lt = document.getElementById('cd-lt'); if(lt) lt.textContent = last.title;
+    const RANKS = window.RG_RANKS || [['the dawn',1.57],['the hunter',0.60],['pavanputra',0.02],['dispersion',-0.11]];
+    const mx = Math.max(...RANKS.map(x=>Math.abs(x[1])), 0.1);
+    const lanes = document.getElementById('cd-lanes');
+    if(lanes) lanes.innerHTML = RANKS.map(x => { const w = Math.max(4, Math.abs(x[1])/mx*46); const pos = x[1]>=0;
+      return `<div class="cl2"><span class="nm">${x[0]}</span><span class="track"><i class="${pos?'pos':'neg'}" style="width:${w}%"></i></span><span class="r ${pos?'':'neg'}">${rr(x[1])}</span></div>`; }).join('');
+    const svg = document.getElementById('cdcurve');
+    const draw = () => {
+      if(!svg) return;
+      const W = svg.clientWidth || 600, H = svg.clientHeight || 160, M = {t:12,r:14,b:14,l:32};
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      const cum = []; let c = 0; data.forEach(p => { c += (p.r||0); cum.push(c); });
+      const lo = Math.min(0, ...cum), hi = Math.max(...cum);
+      const x = i => M.l + i/(cum.length-1)*(W-M.l-M.r);
+      const y = v => M.t + (1-(v-lo)/((hi-lo)||1))*(H-M.t-M.b);
+      const NS = 'http://www.w3.org/2000/svg';
+      const el = (t,a) => { const n = document.createElementNS(NS,t); for(const k in a) n.setAttribute(k,a[k]); return n; };
+      svg.innerHTML = '';
+      svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y(0),y2:y(0),stroke:'#6E6552','stroke-width':1,'stroke-dasharray':'2 4'}));
+      const g0 = el('text',{x:2,y:y(0)+3,fill:'#6E6552','font-size':'9',style:'font-family:ui-monospace,monospace'}); g0.textContent='0R'; svg.appendChild(g0);
+      const gh = el('text',{x:2,y:y(hi)+3,fill:'#6E6552','font-size':'9',style:'font-family:ui-monospace,monospace'}); gh.textContent='+'+hi.toFixed(1); svg.appendChild(gh);
+      const pts = cum.map((v,i) => [x(i), y(v)]);
+      const dl = pts.map((p,i) => (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+      svg.appendChild(el('path',{d:dl+` L${pts[pts.length-1][0]} ${y(lo)} L${pts[0][0]} ${y(lo)} Z`, fill:'rgba(201,162,78,0.07)'}));
+      const line = el('path',{d:dl, fill:'none', stroke:'#C9A24E', 'stroke-width':1.8, 'stroke-linejoin':'round','stroke-linecap':'round'});
+      svg.appendChild(line);
+      cum.forEach((v,i) => svg.appendChild(el('circle',{cx:x(i),cy:y(v),r:2.2,fill:(data[i].r||0)>=0?'#A5843B':'#BF5B33'})));
+      svg.appendChild(el('circle',{cx:pts[pts.length-1][0],cy:pts[pts.length-1][1],r:3.4,fill:'#C9A24E'}));
+      if(!reduce){ const L=line.getTotalLength(); line.style.strokeDasharray=L; line.style.strokeDashoffset=L; line.getBoundingClientRect(); line.style.transition='stroke-dashoffset 1.4s cubic-bezier(.3,.5,.2,1)'; requestAnimationFrame(()=>line.style.strokeDashoffset=0); }
+      const rg = document.getElementById('cd-range'); if(rg) rg.textContent = '0 → +' + hi.toFixed(2) + 'R';
+    };
+    draw(); addEventListener('resize', () => { clearTimeout(window.__cdr); window.__cdr = setTimeout(draw, 200); });
+  };
+  boot();
 })();
 </script>
 </body>
