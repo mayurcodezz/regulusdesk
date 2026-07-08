@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://regulusdesk.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260708-114627">
+<meta name="build" content="20260708-115026">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -315,17 +315,16 @@
   .cd-rail b{color:var(--gold); font-weight:400;}
   .cd-rail .neg{color:var(--rust);}
   /* the grid */
-  .cd-grid{flex:1; display:grid; grid-template-columns:1fr; gap:1px; background:var(--hair); }
-  @media (min-width:760px){ .cd-grid{grid-template-columns:repeat(6,1fr); grid-auto-rows:minmax(0,1fr);} }
-  .cdp{background:var(--ground); padding:0; display:flex; flex-direction:column; min-height:150px; position:relative;}
+  .cd-grid{flex:1; display:grid; grid-template-columns:1fr; gap:1px; background:var(--hair);
+    grid-template-areas:"id" "vi" "bk" "la" "ls";}
+  @media (min-width:760px){ .cd-grid{grid-template-columns:repeat(6,1fr); grid-template-rows:auto 1.7fr .9fr;
+    grid-template-areas:"id id id vi vi vi" "bk bk bk bk la la" "bk bk bk bk ls ls";} }
+  .cd-identity{grid-area:id;} .cd-vitals{grid-area:vi;} .cd-book{grid-area:bk;} .cd-lanes{grid-area:la;} .cd-last{grid-area:ls;}
+  .cdp{background:var(--ground); padding:0; display:flex; flex-direction:column; min-height:120px; position:relative;}
   .cdp > .h{font-family:var(--grot); font-weight:700; font-size:.55rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint); padding:10px 14px 8px; border-bottom:1px solid var(--hair-soft); display:flex; justify-content:space-between; align-items:center;}
   .cdp > .h .t{color:var(--gold); margin-right:6px;}
   .cdp > .b{padding:14px; flex:1; display:flex; flex-direction:column;}
   /* spans */
-  @media (min-width:760px){
-    .cd-identity{grid-column:span 4;} .cd-vitals{grid-column:span 2; grid-row:span 2;}
-    .cd-book{grid-column:span 4; grid-row:span 2;} .cd-last{grid-column:span 3;} .cd-lanes{grid-column:span 3;}
-  }
   /* identity */
   .cd-identity .b{justify-content:center;}
   .cd-identity .nm{font-family:var(--serif); font-weight:400; font-size:clamp(2rem,6vw,3.4rem); letter-spacing:.06em; line-height:1; color:var(--ink);}
@@ -334,7 +333,8 @@
   .cd-identity .man{font-family:var(--serif); font-style:italic; color:var(--ink-2); font-size:clamp(.95rem,2.2vw,1.1rem); margin-top:16px; max-width:46ch; line-height:1.55;}
   /* vitals data grid */
   .cd-vitals .b{padding:0;}
-  .vg{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hair-soft); flex:1;}
+  .vg{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hair-soft); flex:1;}
+  @media (min-width:760px){ .vg{grid-template-columns:repeat(3,1fr);} }
   .vg > div{background:var(--ground); padding:13px 14px; display:flex; flex-direction:column; justify-content:center;}
   .vg .k{font-family:var(--grot); font-weight:600; font-size:.5rem; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);}
   .vg .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:clamp(1.15rem,3.4vw,1.5rem); line-height:1.1; margin-top:5px; color:var(--ink);}
@@ -1040,7 +1040,10 @@
   const after=document.querySelector('#act-thesis .after');
   const moments=[...document.querySelectorAll('#act-numbers .moment')];
   const bar=document.getElementById('bar');
-  bar.classList.add('on');
+  // nav + ticker hide over the command deck (it owns the top), appear once you enter the book
+  const deckEl=document.getElementById('deck');
+  const navToggle=()=>{ const past = scrollY > (deckEl ? deckEl.offsetHeight*0.82 : innerHeight*0.82); bar.classList.toggle('on', past); };
+  navToggle(); addEventListener('scroll', navToggle, {passive:true});
   const thread=document.getElementById('thread');
   function prog(elm){
     const r=elm.getBoundingClientRect(), vh=innerHeight;
@@ -1073,7 +1076,7 @@
     // act iv
     scrubCurve(actP.curve);
     // chrome
-    // bar always visible — the menu and the motion switch must never hide (mayur 07-07)
+    navToggle();
     const h=document.documentElement;
     thread.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight||1))*100)+'%';
   }
