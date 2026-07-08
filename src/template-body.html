@@ -381,9 +381,50 @@
   .mc-o .nm{font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--ink); margin:6px 0 6px;}
   .mc-o .ds{font-size:.9rem; color:var(--muted); line-height:1.6;}
 
+
+  /* ═══════════ THE BOOT SEQUENCE — terminal power-on (2026-07-08) ═══════════ */
+  #boot{position:fixed; inset:0; z-index:200; background:var(--ground); display:flex; align-items:center; justify-content:center; transition:opacity .7s ease;}
+  #boot.gone{opacity:0; pointer-events:none;}
+  .boot-inner{width:min(560px,86vw); font-family:var(--mono); font-size:clamp(.72rem,2.4vw,.86rem); color:var(--muted);}
+  .boot-hd{font-family:var(--serif); font-style:italic; font-size:clamp(1.6rem,6vw,2.4rem); color:var(--ink); letter-spacing:.02em; margin-bottom:4px;}
+  .boot-hd b{color:var(--gold); font-weight:400;}
+  .boot-rule{height:1px; background:var(--gold-mark); width:0; margin:14px 0 20px; transition:width .5s ease;}
+  #boot.run .boot-rule{width:100%;}
+  .boot-line{opacity:0; transform:translateY(4px); transition:opacity .25s, transform .25s; display:flex; justify-content:space-between; padding:3px 0; letter-spacing:.03em;}
+  .boot-line.in{opacity:1; transform:none;}
+  .boot-line .ok{color:var(--gold);}
+  .boot-prog{height:2px; background:var(--hair); margin-top:22px; position:relative; overflow:hidden;}
+  .boot-prog i{position:absolute; left:0; top:0; bottom:0; width:0; background:linear-gradient(90deg,var(--gold-mark),var(--gold)); transition:width 1.9s linear;}
+  #boot.run .boot-prog i{width:100%;}
+  .boot-skip{margin-top:18px; text-align:center; font-family:var(--grot); font-weight:600; font-size:.54rem; letter-spacing:.24em; text-transform:uppercase; color:var(--faint);}
+  @media (prefers-reduced-motion: reduce){ #boot{display:none;} }
+  /* refined hover motion across the deck + cards */
+  .cdp{transition:background .35s ease;}
+  .cdp:hover{background:#100E09;}
+  .cardleg{transition:transform .3s ease, border-color .3s ease;}
+  .cardleg:hover{transform:translateX(3px);}
+  .lb-row{transition:background .3s ease, padding-left .3s ease;}
+  .lb-row:hover{padding-left:26px;}
+  .gild, .hero em, h2 .g, .nm b{transition:filter .4s ease;}
+  h2:hover .g{filter:drop-shadow(0 0 14px rgba(201,162,78,.4));}
+
 </style>
 
 <canvas id="sky" aria-hidden="true"></canvas>
+<div id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-hd">Regulus <b>Desk</b></div>
+    <div class="boot-rule"></div>
+    <div class="boot-line"><span>&gt; initialising terminal</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; connecting broker feed</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; loading ledger · 9 sessions</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; reconciling to broker truth</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; regime · reading live tape</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; the book is open.</span><span class="ok">✦</span></div>
+    <div class="boot-prog"><i></i></div>
+    <div class="boot-skip">tap to enter</div>
+  </div>
+</div>
 <div id="thread" aria-hidden="true"></div>
 
 <header id="bar" aria-label="regulus desk">
@@ -1336,5 +1377,27 @@
   if(oc) oc.innerHTML = ORG.map(o => `<div class="mc-o"><div class="tm">${o.tm}</div><div class="nm">${o.nm}</div><div class="ds">${o.ds}</div></div>`).join('');
   draw();
   if(!reduce) setInterval(draw, 15000);   // re-tick the needle every 15s
+})();
+</script>
+
+<script>
+(function boot(){
+  const b = document.getElementById('boot'); if(!b) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const seen = (() => { try { return sessionStorage.getItem('booted'); } catch(e){ return null; } })();
+  if(reduce || seen){ b.classList.add('gone'); setTimeout(()=>b.remove(), 50); return; }
+  document.body.style.overflow = 'hidden';
+  const lines = [...b.querySelectorAll('.boot-line')];
+  const finish = () => {
+    try { sessionStorage.setItem('booted','1'); } catch(e){}
+    b.classList.add('gone'); document.body.style.overflow = '';
+    setTimeout(()=>b.remove(), 800);
+  };
+  requestAnimationFrame(() => b.classList.add('run'));
+  lines.forEach((l,i) => setTimeout(() => l.classList.add('in'), 260 + i*230));
+  const total = 260 + lines.length*230 + 700;
+  const timer = setTimeout(finish, Math.max(total, 2000));
+  b.addEventListener('click', () => { clearTimeout(timer); finish(); });
+  addEventListener('keydown', e => { if(e.key==='Escape'){ clearTimeout(timer); finish(); } }, {once:true});
 })();
 </script>
