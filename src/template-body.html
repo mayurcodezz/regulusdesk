@@ -408,6 +408,25 @@
   .gild, .hero em, h2 .g, .nm b{transition:filter .4s ease;}
   h2:hover .g{filter:drop-shadow(0 0 14px rgba(201,162,78,.4));}
 
+
+  /* ═══ THE EVOLUTION — the kaizen ladder (2026-07-08) ═══ */
+  .evo{position:relative; margin-top:8px; padding-left:34px;}
+  .evo::before{content:""; position:absolute; left:11px; top:6px; bottom:6px; width:2px; background:linear-gradient(180deg,var(--gold-mark),var(--hair));}
+  .evo-rung{position:relative; padding:0 0 26px 0;}
+  .evo-rung:last-child{padding-bottom:2px;}
+  .evo-rung .node{position:absolute; left:-28px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--ground); border:2px solid var(--gold-mark);}
+  .evo-rung.bolted .node{background:var(--gold);}
+  .evo-rung .d{font-family:var(--mono); font-size:.66rem; color:var(--faint); letter-spacing:.06em;}
+  .evo-rung .t{font-family:var(--serif); font-size:1.04rem; color:var(--ink); line-height:1.5; margin:3px 0 6px;}
+  .evo-rung .t b{color:var(--gold); font-weight:400; font-style:italic;}
+  .evo-rung .chip{display:inline-block; font-family:var(--grot); font-weight:600; font-size:.5rem; letter-spacing:.18em; text-transform:uppercase; padding:3px 9px; border:1px solid var(--hair); color:var(--muted);}
+  .evo-rung .chip.bolt{border-color:var(--gold-mark); color:var(--gold);}
+  .evo-rung .chip.learn{border-color:var(--rust); color:var(--rust);}
+  @media (prefers-reduced-motion: no-preference){
+    .evo-rung{opacity:0; transform:translateX(-8px); animation:evoin .5s ease forwards;}
+    @keyframes evoin{to{opacity:1; transform:none}}
+  }
+
 </style>
 
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -436,6 +455,7 @@
     <a href="#book">the book</a>
     <a href="#desks">strategies</a>
     <a href="#proving">proving</a>
+    <a href="#evolution">evolution</a>
     <a href="#lessons">lessons</a>
     <a href="#mistakes">mistakes</a>
     <a href="#keeper">principal</a>
@@ -683,6 +703,16 @@
   </div>
 </section>
 
+<!-- ═══ THE EVOLUTION ═══ -->
+<section id="evolution">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">evolution</span></h2>
+    <p class="h2sub rv">the desk is a living system — it improves itself by a measured 1% every session, and each improvement is recorded here the day it is made. depth over size: the compounding is the edge.</p>
+    <div class="evo rv" id="evobox"></div>
+  </div>
+</section>
+
 <!-- ═══ LESSONS ═══ -->
 <section id="lessons">
   <div class="page">
@@ -754,6 +784,15 @@
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
+  const EVOLUTION=[
+   ['8 jul','named and armed the desk\'s <b>fourth regime</b> — the reversal day — with its own detector and a long-volatility response','doctrine'],
+   ['7 jul','the <b>pen law</b>: the system holds every exit to the close; the banking rule, not the hand, calls the harvest','bolted'],
+   ['6 jul','the desk learned to <b>repair itself mid-session</b> — twenty-five organs shipped between two bells','bolted'],
+   ['4 jul','the <b>regime-conditional slate</b>: the book leans with the weather, or stays balanced when the weather is unclear','bolted'],
+   ['3 jul','the reading brain was <b>re-connected to the trigger</b> — the desk stopped firing a list deaf to the day','bolted'],
+   ['2 jul','the <b>self-improvement engine</b> was built — every experiment now graded against real sessions before it earns capital','bolted'],
+   ['8 jul','the <b>deep-work law</b>: the desk improves by deepening its core systems, not by chasing one-off ideas','doctrine']
+  ];
   const LESSONS=[
    ['i','risk is fixed before the day begins','the daily budget (1R) is set before the opening bell and never moves mid-session — no matter how the day feels.'],
    ['ii','losers are cut small; winners are given room','the shape of the results matters more than the count of wins. several small scratches are the price of one full run.'],
@@ -1006,6 +1045,12 @@
         +'<span class="lb-cost'+(pos?' ok':'')+'">'+(pos?'+':'−')+Math.abs(x[1]).toFixed(2)+'R</span></div>';
     }).join('');
   }
+  const ebx=document.getElementById('evobox');
+  if(ebx) ebx.innerHTML=EVOLUTION.map((e,i)=>{
+    var cls=e[2]==='bolted'?'chip bolt':e[2]==='learning'?'chip learn':'chip';
+    var rung=e[2]==='bolted'?'evo-rung bolted':'evo-rung';
+    return '<div class="'+rung+'" style="animation-delay:'+Math.min(i*70,500)+'ms"><span class="node"></span><span class="d">'+e[0]+'</span><div class="t">'+e[1]+'</div><span class="'+cls+'">'+e[2]+'</span></div>';
+  }).join('');
   const lbx=document.getElementById('lessonsbox');
   lbx.innerHTML=LESSONS.map(l=>'<div class="lb-row"><span class="lb-num">'+l[0]+'.</span><span class="lb-title">'+l[1]+'<small>'+l[2]+'</small></span></div>').join('')
     +'<p class="lb-foot"><b>the working rulebook runs deeper.</b> these are the lessons a reader can use anywhere; the desk\'s full internal laws number over thirty-five.</p>';
