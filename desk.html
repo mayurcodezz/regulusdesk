@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>the cockpit — regulus desk</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜂</text></svg>">
+<style>
+  :root{
+    --ground:#0A0907; --panel:#100E09; --panel2:#151209;
+    --ink:#EFE9DA; --ink-2:#CEC5AF; --muted:#9A9078; --faint:#6E6552;
+    --gold:#C9A24E; --gold-mark:#A5843B; --rust:#BF5B33;
+    --hair:#262013; --hair-soft:#1A160D;
+    --serif:'Iowan Old Style','Palatino Nova',Palatino,'Book Antiqua','Times New Roman',Georgia,serif;
+    --grot:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  html,body{overflow-x:clip;}
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--serif); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--gold); color:var(--ground);}
+  .wrap{max-width:1020px; margin:0 auto; padding:26px 16px 80px;}
+  .mast{display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--hair); padding-bottom:14px; margin-bottom:8px;}
+  .mast h1{font-family:var(--grot); font-weight:600; font-size:.72rem; letter-spacing:.32em; text-transform:uppercase; margin:0;}
+  .mast h1 b{color:var(--gold); font-weight:600;}
+  .mast .asof{font-family:var(--mono); font-size:.68rem; color:var(--faint);}
+  /* gate */
+  #gate{max-width:420px; margin:16vh auto 0; text-align:center;}
+  #gate h2{font-weight:400; font-style:italic; font-size:1.6rem; margin:0 0 8px;}
+  #gate p{color:var(--muted); font-size:.9rem; margin:0 0 22px;}
+  #gate input{width:100%; box-sizing:border-box; background:var(--panel); border:1px solid var(--hair); color:var(--ink);
+    font-family:var(--mono); font-size:1rem; padding:14px 16px; text-align:center; letter-spacing:.1em; outline:none;}
+  #gate input:focus{border-color:var(--gold-mark);}
+  #gate button{margin-top:14px; width:100%; background:none; border:1px solid var(--gold-mark); color:var(--gold);
+    font-family:var(--grot); font-weight:600; font-size:.66rem; letter-spacing:.3em; text-transform:uppercase; padding:14px; cursor:pointer;}
+  #gate button:hover{background:var(--gold); color:var(--ground);}
+  #gate .err{color:var(--rust); font-size:.8rem; min-height:1.2em; margin-top:10px; font-style:italic;}
+  /* board */
+  #board{display:none;}
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--hair-soft); border:1px solid var(--hair); border-top:2px solid var(--gold-mark); margin:18px 0;}
+  .tile{background:var(--panel); padding:16px 16px 14px;}
+  .tile .k{font-family:var(--grot); font-weight:600; font-size:.54rem; letter-spacing:.22em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:8px;}
+  .tile .v{font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:1.3rem; line-height:1;}
+  .tile .v.pos{color:var(--gold);} .tile .v.neg{color:var(--rust);}
+  .tile .s{font-size:.7rem; color:var(--faint); display:block; margin-top:6px; font-style:italic;}
+  .env{margin:4px 0 20px;}
+  .env .bar{height:5px; background:var(--hair); position:relative;}
+  .env .bar i{position:absolute; left:0; top:0; bottom:0; background:var(--gold-mark);}
+  .env .bar em{position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--rust); font-style:normal;}
+  .env .lab{font-family:var(--mono); font-size:.64rem; color:var(--faint); margin-top:6px;}
+  h3{font-family:var(--grot); font-weight:600; font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin:26px 0 10px;}
+  .tblwrap{overflow-x:auto; border:1px solid var(--hair); border-top:2px solid var(--gold-mark);}
+  table{border-collapse:collapse; width:100%; min-width:640px; font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:.76rem; background:var(--panel);}
+  th{font-family:var(--grot); font-weight:600; font-size:.52rem; letter-spacing:.2em; text-transform:uppercase; color:var(--faint); text-align:left; padding:9px 10px; border-bottom:1px solid var(--hair); white-space:nowrap;}
+  td{padding:8px 10px; border-bottom:1px solid var(--hair-soft); color:var(--ink-2); white-space:nowrap;}
+  tr:last-child td{border-bottom:0;}
+  tbody tr:hover td{background:rgba(201,162,78,.04);}
+  .r{text-align:right;} .pos{color:var(--gold);} .neg{color:var(--rust);} .dim{color:var(--faint);}
+  .badge{font-family:var(--grot); font-weight:600; font-size:.5rem; letter-spacing:.16em; padding:2px 7px; border:1px solid var(--hair); color:var(--muted); text-transform:uppercase;}
+  .badge.open{border-color:var(--gold-mark); color:var(--gold);}
+  .note{font-size:.74rem; color:var(--faint); font-style:italic; margin-top:10px;}
+  .foot{margin-top:34px; border-top:1px solid var(--hair); padding-top:14px; font-size:.68rem; color:var(--faint); font-family:var(--grot); letter-spacing:.14em; text-transform:uppercase;}
+  a{color:var(--gold); text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mast">
+    <h1><b>🜂 kapidhvaja</b> · the cockpit</h1>
+    <span class="asof" id="asof"></span>
+  </div>
+
+  <div id="gate">
+    <h2>crew <em style="color:var(--gold)">only.</em></h2>
+    <p>this door opens for the principal. everything behind it is encrypted at rest.</p>
+    <input type="password" id="pw" placeholder="passphrase" autocomplete="current-password">
+    <button id="unlock">open the cockpit</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="board">
+    <div class="tiles" id="tiles"></div>
+    <div class="env" id="env"></div>
+    <h3>the live book — every trade, as entered</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th>in</th><th>lane</th><th>contract</th><th>view</th><th class="r">qty</th><th class="r">entry</th><th class="r">mark</th><th class="r">move</th><th class="r">p&amp;l ₹</th><th>state</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <p class="note" id="note"></p>
+    <div class="foot">🜂 owner's instrument · marks refresh with each publish · <a href="/">the public book →</a></div>
+  </div>
+</div>
+
+<script>
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function decrypt(payload, pass){
+  const salt = b64(payload.salt), iv = b64(payload.iv), data = b64(payload.data);
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'}, km,
+    {name:'AES-GCM', length:256}, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, data);
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+async function loadPayload(){
+  const r = await fetch('desk-data.json?v=' + Date.now(), {cache:'no-store'});
+  if(!r.ok) throw new Error('no data file');
+  return r.json();
+}
+function inr(v){ const n = Math.round(v); return (n<0?'−₹':'+₹') + Math.abs(n).toLocaleString('en-IN'); }
+function render(d){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('board').style.display = 'block';
+  document.getElementById('asof').textContent = 'as of ' + d.asof + ' IST';
+  const open = d.legs.filter(l => l.state === 'OPEN');
+  const tot = d.legs.reduce((a,l) => a + (l.pnl||0), 0);
+  const dayR = (tot/ d.r_unit);
+  document.getElementById('tiles').innerHTML =
+    `<div class="tile"><span class="k">book p&l</span><span class="v ${tot>=0?'pos':'neg'}">${inr(tot)}</span><span class="s">${(dayR>=0?'+':'')}${dayR.toFixed(2)}R</span></div>`+
+    `<div class="tile"><span class="k">legs open</span><span class="v">${open.length}</span><span class="s">${d.legs.length} entered today</span></div>`+
+    `<div class="tile"><span class="k">deployed</span><span class="v">₹${Math.round(d.deployed/1000)}k</span><span class="s">of ₹${Math.round(d.envelope/1000)}k envelope</span></div>`+
+    `<div class="tile"><span class="k">capital</span><span class="v">₹${(d.capital/100000).toFixed(2)}L</span><span class="s">start of day</span></div>`;
+  const pct = Math.min(100, d.deployed/d.envelope*100);
+  document.getElementById('env').innerHTML =
+    `<div class="bar"><i style="width:${pct.toFixed(1)}%"></i><em style="left:${(720000/d.envelope*100).toFixed(1)}%"></em></div>`+
+    `<div class="lab">envelope ${pct.toFixed(0)}% used · soft line at ₹720k · hard ceiling ₹${Math.round(d.envelope/1000)}k</div>`;
+  document.getElementById('rows').innerHTML = d.legs.map(l => {
+    const mv = l.entry ? ((l.mark - l.entry)/l.entry*100) : 0;
+    return `<tr><td class="dim">${l.t}</td><td class="dim">${l.lane}</td><td>${l.c}</td><td>${l.v}</td>`+
+      `<td class="r">${l.q.toLocaleString('en-IN')}</td><td class="r">${l.entry.toFixed(2)}</td>`+
+      `<td class="r">${l.mark ? l.mark.toFixed(2) : '—'}</td>`+
+      `<td class="r ${mv>=0?'pos':'neg'}">${l.mark ? (mv>0?'+':'')+mv.toFixed(1)+'%' : '—'}</td>`+
+      `<td class="r ${ (l.pnl||0)>=0?'pos':'neg'}">${l.pnl!=null ? inr(l.pnl) : '—'}</td>`+
+      `<td><span class="badge ${l.state==='OPEN'?'open':''}">${l.state}</span></td></tr>`;
+  }).join('');
+  document.getElementById('note').textContent = d.note || '';
+}
+async function go(){
+  const err = document.getElementById('err');
+  err.textContent = '';
+  try{
+    const payload = await loadPayload();
+    const pass = document.getElementById('pw').value;
+    const d = await decrypt(payload, pass);
+    try{ sessionStorage.setItem('kd', pass); }catch(e){}
+    render(d);
+  }catch(e){
+    err.textContent = 'the door stays shut — wrong phrase, or no data published yet.';
+  }
+}
+document.getElementById('unlock').addEventListener('click', go);
+document.getElementById('pw').addEventListener('keydown', e => { if(e.key === 'Enter') go(); });
+(async () => {
+  try{
+    const saved = sessionStorage.getItem('kd');
+    if(saved){ const payload = await loadPayload(); render(await decrypt(payload, saved)); }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
