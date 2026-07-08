@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260708-212603">
+<meta name="build" content="20260708-213526">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -472,6 +472,7 @@
     <a href="#proving">proving</a>
     <a href="#evolution">evolution</a>
     <a href="#lessons">lessons</a>
+    <a href="/desk.html" style="color:var(--gold)">cockpit ◆</a>
     <a href="#mistakes">mistakes</a>
     <a href="#keeper">principal</a>
     <a href="#letters">letters</a>
@@ -883,6 +884,30 @@
      story:'the widest book to date: <b>sixteen positions across four systems</b> on a dispersion tape. one trend runner did the heavy lifting — identified at 9:50, pressed to +193% — while losers stayed cut small: <b>wins outweighed losses 3.7 to 1.</b> the post-close study was published without varnish: an untouched rule-based exit would have kept ~0.5R more. the rule now holds the pen.',
      law:'the machine holds the pen to the bell; the banking rule calls the harvest.'},
     {d:'8 jul', r:-0.69, cum:1.50, title:'direction right, weighting wrong',
+     trades:[
+      {s:'INOXWIND 85 PE', v:'short', e:2.65, x:4.35, pc:64},
+      {s:'LTF 320 PE', v:'short', e:9.20, x:14.25, pc:55},
+      {s:'COFORGE 1500 PE', v:'short', e:64.50, x:98.30, pc:52},
+      {s:'TMPV 330 PE', v:'short', e:6.30, x:9.30, pc:48},
+      {s:'VEDL 275 PE', v:'short', e:10.05, x:12.00, pc:19},
+      {s:'SWIGGY 260 PE', v:'short', e:8.39, x:10.00, pc:19},
+      {s:'MCX 2750 CE', v:'long', e:82.35, x:89.00, pc:8},
+      {s:'BSE 3750 CE', v:'long', e:112.35, x:112.80, pc:0},
+      {s:'COCHINSHIP 1400 PE', v:'short', e:42.00, x:40.00, pc:-5},
+      {s:'GVT&D 4500 CE', v:'long', e:217.25, x:200.15, pc:-8},
+      {s:'NATIONALUM 355 CE', v:'long', e:10.95, x:10.05, pc:-8},
+      {s:'BHARATFORG 2140 CE', v:'long', e:47.65, x:42.50, pc:-11},
+      {s:'ADANIENSOL 1700 CE', v:'long', e:56.70, x:49.70, pc:-12},
+      {s:'ADANIPOWER 225 CE', v:'long', e:8.84, x:6.95, pc:-21},
+      {s:'PREMIERENE 1060 CE', v:'long', e:28.80, x:22.40, pc:-22},
+      {s:'UNOMINDA 1140 CE', v:'long', e:42.90, x:33.10, pc:-23},
+      {s:'VMM 120 CE', v:'long', e:2.83, x:2.13, pc:-25},
+      {s:'LAURUSLABS 1510 CE', v:'long', e:34.20, x:25.00, pc:-27},
+      {s:'ADANIGREEN 1550 CE', v:'long', e:63.65, x:45.30, pc:-29},
+      {s:'DIXON 13500 CE', v:'long', e:411.85, x:280.35, pc:-32},
+      {s:'KAYNES 3400 CE', v:'long', e:132.25, x:84.00, pc:-36},
+      {s:'GMRAIRPORT 117 CE', v:'long', e:2.15, x:1.35, pc:-37}
+     ],
      story:'a red session worth studying: <b>86% of entries moved the correct way</b> and the short side was right and profitable — yet the book never showed a profit, not for a minute. the cause was <b>weighting, not selection.</b> the book leaned 2.3-to-1 long into a session that closed down; the two halves were never in profit at the same moment, and a small correct side could not outweigh a large wrong one. the fix — letting the regime read set the long/short lean, rather than habit — is in test, not yet live.',
      law:'direction can be right and the book still red when the lean is wrong.'}
   ];
