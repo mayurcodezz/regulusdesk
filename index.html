@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260708-120946">
+<meta name="build" content="20260708-191127">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -578,7 +578,7 @@
       <div class="stage now">
         <span class="when">stage 01 · now — july 2026</span>
         <h3>prove my discipline</h3>
-        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="45"></i></span><span class="lab">9 / 20 sessions published</span></span></p>
+        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="50"></i></span><span class="lab">10 / 20 sessions published</span></span></p>
       </div>
       <div class="stage">
         <span class="when">stage 02 · august 2026</span>
@@ -777,7 +777,8 @@
    ['v','a red day must buy a permanent fix','a loss that produces a lasting rule was tuition. a loss that produces nothing was a donation.'],
    ['vi','quiet days are skipped, not fought','a directionless market charges rent to those who insist on trading it.'],
    ['vii','the exit belongs to the system','banking and cutting follow written rules, not the mood of the moment. the most expensive exits are the emotional ones.'],
-   ['viii','nothing goes live on promise','every mechanism is tested in shadow and graded against real sessions before it touches capital.']
+   ['viii','nothing goes live on promise','every mechanism is tested in shadow and graded against real sessions before it touches capital.'],
+   ['ix','direction right is not the whole job','a book can pick direction correctly and still lose if it is weighted toward the losing side. the lean must match the regime, never habit.']
   ];
   const RANKS=[
    ['the dawn', 1.57, 'confirmed-gap entries — carried the record session'],
@@ -792,7 +793,8 @@
    ['6 jul','capital arrived after the bell','funding reached the broker late; the opening orders bounced.','missed open','capital is now verified before the bell — a hard gate'],
    ['7 jul','a test mode placed real orders','a dry-run label lied: two live positions were placed during what should have been a rehearsal. caught within minutes by reconciliation; both closed positive.','caught','no test mode is trusted until it proves it cannot place orders (fix in progress)'],
    ['7 jul','risk budgets that did not add up','four systems each respected their own limit; their sum exceeded the book\'s ceiling by ~7%.','over-limit','an aggregate check before any new position (fix in progress)'],
-   ['7 jul','the hand took the pen','a manual exit banked the record day — and still cost ~0.5R against the system\'s own rule.','−0.5R vs rule','the rule holds the pen now (lesson vii)']
+   ['7 jul','the hand took the pen','a manual exit banked the record day — and still cost ~0.5R against the system\'s own rule.','−0.5R vs rule','the rule holds the pen now (lesson vii)'],
+   ['8 jul','the book leaned the wrong way','entries were 86% directionally correct and the short side printed — but the book was weighted 2.3-to-1 long into a session that closed down; the small correct side could not carry the large wrong one.','−0.69R','the regime read will set the long/short lean — in test, not yet wired']
   ];
   const fmtB=v=>(v<0?'−':'')+Math.abs(v).toFixed(2)+'R';
 
@@ -840,7 +842,10 @@
       {s:'KALYANKJIL 350 PE', v:'short', e:12.60, x:8.08, pc:-36}
      ],
      story:'the widest book to date: <b>sixteen positions across four systems</b> on a dispersion tape. one trend runner did the heavy lifting — identified at 9:50, pressed to +193% — while losers stayed cut small: <b>wins outweighed losses 3.7 to 1.</b> the post-close study was published without varnish: an untouched rule-based exit would have kept ~0.5R more. the rule now holds the pen.',
-     law:'the machine holds the pen to the bell; the banking rule calls the harvest.'}
+     law:'the machine holds the pen to the bell; the banking rule calls the harvest.'},
+    {d:'8 jul', r:-0.69, cum:1.50, title:'direction right, weighting wrong',
+     story:'a red session worth studying: <b>86% of entries moved the correct way</b> and the short side was right and profitable — yet the book never showed a profit, not for a minute. the cause was <b>weighting, not selection.</b> the book leaned 2.3-to-1 long into a session that closed down; the two halves were never in profit at the same moment, and a small correct side could not outweigh a large wrong one. the fix — letting the regime read set the long/short lean, rather than habit — is in test, not yet live.',
+     law:'direction can be right and the book still red when the lean is wrong.'}
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
