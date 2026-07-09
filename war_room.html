@@ -1,0 +1,204 @@
+<title>THE WAR ROOM &middot; Regulus</title>
+<style>
+:root{--void:#0a0a0c;--panel:#131318;--panel2:#17171d;--gold:#c8a24a;--gold2:#e6c877;--rust:#b04a2f;
+--green:#5a8a5a;--ink:#e9e4d8;--dim:#6d665c;--line:rgba(200,162,74,.22);--glow:rgba(200,162,74,.32);
+--serif:"Iowan Old Style",Palatino,Georgia,"Times New Roman",serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(ellipse 90% 50% at 50% -10%,rgba(200,162,74,.07),transparent 70%),
+radial-gradient(ellipse 70% 40% at 50% 120%,rgba(176,74,47,.05),transparent 70%);min-height:100vh}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.45;
+background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.13) 2px 3px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:820px;margin:0 auto;padding:22px 16px 70px;position:relative;z-index:1}
+/* the gate */
+#gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:150;padding:20px}
+.gatecard{text-align:center;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2));
+padding:34px 30px;max-width:360px;width:100%;clip-path:polygon(0 12px,12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px));
+box-shadow:0 0 40px -14px var(--glow),0 20px 60px -30px #000}
+.gsys{letter-spacing:.5em;font-size:12px;color:var(--gold);text-transform:uppercase}
+.gttl{font-family:var(--serif);font-size:26px;margin:10px 0 4px}.gttl .g{color:var(--gold);font-style:italic}
+.gsub{color:var(--dim);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:22px}
+#pw{width:100%;background:#0c0c0f;border:1px solid var(--line);color:var(--ink);font-family:var(--mono);
+font-size:14px;padding:12px 14px;letter-spacing:.1em;text-align:center;outline:none}
+#pw:focus{border-color:var(--gold);box-shadow:0 0 14px -4px var(--glow)}
+.genter{margin-top:14px;width:100%;background:linear-gradient(180deg,var(--gold2),var(--gold));color:var(--void);
+border:0;font-family:var(--mono);font-size:12px;letter-spacing:.24em;font-weight:700;padding:13px;cursor:pointer;text-transform:uppercase;
+clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+#err{color:var(--rust);font-size:11px;letter-spacing:.1em;margin-top:12px;min-height:14px}
+.win{position:relative;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
+margin:12px 0;padding:18px;clip-path:polygon(0 10px,10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px));
+box-shadow:0 0 0 1px rgba(0,0,0,.5),0 18px 50px -30px #000,inset 0 1px 0 rgba(255,255,255,.03)}
+.win::before{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 34px -12px var(--glow);
+clip-path:polygon(0 10px,10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px))}
+.tick{position:absolute;width:11px;height:11px;border:1.5px solid var(--gold);opacity:.6}
+.tl{top:5px;left:5px;border-right:0;border-bottom:0}.tr{top:5px;right:5px;border-left:0;border-bottom:0}
+.bl{bottom:5px;left:5px;border-right:0;border-top:0}.br{bottom:5px;right:5px;border-left:0;border-top:0}
+.whead{font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:flex;gap:9px;margin:0 0 14px}
+.whead::before{content:"\25C6";font-size:9px}.whead .rt{margin-left:auto;color:var(--dim);letter-spacing:.14em;font-size:10px}
+.top{text-align:center;padding:10px 0 4px}
+.sys{letter-spacing:.5em;font-size:12px;color:var(--gold);text-transform:uppercase}
+.title{font-family:var(--serif);font-size:40px;letter-spacing:.02em;margin:6px 0 2px}
+.title .g{color:var(--gold);font-style:italic}
+.sub{color:var(--dim);font-size:11px;letter-spacing:.26em;text-transform:uppercase}
+.arena{display:flex;gap:8px;justify-content:center;margin:16px 0 4px}
+.atab{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);
+padding:9px 20px;cursor:pointer;background:#0c0c0f;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.atab.on{color:var(--void);background:linear-gradient(180deg,var(--gold2),var(--gold));font-weight:700;box-shadow:0 0 14px var(--glow)}
+.lvlrow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.lvl{font-family:var(--serif);font-size:50px;line-height:.9}
+.badge{margin-left:auto;font-size:13px;letter-spacing:.22em;color:var(--void);background:linear-gradient(180deg,var(--gold2),var(--gold));
+padding:7px 14px;font-weight:700;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.tonext{color:var(--dim);font-size:11px;letter-spacing:.13em;margin:12px 0 6px;text-transform:uppercase}
+.tonext b{color:var(--gold)}
+.xpbar{height:14px;background:#0c0c0f;border:1px solid var(--line);position:relative;overflow:hidden;clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+.xpfill{position:absolute;inset:0;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 14px var(--glow)}
+.xpnum{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-top:6px;letter-spacing:.1em}
+.stat{display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:center;margin:10px 0}
+.stat .lab{font-size:11px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+.stat .track{height:7px;background:#0c0c0f;border:1px solid rgba(200,162,74,.13);position:relative;overflow:hidden}
+.stat .tf{position:absolute;inset:0;background:linear-gradient(90deg,var(--rust),var(--gold));box-shadow:0 0 8px var(--glow)}
+.stat .val{font-family:var(--serif);font-size:18px;text-align:right;min-width:70px}.stat .val.pos{color:var(--gold2)}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mv{border:1px solid var(--line);background:#101016;padding:15px 14px;cursor:pointer;position:relative;
+transition:transform .15s,box-shadow .15s,border-color .15s;clip-path:polygon(0 8px,8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%)}
+.mv:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 24px -10px var(--glow),0 0 0 1px var(--gold)}
+.mv .mn{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:8px}
+.mv .mn::before{content:"\25B8";color:var(--gold);font-size:11px;flex:none}
+.mv .mr{color:var(--dim);font-size:11px;margin-top:8px;line-height:1.35}
+.mv .tag{display:inline-block;margin-right:7px;font-size:8px;letter-spacing:.12em;padding:2px 6px;color:var(--void);vertical-align:middle}
+.mv .money{background:var(--rust)}.mv .safe{background:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.node{aspect-ratio:1;border:1px solid rgba(200,162,74,.14);background:#0c0c0f;display:flex;flex-direction:column;
+align-items:center;justify-content:center;gap:3px;font-size:8px;letter-spacing:.03em;color:var(--dim);text-align:center;padding:3px;line-height:1.1}
+.node.lit{border-color:var(--gold);color:var(--gold2);background:linear-gradient(180deg,#1a160c,#12100a);box-shadow:inset 0 0 16px -6px var(--glow)}
+.node .dot{width:5px;height:5px;border-radius:50%;background:var(--dim)}.node.lit .dot{background:var(--gold);box-shadow:0 0 7px var(--gold)}
+.q{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:#101016;padding:13px 15px;margin:9px 0;
+clip-path:polygon(0 7px,7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%)}
+.q .box{width:16px;height:16px;border:1.5px solid var(--dim);flex:none}
+.q.done .box{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px var(--glow)}
+.q .qn{font-size:13px;letter-spacing:.14em;text-transform:uppercase}.q .qd{color:var(--dim);font-size:11px;margin-top:3px}
+.q .qs{margin-left:auto;font-size:10px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.self-note{color:var(--dim);font-size:10.5px;letter-spacing:.08em;line-height:1.7;margin-top:12px}
+.self-note b{color:var(--gold)}
+.hide{display:none}
+.foot{text-align:center;color:var(--dim);font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-top:26px;line-height:1.9}
+.foot .g{color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120px);background:linear-gradient(180deg,#191509,#0f0d07);
+border:1px solid var(--gold);color:var(--ink);padding:13px 20px;font-size:12px;letter-spacing:.05em;z-index:200;transition:transform .3s;
+box-shadow:0 0 30px -8px var(--glow);clip-path:polygon(0 6px,6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%);max-width:90%}
+.toast.show{transform:translateX(-50%) translateY(0)}.toast b{color:var(--gold2)}
+@media(max-width:520px){.ctl{grid-template-columns:1fr}.grid{grid-template-columns:repeat(4,1fr)}.title{font-size:30px}.lvl{font-size:40px}
+.stat{grid-template-columns:94px 1fr auto}.stat .val{font-size:15px;min-width:58px}}
+</style>
+
+<div id="gate"><div class="gatecard">
+  <div class="gsys">&#9670; THE WAR ROOM &#9670;</div>
+  <div class="gttl">Regulus <span class="g">Command</span></div>
+  <div class="gsub">for the pilot's eyes only</div>
+  <input type="password" id="pw" placeholder="passphrase" autocomplete="current-password" inputmode="text">
+  <button class="genter" onclick="unlock()">ENTER</button>
+  <div id="err"></div>
+</div></div>
+
+<div class="wrap hide" id="wrap">
+  <div class="top">
+    <div class="sys">&#9670; THE WAR ROOM &#9670;</div>
+    <div class="title">Regulus <span class="g">Command</span></div>
+    <div class="sub">pilot: <span id="player"></span> &middot; one operator, two arenas</div>
+  </div>
+  <div class="arena">
+    <div class="atab on" data-a="desk" onclick="arena('desk')">THE DESK</div>
+    <div class="atab" data-a="self" onclick="arena('self')">THE SELF</div>
+  </div>
+  <section class="win"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+    <div class="whead">Player Status<span class="rt" id="gen"></span></div>
+    <div class="lvlrow"><div class="lvl">LVL <span id="lvl"></span></div><div class="badge" id="rank"></div></div>
+    <div class="tonext" id="tonext"></div>
+    <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
+    <div class="xpnum"><span id="xptxt"></span><span id="xpnext"></span></div>
+  </section>
+  <div id="desk-arena">
+    <section class="win"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+      <div class="whead">The Pilot's Console &middot; high-asymmetric work<span class="rt">FEW CLICKS</span></div>
+      <div class="ctl" id="ctl"></div>
+      <div class="self-note">money moves route through the guarded telegram rail &mdash; a click here is as safe as a tap.
+        <b>the war room never touches the broker directly.</b></div></section>
+    <section class="win"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+      <div class="whead">Desk Stats</div><div id="stats"></div></section>
+    <section class="win"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+      <div class="whead">KOSHA &mdash; the treasury tech-tree<span class="rt" id="khead"></span></div>
+      <div class="grid" id="tree"></div><div class="self-note" id="kfoot"></div></section>
+  </div>
+  <div id="self-arena" class="hide">
+    <section class="win"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+      <div class="whead">The Becoming &middot; today's quests<span class="rt">PROVE THE DAY</span></div>
+      <div id="self"></div>
+      <div class="self-note">the book <b>reaches</b> you (reminders) &middot; <b>tracks</b> you (proof) &middot;
+        <b>asks</b> you (accountability). miss a quest &rarr; the penance is drawn from the book itself.
+        <br>coming online at the next build &mdash; the MASTERY book, made alive.</div></section>
+  </div>
+  <div class="foot">the game is real. every click does the work.<br>
+    <span class="g">&#9670; REGULUS WAR ROOM &#9670;</span> &middot; it's just life</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function decrypt(payload, pass){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(payload.salt), iterations:200000, hash:'SHA-256'}, km,
+    {name:'AES-GCM', length:256}, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(payload.iv)}, key, b64(payload.data));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+const loadPayload = async () => (await fetch('war-room-data.json?v=' + Date.now(), {cache:'no-store'})).json();
+async function open_(pass){
+  const D = await decrypt(await loadPayload(), pass);
+  $('gate').classList.add('hide'); $('wrap').classList.remove('hide'); render(D);
+  try{ localStorage.setItem('wr_pass', pass); }catch(e){}
+}
+async function unlock(){
+  try{ await open_($('pw').value); }
+  catch(e){ $('err').textContent = 'wrong passphrase'; }
+}
+document.addEventListener('keydown', e => { if(e.key==='Enter' && !$('gate').classList.contains('hide')) unlock(); });
+window.addEventListener('DOMContentLoaded', async () => {
+  const saved = localStorage.getItem('wr_pass');
+  if(saved){ try{ await open_(saved); }catch(e){} }
+});
+
+function render(D){
+  $('player').textContent = D.player;
+  $('gen').textContent = 'SYNC ' + D.generated;
+  $('lvl').textContent = D.level; $('rank').textContent = D.rank;
+  $('tonext').innerHTML = D.next_rank ? ('&rarr; <b>'+D.next_rank+'</b> in '+D.lvl_to_rank+' level'+(D.lvl_to_rank>1?'s':'')) : 'MONARCH &mdash; the summit held';
+  $('xpfill').style.width = D.xp_pct + '%';
+  $('xptxt').textContent = 'XP ' + D.xp_into + ' / ' + D.xp_need;
+  $('xpnext').textContent = 'LVL ' + (D.level+1);
+  const statW = {EDGE:14,VIGILANCE:40,DISCIPLINE:20,CONQUEST:48,INTEL:10};
+  $('stats').innerHTML = Object.entries(D.stats).map(([k,v])=>
+    '<div class="stat"><span class="lab">'+k+'</span><span class="track"><span class="tf" style="width:'+(statW[k]||20)+'%"></span></span><span class="val'+(v[0]==='+'?' pos':'')+'">'+v+'</span></div>').join('');
+  $('ctl').innerHTML = D.moves.map((m,i)=>
+    '<div class="mv" onclick="move('+i+')"><div class="mn">'+m.n+'</div>'+
+    '<div class="mr"><span class="tag '+(m.money?'money':'safe')+'">'+(m.money?'GUARDED':'SAFE')+'</span>1 click &rarr; '+m.r+'</div></div>').join('');
+  $('khead').textContent = D.lit + ' / ' + D.target + ' UNLOCKED';
+  $('tree').innerHTML = D.tree.map((t,i)=>'<div class="node'+(i<D.lit?' lit':'')+'"><span class="dot"></span>'+t+'</div>').join('');
+  $('kfoot').innerHTML = 'chain <b>'+D.chain_days+' days</b> unbroken &middot; <b>'+D.rows+'</b> rows sealed &middot; tamper-proof'+
+    (D.today_r!==null?' &middot; today <b>'+D.today_r+'R</b>':'');
+  $('self').innerHTML = D.self.map(q=>
+    '<div class="q'+(q.state==='done'?' done':'')+'"><span class="box"></span><div><div class="qn">'+q.n+'</div>'+
+    '<div class="qd">'+q.d+'</div></div><span class="qs">'+(q.streak?q.streak+'d streak':'awaiting proof')+'</span></div>').join('');
+}
+function arena(a){document.querySelectorAll('.atab').forEach(t=>t.classList.toggle('on',t.dataset.a===a));
+  if(a==='self'){$('desk-arena').classList.add('hide');$('self-arena').classList.remove('hide');}
+  else{$('desk-arena').classList.remove('hide');$('self-arena').classList.add('hide');}}
+let tT;
+function move(i){const D=window.__D; const m=MOVES[i]; const t=$('toast');
+  t.innerHTML='&#9670; <b>'+m.n+'</b> &mdash; '+(m.money?'routed to the guarded rail. authorize on telegram to execute.':'routed. authorize on telegram &mdash; it runs the real work.');
+  t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),3400);}
+let MOVES=[];
+const _render = render;
+render = function(D){ MOVES = D.moves; _render(D); };
+</script>
