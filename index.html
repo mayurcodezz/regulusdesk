@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260709-154354">
+<meta name="build" content="20260709-154833">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -924,7 +924,31 @@
       {s:'GMRAIRPORT 117 CE', v:'long', e:2.15, x:1.35, pc:-37}
      ],
      story:'a red session worth studying: <b>86% of entries moved the correct way</b> and the short side was right and profitable — yet the book never showed a profit, not for a minute. the cause was <b>weighting, not selection.</b> the book leaned 2.3-to-1 long into a session that closed down; the two halves were never in profit at the same moment, and a small correct side could not outweigh a large wrong one. the fix — letting the regime read set the long/short lean, rather than habit — is in test, not yet live.',
-     law:'direction can be right and the book still red when the lean is wrong.'}
+     law:'direction can be right and the book still red when the lean is wrong.'},
+    {d:'9 jul', r:-0.15, cum:1.35, title:'the operator failed; the machine did not',
+     trades:[
+      {s:'ABCAPITAL 395 CE', v:'long', e:11.40, x:14.15, pc:24},
+      {s:'BHARATFORG 2100 CE', v:'long', e:63.85, x:75.60, pc:18},
+      {s:'INDUSINDBK 1010 CE', v:'long', e:27.20, x:31.50, pc:16},
+      {s:'DELHIVERY 515 CE', v:'long', e:14.65, x:16.90, pc:15},
+      {s:'ADANIENT 3040 CE', v:'long', e:110.80, x:120.30, pc:9},
+      {s:'GMRAIRPORT 114 CE', v:'long', e:2.60, x:2.72, pc:5},
+      {s:'GMRAIRPORT 113 CE', v:'long', e:3.10, x:3.23, pc:4},
+      {s:'SBIN 1030 CE', v:'long', e:20.45, x:20.70, pc:1},
+      {s:'SWIGGY 280 PE', v:'short', e:11.96, x:12.01, pc:0},
+      {s:'LT 3940 CE', v:'long', e:82.00, x:81.75, pc:0},
+      {s:'MANAPPURAM 335 CE', v:'long', e:10.25, x:9.90, pc:-3},
+      {s:'LAURUSLABS 1520 CE', v:'long', e:43.40, x:41.85, pc:-4},
+      {s:'AXISBANK 1320 CE', v:'long', e:31.30, x:30.05, pc:-4},
+      {s:'TMPV 335 CE', v:'long', e:9.35, x:8.95, pc:-4},
+      {s:'RELIANCE 1290 CE', v:'long', e:28.65, x:26.65, pc:-7},
+      {s:'SUNPHARMA 1920 CE', v:'long', e:41.43, x:38.55, pc:-7},
+      {s:'ICICIBANK 1400 CE', v:'long', e:28.10, x:23.90, pc:-15},
+      {s:'EXIDEIND 430 CE', v:'long', e:11.25, x:9.60, pc:-15},
+      {s:'INOXWIND 82 PE', v:'short', e:2.35, x:1.98, pc:-16}
+     ],
+     story:'the strangest session in the book, and the most instructive. a data-reading error by the desk\'s own operator declared healthy executions "phantoms" and stood the automated desk down mid-morning. the session was traded by hand instead — nineteen positions, leaning heavily long into a directionless tape — and closed −0.15R. <b>replayed on the real tape, the machine\'s own scheduled slates, left entirely alone, were worth roughly +2.4R the same day.</b> the failure was never the strategies. it was a wrong read of the broker\'s records, trusted without reconciliation. the fixes are structural: one canonical broker read feeding every organ, an aggregate exposure gate on every entry, and a standing rule that nothing is declared broken until the broker itself has been reconciled.',
+     law:'the machine was never the risk; the unverified read of it was.'}
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
