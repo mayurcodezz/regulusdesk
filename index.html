@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260710-153506">
+<meta name="build" content="20260710-160756">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -683,6 +683,19 @@
   </div>
 </section>
 
+<!-- ═══ THE CLIENT BOOK ═══ -->
+<section id="clients">
+  <div class="page">
+    <div class="sep rv">✦</div>
+    <h2 class="rv">the <span class="g">client book</span></h2>
+    <p class="h2sub rv">a separate book, opened 10 july 2026 — other people's capital runs under stricter law than the desk's own.</p>
+    <div class="lawbook rv stagger">
+      <div class="lb-row"><span class="lb-num">01</span><span class="lb-title">col. umendra kumar vaish<small>client #1 · family · chartered 10 july 2026 · first order filled the same day, broker-verified. his lane goes live on the first session after his derivatives segment clears.</small></span><span class="chip run">chartered</span></div>
+      <p class="lb-foot"><b>the client lane law (law xlii):</b> a written charter before a rupee · a separate ledger, never mixed with the desk's · per-client loss floors and a fixed per-trade slot · every basket behind a human confirmation · every fill verified at the broker · losses reported the day they happen. <b>family only</b> — a licence precedes any client beyond it.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ THE PROVING GROUND ═══ -->
 <section id="proving">
   <div class="page">
@@ -815,6 +828,7 @@
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
   const EVOLUTION=[
+   ['10 jul','the desk signed its <b>first client</b> — a written charter, a separate ledger, and a human confirmation on every basket, before a single rupee moved','bolted'],
    ['8 jul','named and armed the desk\'s <b>fourth regime</b> — the reversal day — with its own detector and a long-volatility response','doctrine'],
    ['7 jul','the <b>pen law</b>: the system holds every exit to the close; the banking rule, not the hand, calls the harvest','bolted'],
    ['6 jul','the desk learned to <b>repair itself mid-session</b> — twenty-five organs shipped between two bells','bolted'],
@@ -841,6 +855,7 @@
    ['dispersion', -0.11, 'first live day — paying its entry tuition']
   ];
   const MISTAKES=[
+   ['10 jul','a slate nobody owned','a composed basket was deferred by one system to another that never fired it — each believed the other held it. the miss happened to avoid a loss; the mechanism was still wrong.','avoided −0.33R by luck','the ownership law: every slate names one firing owner, verified at the broker by 9:30'],
    ['24 jun','a classifier built but not connected','the regime-reading system existed but was not wired into execution; the desk traded a trending book in a directionless session.','−1.47R','fixed same day — wired into execution'],
    ['1 jul','the ledger flattered itself','the internal ledger overstated a session by a fraction of R.','restated','reconciliation now runs at every close'],
    ['3 jul','junk entries on a dead tape','low-quality entries on a directionless session.','−1.01R','a volume gate now declines them — replayed, it would have refused every one'],
@@ -950,6 +965,34 @@
      story:'the strangest session in the book, and the most instructive. a data-reading error by the desk\'s own operator declared healthy executions "phantoms" and stood the automated desk down mid-morning. the session was traded by hand instead — nineteen positions, leaning heavily long into a directionless tape — and closed −0.15R. <b>replayed on the real tape, the machine\'s own scheduled slates, left entirely alone, were worth roughly +2.4R the same day.</b> the failure was never the strategies. it was a wrong read of the broker\'s records, trusted without reconciliation. the fixes are structural: one canonical broker read feeding every organ, an aggregate exposure gate on every entry, and a standing rule that nothing is declared broken until the broker itself has been reconciled.',
      law:'the machine was never the risk; the unverified read of it was.'},
     {d:'10 jul', r:0.94, cum:2.29, star:'the desk', title:'the day the desk took its first client',
+     trades:[
+      {s:'TCS 2080 PE', v:'short', e:32.8, x:54.05, pc:65},
+      {s:'GODREJPROP 2100 CE', v:'long', e:48.6, x:78.33, pc:61},
+      {s:'PAYTM 1320 CE', v:'long', e:42.5, x:67.1, pc:58},
+      {s:'SOLARINDS 18000 CE', v:'long', e:493.4, x:760.25, pc:54},
+      {s:'JSWENERGY 550 CE', v:'long', e:14.5, x:18.25, pc:26},
+      {s:'RBLBANK 370 CE', v:'long', e:11.35, x:14.25, pc:26},
+      {s:'OFSS 11500 CE', v:'long', e:399.5, x:499.35, pc:25},
+      {s:'INDIANB 860 CE', v:'long', e:27.05, x:30.9, pc:14},
+      {s:'AMBER 7900 CE', v:'long', e:184.75, x:192.65, pc:4},
+      {s:'ETERNAL 290 PE', v:'short', e:8.85, x:9.15, pc:3},
+      {s:'BHEL 400 CE', v:'long', e:11.8, x:12.0, pc:2},
+      {s:'INOXWIND 83 PE', v:'short', e:2.95, x:3.0, pc:2},
+      {s:'KFINTECH 920 CE', v:'long', e:19.77, x:19.65, pc:-1},
+      {s:'ADANIENT 3200 CE', v:'long', e:84.45, x:82.7, pc:-2},
+      {s:'360ONE 1140 CE', v:'long', e:32.05, x:29.4, pc:-8},
+      {s:'ADANIGREEN 1550 CE', v:'long', e:59.85, x:54.8, pc:-8},
+      {s:'COFORGE 1520 CE', v:'long', e:52.75, x:48.15, pc:-9},
+      {s:'ADANIENSOL 1700 CE', v:'long', e:46.4, x:41.1, pc:-11},
+      {s:'LTF 330 CE', v:'long', e:10.55, x:9.35, pc:-11},
+      {s:'MCX 2700 PE', v:'short', e:69.4, x:58.15, pc:-16},
+      {s:'JUBLFOOD 425 PE', v:'short', e:8.9, x:7.25, pc:-19},
+      {s:'BSE 3700 PE', v:'short', e:91.58, x:72.72, pc:-21},
+      {s:'SAIL 170 CE', v:'long', e:6.04, x:4.71, pc:-22},
+      {s:'AMBUJACEM 425 PE', v:'short', e:7.85, x:6.01, pc:-23},
+      {s:'CUMMINSIND 5750 CE', v:'long', e:95.1, x:70.5, pc:-26},
+      {s:'NATIONALUM 370 CE', v:'long', e:9.05, x:5.5, pc:-39}
+     ],
      story:'a working friday with three stories inside it. the machine banked the morning\'s winners near their peaks — the operator\'s one manual act, an early harvest in the morning window where human reads are strongest, caught the top of its move almost exactly. mid-morning the desk\'s owner deleted the broker app from his phone entirely: <b>the ticking number is a mirror, not a verdict, and the system now reports the truth on its own schedule.</b> and by early afternoon the desk had signed its first client — family, chartered in writing before a single rupee moved: a separate ledger, fixed per-trade sizing, loss floors set tighter than the desk\'s own, and every basket behind a human confirmation. the first order filled and was verified at the broker within the hour. <b>+0.94R, broker-true.</b>',
      law:'other people\'s capital enters only through a charter — separate book, stricter floors, a human confirm on every basket.'}
   ];
