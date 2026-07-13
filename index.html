@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260713-153507">
+<meta name="build" content="20260713-223837">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -997,6 +997,10 @@
      ],
      story:'a working friday with three stories inside it. the machine banked the morning\'s winners near their peaks — the operator\'s one manual act, an early harvest in the morning window where human reads are strongest, caught the top of its move almost exactly. mid-morning the desk\'s owner deleted the broker app from his phone entirely: <b>the ticking number is a mirror, not a verdict, and the system now reports the truth on its own schedule.</b> and by early afternoon the desk had signed its first client — family, chartered in writing before a single rupee moved: a separate ledger, fixed per-trade sizing, loss floors set tighter than the desk\'s own, and every basket behind a human confirmation. the first order filled and was verified at the broker within the hour. <b>+0.94R, broker-true.</b>',
      law:'other people\'s capital enters only through a charter — separate book, stricter floors, a human confirm on every basket.'}
+      {d:'13 jul', r:-1.51, cum:0.78, title:'the machine fired on a stale map — and bought its replacement',
+     story:'the desk fired the open on directions computed three sessions earlier while the live tape ran the other way — a stale-map failure, not a thesis failure. the root cause was found the same evening and the ENTIRE execution loop was rebuilt: rebuilt selection, rebuilt exits, every input now announces its own staleness, and the whole day reduced to <b>two decisions</b>. the same session replayed through the rebuilt loop, cross-checked against exchange records, closes strongly positive. a red day must buy a permanent fix — this one bought the largest rebuild in the book.',
+     law:'a trailing stop must be a fraction of the peak, never a fixed distance — the leash must grow with the run.'},
+
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
