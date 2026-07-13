@@ -436,7 +436,7 @@
     <div class="boot-rule"></div>
     <div class="boot-line"><span>&gt; initialising terminal</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; connecting broker feed</span><span class="ok">ok</span></div>
-    <div class="boot-line"><span>&gt; loading ledger · 9 sessions</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; loading ledger · 13 sessions</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; reconciling to broker truth</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; regime · reading live tape</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; the book is open.</span><span class="ok">✦</span></div>
@@ -541,8 +541,8 @@
 <div class="act" id="act-numbers">
   <div class="stage">
     <div class="moment"><span class="k">largest gain</span><span class="v pos">+2.08R</span><span class="m">7 july — sixteen positions on one book; the runner pressed to its full move.</span></div>
-    <div class="moment"><span class="k">largest loss</span><span class="v neg">−1.47R</span><span class="m">24 june — recorded like every other session. it financed a permanent fix.</span></div>
-    <div class="moment"><span class="k">the whole truth</span><span class="v">9</span><span class="m">sessions · hit ratio 56% · avg win +1.08R · avg loss −0.80R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +2.19R. a young sample, published from n=1.</span></div>
+    <div class="moment"><span class="k">largest loss</span><span class="v neg">−1.51R</span><span class="m">13 july — recorded like every other session. it financed the largest rebuild in the book.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">13</span><span class="m">sessions · hit ratio 46% · avg win +1.05R · avg loss -0.79R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +0.78R. a young sample, published from n=1.</span></div>
   </div>
 </div>
 
@@ -584,7 +584,7 @@
       <div class="stage now">
         <span class="when">stage 01 · now — july 2026</span>
         <h3>prove my discipline</h3>
-        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="50"></i></span><span class="lab">10 / 20 sessions published</span></span></p>
+        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="65"></i></span><span class="lab">13 / 20 sessions published</span></span></p>
       </div>
       <div class="stage">
         <span class="when">stage 02 · august 2026</span>
@@ -813,6 +813,8 @@
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
   const EVOLUTION=[
+   ['13 jul','the whole execution loop was rebuilt in one night and reduced to <b>two decisions</b> a day — exits now trail a share of each position\'s own peak, so winners are left to finish','bolted'],
+   ['13 jul','every input the desk fires on now <b>announces</b> its own staleness — a three-day-old map can never steer the open silently again','bolted'],
    ['12 jul','the desk now verifies its own <b>regime chain</b> one minute before every open, and a money-gate scoreboard tracks each week against its target at every close','bolted'],
    ['11 jul','a daily <b>deep audit</b> court now examines the whole system every afternoon — sync, honesty, bugs, and missed opportunity — and files experiments automatically','bolted'],
    ['10 jul','the desk signed its <b>first client</b> — a written charter, a separate ledger, and a human confirmation on every basket, before a single rupee moved','bolted'],
@@ -842,6 +844,7 @@
    ['dispersion', -0.11, 'first live day — paying its entry tuition']
   ];
   const MISTAKES=[
+   ['13 jul','fired on a stale map','the desk fired the open on directions computed three sessions earlier while the live tape ran the opposite way; a second system read a ten-day-old classification file without complaint. the largest recorded loss — and the cheapest, for what it bought.','−1.51R','selection now reads only the live tape; every input announces its own age; a stale file can no longer steer a single order'],
    ['10 jul','a slate nobody owned','a composed basket was deferred by one system to another that never fired it — each believed the other held it. a midday snapshot suggested the miss had saved money; by the close the unfired basket would have finished positive — the miss cost ≈0.12R. corrected the same day.','−0.12R','the ownership law: every slate names one firing owner, verified at the broker by 9:30'],
    ['24 jun','a classifier built but not connected','the regime-reading system existed but was not wired into execution; the desk traded a trending book in a directionless session.','−1.47R','fixed same day — wired into execution'],
    ['1 jul','the ledger flattered itself','the internal ledger overstated a session by a fraction of R.','restated','reconciliation now runs at every close'],
@@ -983,6 +986,46 @@
      story:'a working friday with three stories inside it. the machine banked the morning\'s winners near their peaks — the operator\'s one manual act, an early harvest in the morning window where human reads are strongest, caught the top of its move almost exactly. mid-morning the desk\'s owner deleted the broker app from his phone entirely: <b>the ticking number is a mirror, not a verdict, and the system now reports the truth on its own schedule.</b> and by early afternoon the desk had signed its first client — family, chartered in writing before a single rupee moved: a separate ledger, fixed per-trade sizing, loss floors set tighter than the desk\'s own, and every basket behind a human confirmation. the first order filled and was verified at the broker within the hour. <b>+0.94R, broker-true.</b>',
      law:'other people\'s capital enters only through a charter — separate book, stricter floors, a human confirm on every basket.'}
       {d:'13 jul', r:-1.51, cum:0.78, title:'the machine fired on a stale map — and bought its replacement',
+     trades:[
+      {s:'INDIANB 841.75 PE', v:'short', e:14.15, x:18.65, pc:32},
+      {s:'PAYTM 1380 CE', v:'long', e:41.3, x:52.5, pc:27},
+      {s:'ASHOKLEY 160 CE', v:'long', e:3.31, x:4.16, pc:26},
+      {s:'PAYTM 1400 CE', v:'long', e:43.35, x:54.0, pc:25},
+      {s:'RBLBANK 385 CE', v:'long', e:7.8, x:8.95, pc:15},
+      {s:'RBLBANK 380 CE', v:'long', e:9.5, x:10.75, pc:13},
+      {s:'GMRAIRPORT 116 CE', v:'long', e:2.1, x:2.26, pc:8},
+      {s:'COCHINSHIP 1400 PE', v:'short', e:28.55, x:29.43, pc:3},
+      {s:'BHEL 415 CE', v:'long', e:12.6, x:12.7, pc:1},
+      {s:'SOLARINDS 18250 CE', v:'long', e:548.9, x:549.0, pc:0},
+      {s:'OFSS 12100 CE', v:'long', e:337.0, x:337.8, pc:0},
+      {s:'DLF 690 CE', v:'long', e:13.23, x:13.05, pc:-1},
+      {s:'CGPOWER 890 PE', v:'short', e:20.5, x:20.25, pc:-1},
+      {s:'VEDL 265 PE', v:'short', e:6.25, x:6.1, pc:-2},
+      {s:'POWERINDIA 31500 PE', v:'short', e:875.9, x:859.7, pc:-2},
+      {s:'ADANIGREEN 1570 CE', v:'long', e:51.7, x:50.0, pc:-3},
+      {s:'BANDHANBNK 212.5 CE', v:'long', e:6.4, x:6.23, pc:-3},
+      {s:'GODREJPROP 2180 CE', v:'long', e:44.4, x:42.9, pc:-3},
+      {s:'CROMPTON 257.5 PE', v:'short', e:6.35, x:6.05, pc:-5},
+      {s:'GODFRYPHLP 2100 PE', v:'short', e:65.25, x:62.3, pc:-5},
+      {s:'ADANIENT 3240 CE', v:'long', e:68.95, x:65.3, pc:-5},
+      {s:'INOXWIND 82 PE', v:'short', e:2.9, x:2.74, pc:-6},
+      {s:'ADANIENT 3220 CE', v:'long', e:78.9, x:74.2, pc:-6},
+      {s:'OFSS 12000 CE', v:'long', e:354.85, x:330.35, pc:-7},
+      {s:'KPITTECH 580 CE', v:'long', e:18.35, x:17.0, pc:-7},
+      {s:'RVNL 225 PE', v:'short', e:4.35, x:4.02, pc:-8},
+      {s:'LTF 330 CE', v:'long', e:8.0, x:7.15, pc:-11},
+      {s:'NAM-INDIA 1240 CE', v:'long', e:32.65, x:29.18, pc:-11},
+      {s:'NBCC 104 CE', v:'long', e:2.83, x:2.52, pc:-11},
+      {s:'PAGEIND 40500 CE', v:'long', e:942.25, x:829.25, pc:-12},
+      {s:'AUBANK 1080 CE', v:'long', e:20.7, x:18.27, pc:-12},
+      {s:'ADANIENSOL 1680 CE', v:'long', e:51.65, x:43.85, pc:-15},
+      {s:'TMPV 330 PE', v:'short', e:6.0, x:5.1, pc:-15},
+      {s:'TCS 2220 CE', v:'long', e:30.98, x:25.94, pc:-16},
+      {s:'NAUKRI 1220 CE', v:'long', e:22.7, x:18.8, pc:-17},
+      {s:'MOTHERSON 140 PE', v:'short', e:3.54, x:2.87, pc:-19},
+      {s:'COFORGE 1480 PE', v:'short', e:49.7, x:35.0, pc:-30},
+      {s:'AMBER 8100 CE', v:'long', e:180.5, x:111.7, pc:-38}
+     ],
      story:'the desk fired the open on directions computed three sessions earlier while the live tape ran the other way — a stale-map failure, not a thesis failure. the root cause was found the same evening and the ENTIRE execution loop was rebuilt: rebuilt selection, rebuilt exits, every input now announces its own staleness, and the whole day reduced to <b>two decisions</b>. the same session replayed through the rebuilt loop, cross-checked against exchange records, closes strongly positive. a red day must buy a permanent fix — this one bought the largest rebuild in the book.',
      law:'a trailing stop must be a fraction of the peak, never a fixed distance — the leash must grow with the run.'},
 
