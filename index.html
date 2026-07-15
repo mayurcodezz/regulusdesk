@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260714-170649">
+<meta name="build" content="20260715-143018">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -828,6 +828,7 @@
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
   const EVOLUTION=[
+    ['15 jul','the desk now re-verifies its market thesis and every open position every ten minutes — exits fire when the <b>reason</b> dies, not when the loss arrives','bolted'],
    ['13 jul','the whole execution loop was rebuilt in one night and reduced to <b>two decisions</b> a day — exits now trail a share of each position\'s own peak, so winners are left to finish','bolted'],
    ['13 jul','every input the desk fires on now <b>announces</b> its own staleness — a three-day-old map can never steer the open silently again','bolted'],
    ['12 jul','the desk now verifies its own <b>regime chain</b> one minute before every open, and a money-gate scoreboard tracks each week against its target at every close','bolted'],
@@ -859,6 +860,7 @@
    ['dispersion', -0.11, 'first live day — paying its entry tuition']
   ];
   const MISTAKES=[
+    ['15 jul','a schedule edited is not a schedule loaded','the previous evening\'s re-timing of the entry sequence was written to the scheduler\'s files but never re-loaded into the scheduler itself — so the system fired twenty-one minutes early, into the richest option pricing of the day, before the live tape had finished naming its leaders. every timing change is now verified against the scheduler\'s own read-back, not the file on disk.','−1.11R','all seven re-timed jobs reloaded and verified the same afternoon; a sentry now re-checks the session thesis every ten minutes'],
    ['13 jul','fired on a stale map','the desk fired the open on directions computed three sessions earlier while the live tape ran the opposite way; a second system read a ten-day-old classification file without complaint. the largest recorded loss — and the cheapest, for what it bought.','−1.51R','selection now reads only the live tape; every input announces its own age; a stale file can no longer steer a single order'],
    ['10 jul','a slate nobody owned','a composed basket was deferred by one system to another that never fired it — each believed the other held it. a midday snapshot suggested the miss had saved money; by the close the unfired basket would have finished positive — the miss cost ≈0.12R. corrected the same day.','−0.12R','the ownership law: every slate names one firing owner, verified at the broker by 9:30'],
    ['24 jun','a classifier built but not connected','the regime-reading system existed but was not wired into execution; the desk traded a trending book in a directionless session.','−1.47R','fixed same day — wired into execution'],
@@ -1045,7 +1047,33 @@
      law:'a trailing stop must be a fraction of the peak, never a fixed distance — the leash must grow with the run.'},
     {d:'14 jul', r:-2.93, cum:-2.15, title:'the day in one number — broker-reconciled',
      story:'session closed and reconciled to the broker: <b>-2.93R</b> on the day. the full read belongs to the evening ritual; this row is the number, written the same day.'},
-  ];
+      {d:'15 jul', r:-1.11, cum:-3.26, title:'the hardest session — and the day the desk grew a watch',
+     story:'the morning read was correct and the early leaders were the right ones — then the session reversed from mid-morning and <b>nothing was watching.</b> both loss-limits fired exactly as written: the day stopped at its ceiling, the linked account\'s independent floor cleared its book without a hand touching it. by the close the gap had a name and a fix: a sentry now re-verifies the market thesis AND every open position, every ten minutes, and cuts when the <b>reason</b> dies — not when the loss arrives. replayed on this same session, the sentry\'s exit signal would have kept roughly three-quarters of the day\'s drawdown. the weekly allowance is now spent; the next session runs on paper, by rule, until the machine re-earns its size.',
+     law:'a thesis unwatched is a loss unbooked — re-verify the reason every ten minutes, and exit when the reason dies.',
+     trades:[{s:'FORCEMOT 17500 CE', v:'long', e:965.5, x:1162.32, pc:+20},
+       {s:'POWERINDIA 32000 CE', v:'long', e:1673.3, x:2056.05, pc:+23},
+       {s:'POLICYBZR 1540 CE', v:'long', e:75.7, x:97.8, pc:+29},
+       {s:'DELHIVERY 520 PE', v:'short', e:14.75, x:20.75, pc:+41},
+       {s:'GVT&D 4400 CE', v:'long', e:300.4, x:320.45, pc:+7},
+       {s:'POLICYBZR 1580 CE', v:'long', e:67.2, x:70.15, pc:+4},
+       {s:'NATIONALUM 365 PE', v:'short', e:11.65, x:11.65, pc:+0},
+       {s:'PNBHOUSING 1080 CE', v:'long', e:48.1, x:47.5, pc:-1},
+       {s:'TECHM 1464 CE', v:'long', e:52.75, x:51.75, pc:-2},
+       {s:'GODFRYPHLP 2100 CE', v:'long', e:44.85, x:41.85, pc:-7},
+       {s:'TRENT 2850 CE', v:'long', e:80.3, x:75.62, pc:-6},
+       {s:'INDUSINDBK 1000 CE', v:'long', e:38.65, x:34.65, pc:-10},
+       {s:'KPITTECH 570 PE', v:'short', e:35.2, x:30.75, pc:-13},
+       {s:'SUZLON 52 CE', v:'long', e:2.34, x:2.02, pc:-14},
+       {s:'COFORGE 1520 CE', v:'long', e:71.3, x:62.0, pc:-13},
+       {s:'LODHA 1140 CE', v:'long', e:50.85, x:43.0, pc:-15},
+       {s:'TCS 2200 PE', v:'short', e:54.5, x:43.2, pc:-21},
+       {s:'EXIDEIND 415 CE', v:'long', e:17.75, x:14.6, pc:-18},
+       {s:'DLF 675 CE', v:'long', e:15.1, x:9.35, pc:-38},
+       {s:'VEDL 275 CE', v:'long', e:6.1, x:4.12, pc:-32},
+       {s:'HCLTECH 1160 CE', v:'long', e:26.2, x:21.82, pc:-17},
+       {s:'KALYANKJIL 515 PE', v:'short', e:26.5, x:21.2, pc:-20},
+       {s:'KEI 5050 CE', v:'long', e:223.0, x:148.7, pc:-33}]},
+];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
   const cv=document.getElementById('sky'), cx=cv.getContext('2d');
