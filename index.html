@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260715-223937">
+<meta name="build" content="20260716-132439">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -451,7 +451,7 @@
     <div class="boot-rule"></div>
     <div class="boot-line"><span>&gt; initialising terminal</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; connecting broker feed</span><span class="ok">ok</span></div>
-    <div class="boot-line"><span>&gt; loading ledger · 13 sessions</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; loading ledger · 16 sessions</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; reconciling to broker truth</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; regime · reading live tape</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; the book is open.</span><span class="ok">✦</span></div>
@@ -556,8 +556,8 @@
 <div class="act" id="act-numbers">
   <div class="stage">
     <div class="moment"><span class="k">largest gain</span><span class="v pos">+2.08R</span><span class="m">7 july — sixteen positions on one book; the runner pressed to its full move.</span></div>
-    <div class="moment"><span class="k">largest loss</span><span class="v neg">−1.51R</span><span class="m">13 july — recorded like every other session. it financed the largest rebuild in the book.</span></div>
-    <div class="moment"><span class="k">the whole truth</span><span class="v">13</span><span class="m">sessions · hit ratio 46% · avg win +1.05R · avg loss -0.79R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net +0.78R. a young sample, published from n=1.</span></div>
+    <div class="moment"><span class="k">largest loss</span><span class="v neg">−2.93R</span><span class="m">14 july — recorded like every other session. it financed the largest rebuild in the book, and the loss-limits that contained every day since.</span></div>
+    <div class="moment"><span class="k">the whole truth</span><span class="v">16</span><span class="m">sessions · hit ratio 38% · avg win +1.05R · avg loss -0.97R · <b style="color:var(--gold); font-weight:400;">0 omitted</b> · net -3.39R. a young sample, published from n=1 — drawdown ledgered in full.</span></div>
   </div>
 </div>
 
@@ -599,7 +599,7 @@
       <div class="stage now">
         <span class="when">stage 01 · now — july 2026</span>
         <h3>prove my discipline</h3>
-        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="65"></i></span><span class="lab">13 / 20 sessions published</span></span></p>
+        <p><b>twenty published sessions</b> proving i can follow my own rules while real money moves — every error i make ledgered with its cost and its fix, in my own hand. the gate: the mistakes ledger stays honest, and no rule of mine is broken twice the same way.<span class="prog"><span class="bar"><i data-w="80"></i></span><span class="lab">16 / 20 sessions published</span></span></p>
       </div>
       <div class="stage">
         <span class="when">stage 02 · august 2026</span>
@@ -1052,6 +1052,8 @@
      story:'the morning read was correct and the early leaders were the right ones — then the session reversed from mid-morning and <b>nothing was watching.</b> both loss-limits fired exactly as written: the day stopped at its ceiling, the linked account\'s independent floor cleared its book without a hand touching it. by the close the gap had a name and a fix: a sentry now re-verifies the market thesis AND every open position, every ten minutes, and cuts when the <b>reason</b> dies — not when the loss arrives. replayed on this same session, the sentry\'s exit signal would have kept roughly three-quarters of the day\'s drawdown. the weekly allowance is now spent; the next session runs on paper, by rule, until the machine re-earns its size.',
      law:'a thesis unwatched is a loss unbooked — re-verify the reason every ten minutes, and exit when the reason dies.',
      trades:[{s:'FORCEMOT 17500 CE', v:'long', e:965.5, x:1162.32, pc:+20},
+    {d:'16 jul', r:-0.13, cum:-3.39, title:'the smallest size bought the biggest lesson set',
+     story:'the one-decision system took its first live session at deliberate minimum size — a test, declared as one. it paid <b>-0.13R</b> and earned its keep: five defects surfaced under real fire (a corrupted data field, a duplicate-order race, an oversized contract slipping a budget) and every one was fixed and re-tested the same hour. one refusal was the day\'s best trade: the per-name cap declined a short that then rose hard. by early afternoon the scatter-day playbook was validated against a bar fixed before the test, and carved as law: <b>on a directionless day, trade only rising names with open air above them — and if nothing has air, not trading is the trade.</b>'},
        {s:'POWERINDIA 32000 CE', v:'long', e:1673.3, x:2056.05, pc:+23},
        {s:'POLICYBZR 1540 CE', v:'long', e:75.7, x:97.8, pc:+29},
        {s:'DELHIVERY 520 PE', v:'short', e:14.75, x:20.75, pc:+41},
