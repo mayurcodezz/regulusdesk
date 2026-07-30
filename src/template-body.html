@@ -436,7 +436,7 @@
     <div class="boot-rule"></div>
     <div class="boot-line"><span>&gt; initialising terminal</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; connecting broker feed</span><span class="ok">ok</span></div>
-    <div class="boot-line"><span>&gt; loading ledger · 16 sessions</span><span class="ok">ok</span></div>
+    <div class="boot-line"><span>&gt; loading ledger · 18 sessions</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; reconciling to broker truth</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; regime · reading live tape</span><span class="ok">ok</span></div>
     <div class="boot-line"><span>&gt; the book is open.</span><span class="ok">✦</span></div>
@@ -813,6 +813,7 @@
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
   const EVOLUTION=[
+    ['30 jul','a four-week replay showed the regime caller was right 7 of 22 sessions reading the market once at dawn — and 16 of 22 re-reading at midday. deployment now follows the <b>freshest</b> reading, in supervised trial','learning'],
     ['28 jul','the desk adopted <b>retention</b> as its headline metric — a 13-day study showed most of each day\'s move happens before the entry clock, so the clock, not the strike, becomes the work','doctrine'],
     ['15 jul','the whole system was compressed into ONE risk-sized position per session and researched across every available session — the concentrated form beat every diversified variant at equal risk; it proves itself on <b>paper</b> daily before any capital moves','doctrine'],
     ['15 jul','the desk now re-verifies its market thesis and every open position every ten minutes — exits fire when the <b>reason</b> dies, not when the loss arrives','bolted'],
@@ -1068,6 +1069,13 @@
      story:'a small green day, broker-reconciled: <b>+0.06R</b> across four momentum-continuation entries. the real work happened after the close — a measurement study across 13 days of the desk\'s own recorded option data found that roughly <b>three-quarters of a stock\'s daily move happens before the entry clock fires</b>, and of the move actually touched, only about a third is retained by the close. strike selection tested neutral on the same data — the instrument was never the leak. two engineering fronts opened: earlier entries, and exit retention. a 50–80% retention band was adopted as the desk\'s headline metric, reported daily.',
      law:'LIX — the keeping law: retention (banked ÷ touchable move) is the desk\'s primary metric — band 50–80%, measured from broker receipts only; every retention change must pass a measurement study before it ships.',
      trades:[{s:'LODHA 1260 CE',v:'long',e:30.0,x:33.4,pc:11},{s:'LODHA 1260 CE',v:'long',e:32.7,x:33.4,pc:2},{s:'COFORGE 1640 CE',v:'long',e:92.9,x:91.7,pc:-1},{s:'PERSISTENT 5300 CE',v:'long',e:321.9,x:301.9,pc:-6}]},
+    {d:'29 jul', r:-0.22, cum:-2.99, title:'the chase, one more time — a hot name at the bell',
+     story:'one entry at the open on a name already up nearly <b>5%</b> before the desk arrived — the exact pattern the retention study warned about. it kept going without us, then faded; closed at the square for <b>−0.22R</b>. the next evening\'s research would put a number on this habit across the whole month and outlaw it.',
+     trades:[{s:'SAIL 170 CE',v:'long',e:9.1,x:7.3,pc:-20}]},
+    {d:'30 jul', r:-0.13, cum:-3.12, title:'the review night — every strategy audited in one sitting',
+     story:'a quiet red day on the book (<b>−0.13R</b>, two staggered entries on one weakening name, closed flat at the square) — and the largest research night in the desk\'s history after the close. six parallel audits replayed a month of recorded data with rules registered <i>before</i> results were seen. the verdict: the selection engine is healthy; the losses trace to <b>stale entries</b> (chasing names that had already moved), <b>a stale regime reading</b> (one dawn call governing a day that changes weather half the time — re-reading at 10:00 and 12:30 nearly doubles accuracy), and one paper-testing slot that was silently running the wrong strategy under the right name. separately, a safety filter one step from activation was revoked when its 9-of-10 record proved to be measured against a retired book. every fix now runs a supervised trial before it touches live sizing.',
+     law:'LX applied — a measurement graded against a retired book confers no eligibility; instruments must prove they read the live book before their readings count.',
+     trades:[{s:'INOXWIND 77.5 PE',v:'short',e:5.4,x:4.7,pc:-13},{s:'INOXWIND 77.5 PE',v:'short',e:4.8,x:4.7,pc:-3}]},
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
