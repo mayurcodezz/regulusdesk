@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260803-153510">
+<meta name="build" content="20260804-090848">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -828,6 +828,8 @@
   const ease=t=>1-Math.pow(1-t,3);
   const fmtR=v=>(v>0?'+':'−')+Math.abs(v).toFixed(2)+'R';
   const EVOLUTION=[
+    ['3 aug','the desk\'s rulebook became a <b>playbook</b> — every market condition mapped to one pre-registered response, each priced on two months of recorded data; a mid-morning re-read of market character entered supervised trial after lifting both test months','bolted'],
+    ['31 jul','peak-retention measured as the largest single leak — the desk sees far more than it keeps; a retention-focused exit entered <b>supervised</b> trial','learning'],
     ['30 jul','a four-week replay showed the regime caller was right 7 of 22 sessions reading the market once at dawn — and 16 of 22 re-reading at midday. deployment now follows the <b>freshest</b> reading, in supervised trial','learning'],
     ['28 jul','the desk adopted <b>retention</b> as its headline metric — a 13-day study showed most of each day\'s move happens before the entry clock, so the clock, not the strike, becomes the work','doctrine'],
     ['15 jul','the whole system was compressed into ONE risk-sized position per session and researched across every available session — the concentrated form beat every diversified variant at equal risk; it proves itself on <b>paper</b> daily before any capital moves','doctrine'],
@@ -1091,6 +1093,12 @@
      story:'a quiet red day on the book (<b>−0.13R</b>, two staggered entries on one weakening name, closed flat at the square) — and the largest research night in the desk\'s history after the close. six parallel audits replayed a month of recorded data with rules registered <i>before</i> results were seen. the verdict: the selection engine is healthy; the losses trace to <b>stale entries</b> (chasing names that had already moved), <b>a stale regime reading</b> (one dawn call governing a day that changes weather half the time — re-reading at 10:00 and 12:30 nearly doubles accuracy), and one paper-testing slot that was silently running the wrong strategy under the right name. separately, a safety filter one step from activation was revoked when its 9-of-10 record proved to be measured against a retired book. every fix now runs a supervised trial before it touches live sizing.',
      law:'LX applied — a measurement graded against a retired book confers no eligibility; instruments must prove they read the live book before their readings count.',
      trades:[{s:'INOXWIND 77.5 PE',v:'short',e:5.4,x:4.7,pc:-13},{s:'INOXWIND 77.5 PE',v:'short',e:4.8,x:4.7,pc:-3}]},
+    {d:'31 jul', r:0.00, cum:-3.12, title:'the stand-down — and the day the give-back was measured',
+     story:'no trades by choice — the operator called a rest day and the desk honored it. the research bench kept working: on the day\'s recorded data, the selection engine\'s picks touched a large summed peak and surrendered nearly all of it by the close. the giving-back — not the finding — was measured as the desk\'s single largest leak, and a peak-retention exit entered supervised trial the same night. a red-tinted lesson bought for zero rupees.',
+     trades:[]},
+    {d:'3 aug', r:0.00, cum:-3.12, title:'the proving week opens — the machine runs, the wallet rests',
+     story:'week one of a deliberate proving period: the full system runs every day on recorded prices with <b>zero live capital</b>, while each component is serviced and re-tested like a vehicle before a mountain crossing. day one\'s findings were substantial: a mid-morning <b>re-reading of market character</b> (10:30) would have materially improved the day; an independent audit of exit styles confirmed the incumbent exit law keeps its seat; and a study of five prior sessions played with the full rulebook retained <b>47.5%</b> of what the market offered — the closest the desk has come to its 50–80% retention target. live deployment resumes only after the week\'s evidence is graded.',
+     trades:[]},
   ];
 
   /* ═══ THE CELESTIAL GLOBE — a rotating star-sphere, leo living on it ═══ */
