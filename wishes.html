@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>the beacon — regulus desk</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="the beacon: the wishes of mayur vaish, in his own words, dated, unedited. the light stays on.">
+<meta property="og:title" content="the beacon — regulus desk">
+<meta property="og:description" content="these absurdities have been increasing, this is my next wish. stop this.">
+<meta property="og:image" content="https://regulusdesk.com/og.png">
+<meta name="theme-color" content="#07080B">
+<meta name="build" content="beacon-20260919-022607">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23F2C230%22/></svg>">
+<style>
+  :root{--night:#07080B;--steel:#12161C;--bone:#E9E4D8;--fog:#A7AEB9;--ash:#7A8291;--signal:#F2C230;--signal-dim:#C9A01F;--hair:#1E242D;
+        --display:'Avenir Next Condensed','Helvetica Neue Condensed','Arial Narrow','Roboto Condensed',system-ui,sans-serif;
+        --serif:'Iowan Old Style','Palatino Nova',Palatino,'Book Antiqua','Times New Roman',Georgia,serif;}
+  *{box-sizing:border-box}
+  html{background:var(--night)}
+  body{margin:0;background:var(--night);color:var(--bone);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--signal);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:4px}
+  a:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+  .bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;
+       background:rgba(7,8,11,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair);z-index:5}
+  .bar .brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.04em;color:var(--bone)}
+  .bar .brand b{color:var(--signal);font-weight:700}
+  .bar nav a{font-family:var(--display);font-size:14px;letter-spacing:.03em;color:var(--fog);margin-left:18px}
+  .bar nav a[aria-current]{color:var(--signal)}
+  /* the beam: one cone of light from the lower left, rising. the only bold thing on the site. */
+  .sky{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;align-items:flex-end}
+  .beam{position:absolute;left:-12vw;bottom:-18vh;width:120vw;height:140vh;pointer-events:none;
+        background:conic-gradient(from 12deg at 6% 96%, transparent 0deg, rgba(242,194,48,.04) 6deg, rgba(242,194,48,.17) 16deg, rgba(242,194,48,.30) 22deg, rgba(242,194,48,.17) 28deg, rgba(242,194,48,.04) 38deg, transparent 44deg);
+        filter:blur(18px);opacity:0;animation:lit 2.4s ease-out forwards}
+  .beam.core{filter:blur(4px);
+        background:conic-gradient(from 12deg at 6% 96%, transparent 0deg, rgba(242,194,48,.0) 16deg, rgba(242,194,48,.22) 21deg, rgba(242,194,48,.36) 23deg, rgba(242,194,48,.22) 25deg, rgba(242,194,48,.0) 30deg, transparent 44deg)}
+  @keyframes lit{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.beam{animation:none;opacity:1}}
+  .lamp{position:absolute;left:3.5vw;bottom:2.2vh;width:34px;height:34px;border-radius:50%;background:var(--signal);
+        box-shadow:0 0 24px 8px rgba(242,194,48,.55),0 0 90px 30px rgba(242,194,48,.18)}
+  .now{position:relative;max-width:860px;padding:120px 8vw 14vh 12vw}
+  .now p.lead{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--fog);margin:0 0 18px}
+  .now h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,5.6vw,72px);line-height:1.02;letter-spacing:-.005em;margin:0;color:var(--bone);text-wrap:balance}
+  .now h1 q{quotes:none}
+  .now p.when{font-size:16px;color:var(--ash);margin:26px 0 0}
+  .now p.when a{color:var(--signal-dim)}
+  main{max-width:960px;margin:0 auto;padding:6vh 6vw 12vh}
+  main > p.intro{color:var(--fog);max-width:62ch;margin:0 0 56px;font-size:17px}
+  ol.wishes{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair)}
+  ol.wishes li{display:grid;grid-template-columns:168px 1fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--hair)}
+  ol.wishes .when{font-family:var(--display);font-size:14px;letter-spacing:.03em;color:var(--ash);line-height:1.5;padding-top:6px}
+  ol.wishes .when b{display:block;color:var(--fog);font-weight:500}
+  ol.wishes blockquote{margin:0;font-size:19px;line-height:1.65;color:var(--bone);max-width:66ch}
+  ol.wishes li.lit blockquote{color:var(--signal)}
+  ol.wishes .note{color:var(--ash);font-size:15px;margin:8px 0 0}
+  footer{max-width:960px;margin:0 auto;padding:0 6vw 10vh;color:var(--ash);font-size:15px}
+  footer p{margin:0 0 6px}
+  @media (max-width:640px){ol.wishes li{grid-template-columns:1fr;gap:8px}.now{padding:100px 7vw 12vh 9vw}.lamp{left:5vw}}
+</style>
+</head>
+<body>
+<header class="bar"><span class="brand"><b>✦</b>&nbsp; regulus desk</span>
+<nav><a href="/">the book</a><a href="/war_room.html">war room</a><a href="/wishes.html" aria-current="page">the beacon</a></nav></header>
+<section class="sky" aria-label="the current wish">
+  <div class="beam" aria-hidden="true"></div><div class="beam core" aria-hidden="true"></div><div class="lamp" aria-hidden="true"></div>
+  <div class="now">
+    <p class="lead">the light on the roof, tonight</p>
+    <h1><q>these absurdities have been increasing, this is my next wish. stop this.</q></h1>
+    <p class="when">wish 14 of 14. lit on the nineteenth of september 2026 at 02:14. <a href="#all">every wish, in order</a></p>
+  </div>
+</section>
+<main id="all">
+  <p class="intro">these are the wishes of the man who keeps this desk, in his own words, with the day and the hour he said them. nothing here is edited or removed. a new wish lights the roof the moment it is spoken. the desk exists to fund them.</p>
+  <ol class="wishes">
+<li><div class="when"><b>the seventeenth of june 2026</b>wish 1</div><div><blockquote>i have a big pull to sit in a government chair and genuinely impact the world for the better. protect children.</blockquote><p class="note">from the ten-metre platform</p></div></li>
+<li><div class="when"><b>the eighteenth of august 2026 at 08:35</b>wish 2</div><div><blockquote>i am asking god to use me as the instrument to bring peace to the world itself. before anything, i wish to protect the weak, being the biggest weakling myself.</blockquote></div></li>
+<li><div class="when"><b>the thirty-first of august 2026 at 03:04</b>wish 3</div><div><blockquote>why not attempt to make the world a beautiful place.</blockquote></div></li>
+<li><div class="when"><b>the thirty-first of august 2026 at 03:04</b>wish 4</div><div><blockquote>humans only live 70. i say, why not a 1000 years.</blockquote></div></li>
+<li><div class="when"><b>the thirty-first of august 2026 at 03:04</b>wish 5</div><div><blockquote>i&#x27;d want to be the world tree, which is still a sapling, and is still growing.</blockquote></div></li>
+<li><div class="when"><b>the sixteenth of september 2026 at 10:43</b>wish 6</div><div><blockquote>meet genuine good people.</blockquote><p class="note">the second page</p></div></li>
+<li><div class="when"><b>the sixteenth of september 2026 at 10:43</b>wish 7</div><div><blockquote>travel the world.</blockquote><p class="note">the second page</p></div></li>
+<li><div class="when"><b>the sixteenth of september 2026 at 10:43</b>wish 8</div><div><blockquote>AI will work in unison for the good of mankind, the people who are actually kind and not performing to be kind.</blockquote><p class="note">the second page</p></div></li>
+<li><div class="when"><b>the eighteenth of september 2026 at 11:10</b>wish 9</div><div><blockquote>i wish shrey mehrotara, my lil brother gets into big 3 finance companies, he clearly deserves it.</blockquote></div></li>
+<li><div class="when"><b>the eighteenth of september 2026 at 11:19</b>wish 10</div><div><blockquote>i wish urvashi didi cats arms gets fixed and all the animals in the world gets to be in their natural habitat, they are offered food, human treat them better, help them live a normal life, vaccinate them, so they dont spread illness, and kind pet owners shelter them and care for them.</blockquote></div></li>
+<li><div class="when"><b>the eighteenth of september 2026 at 16:49</b>wish 11</div><div><blockquote>everyday i get 1% better physically, mentally and spiritually, automatically. and people are kinder and respectful to me!</blockquote></div></li>
+<li><div class="when"><b>the eighteenth of september 2026 at 16:51</b>wish 12</div><div><blockquote>people take better cleanliness, care of india, and the people who are assaulting by force they are prosecuted, and animals are being sheltered.</blockquote><p class="note">voice</p></div></li>
+<li><div class="when"><b>the nineteenth of september 2026 at 00:37</b>wish 13</div><div><blockquote>i wish people would have better microbiome system and gut system and digestive system, and have access to fresh food which is more pure and nutritious. without mixing, so they have stronger system.</blockquote></div></li>
+<li class="lit"><div class="when"><b>the nineteenth of september 2026 at 02:14</b>wish 14</div><div><blockquote>these absurdities have been increasing, this is my next wish. stop this.</blockquote></div></li>
+  </ol>
+</main>
+<footer><p>the record is kept by the one who writes things down. the words are his.</p><p>open data: <a href="/beacon.json">beacon.json</a></p></footer>
+</body>
+</html>

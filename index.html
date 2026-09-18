@@ -19,7 +19,7 @@
 <meta name="twitter:site" content="@regulusdesk">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Regulus Desk","url":"https://regulusdesk.com","description":"A private systematic derivatives desk in India that keeps its trading book in public — every result in R, reconciled to broker records.","founder":{"@type":"Person","name":"Mayur Vaish","jobTitle":"Principal","description":"Principal of the Regulus Desk; CFA program candidate."},"knowsAbout":["Systematic trading","Derivatives","Risk management","Quantitative finance"],"foundingDate":"2026"}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
-<meta name="build" content="20260918-153521">
+<meta name="build" content="20260919-022822">
 <style>
   /*
     DESIGN SYSTEM v2 — INSTITUTIONAL (the CFA cut, 2026-07-07)
@@ -27,17 +27,27 @@
     color: warm carbon ground · ivory ink · ONE gold (data + accent) · rust strictly for losses
     structure: numbered sections (roman) · fine double rules · tear-sheet tables · generous measure
   */
+  /*
+    DESIGN SYSTEM v3 — GOTHAM (2026-09-19 02:21, his order: "revamp the trading website to batman themed, where these wishes are showcased")
+    ground: cold night, not warm carbon · ink: bone · ONE accent: the signal yellow, the light on the roof · rust still strictly for losses
+    display: a condensed grotesque for the masthead and the beacon; the report serif stays for the book, because the book is a ledger
+    the one bold thing lives on /wishes.html (the beam). the book pages only change their night.
+  */
   :root{
-    --ground:#0A0907; --panel:#100E09; --panel2:#151209;
-    --ink:#EFE9DA; --ink-2:#CEC5AF; --muted:#9A9078; --faint:#6E6552;
-    --gold:#C9A24E; --gold-mark:#A5843B; --rust:#BF5B33;
-    --hair:#262013; --hair-soft:#1A160D;
+    --ground:#07080B; --panel:#12161C; --panel2:#171C24;
+    --ink:#E9E4D8; --ink-2:#A7AEB9; --muted:#7A8291; --faint:#565D69;
+    --gold:#F2C230; --gold-mark:#C9A01F; --rust:#BF5B33;
+    --hair:#1E242D; --hair-soft:#151A21;
+    --display:'Avenir Next Condensed','Helvetica Neue Condensed','Arial Narrow','Roboto Condensed',system-ui,sans-serif;
     --serif:'Iowan Old Style','Palatino Nova',Palatino,'Book Antiqua','Times New Roman',Georgia,serif;
     --grot:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;
     --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
     --vh100:100vh;
   }
   @supports (height:100svh){ :root{--vh100:100svh;} }
+  /* v3 gotham: the masthead speaks in the display face; the brand mark is the light on the roof */
+  #bar .brand{font-family:var(--display); font-weight:700; letter-spacing:.04em;}
+  #bar .brand .s{color:var(--gold); text-shadow:0 0 14px rgba(242,194,48,.55);}
   html{background:var(--ground); scroll-behavior:smooth;}
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
   body{
@@ -473,6 +483,7 @@
     <a href="#evolution">evolution</a>
     <a href="#lessons">lessons</a>
     <a href="/desk.html" style="color:var(--gold)">cockpit ◆</a>
+    <a href="/wishes.html" style="color:var(--gold)">the beacon</a>
     <a href="#mistakes">mistakes</a>
     <a href="#keeper">principal</a>
     <a href="#letters">letters</a>
