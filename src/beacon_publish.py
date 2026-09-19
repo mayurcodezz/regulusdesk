@@ -47,6 +47,18 @@ def read_wishes():
     return rows
 
 
+PRIVATE_NAMES = [  # private people stay initials on the public page (safety pass 2026-09-19); the vault keeps the names
+    (r"\bshrey mehrotara\b", "shrey m."), (r"\bshrey mehrotra\b", "shrey m."), (r"\burvashi didi\b", "u. didi"), (r"\burvashi\b", "u."),
+    (r"\briddhima\b", "r."), (r"\blekha\b", "l."), (r"\bhena\b", "h."), (r"\bhimant\b", "h."), (r"\bumendra\b", "my father"),
+]
+
+
+def public_text(s):
+    for p, r in PRIVATE_NAMES:
+        s = re.sub(p, r, s, flags=re.I)
+    return s
+
+
 def spoken_date(date, tm):
     y, mo, d = (int(x) for x in date.split("-"))
     s = f"the {ORD[d]} of {MONTHS[mo - 1]} {y}"
@@ -54,7 +66,7 @@ def spoken_date(date, tm):
 
 
 def build(rows):
-    flat = [(r["date"], r["time"], r["note"], w) for r in rows for w in r["wishes"]]
+    flat = [(r["date"], r["time"], r["note"], public_text(w)) for r in rows for w in r["wishes"]]
     n = len(flat)
     last = flat[-1] if flat else ("", "", "", "")
     esc = html.escape
