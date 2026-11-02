@@ -11,7 +11,7 @@ usage:
   python3 src/publish.py --no-deploy         # assemble only (local check)
 exit 0 = live-verified · 1 = failed (reason printed)
 """
-import re, sys, subprocess, time, pathlib, random
+import os, re, sys, subprocess, time, pathlib, random
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SRC  = REPO / "src" / "template-body.html"
@@ -62,6 +62,19 @@ def main() -> int:
     fp = expect or f'name="build" content="{stamp}"'
     print(f"newest day: {newest_day(html)}")
     print(f"assembled {len(html):,} bytes · fingerprint: '{fp}'")
+    # ⚖️ THE SEAL (2026-11-03): the page may show results, never the method. the term list lives in the PRIVATE vault (a list in
+    # this public repo would itself publish the secrets); missing seal = refuse to publish (fail-closed).
+    try:
+        sys.path.insert(0, os.path.expanduser("~/Mriga/systems/scripts"))
+        import pubseal as seal
+        _h = seal.check(html)
+    except Exception as _e:
+        print(f"SEAL unavailable ({_e}) — refusing to publish (fail-closed)"); return 1
+    if _h:
+        print("🔒 REFUSED — the page carries sealed terms (trade secrets):")
+        for _p, _sn in _h:
+            print(f"   {_p} · …{_sn}…")
+        return 1
     if "--no-deploy" in args:
         return 0
     # commit + push (append-only history; nothing force-pushed, law viii)
